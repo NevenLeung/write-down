@@ -1,0 +1,8 @@
+.edit-wrapper {
+  display: flex;
+  border: 2px solid #eee;
+}
+
+.edit-wrapper > div {
+  padding: 10px;
+}
