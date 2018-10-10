@@ -8,10 +8,11 @@
 
 ## 功能列表
 
-- 文章系统
-  - [ ] 文章编辑
-  - [ ] 文章管理
-  - [ ] 文章导入、导出
+### 文章系统
+
+- [ ] 文章编辑
+- [ ] 文章管理
+- [ ] 文章导入、导出
 
 ## Script
 
@@ -26,3 +27,7 @@ Build
 ```
 npm run build
 ```
+
+## License
+
+[MIT](https://github.com/NevenLeung/write-down/blob/master/LICENSE) © Neven Leung
