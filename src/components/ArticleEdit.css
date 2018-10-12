@@ -5,4 +5,9 @@
 
 .edit-wrapper > div {
   padding: 10px;
+  flex: 1;
+}
+
+.editor {
+  width: 600px;
 }
