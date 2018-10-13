@@ -3,13 +3,23 @@
   border: 2px solid #eee;
 }
 
-.edit-wrapper > div {
+.edit-wrapper .editor, .edit-wrapper .rendering {
   padding: 10px;
   flex: 1;
 }
 
 .editor {
-  width: 600px;
+  max-width: 660px;
+  /*height: 600px;*/
+}
+
+.CodeMirror {
+  height: 100%;
+  width: 100%;
+  max-width: 660px;
+  white-space: pre;
+  word-break: break-all;
+  overflow-wrap: break-spaces;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -17,4 +27,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 p, ul, li, a, table {
   font-family: 'Open Sans', sans-serif;
+}
+
+.emoji {
+  height: 1.2em;
 }
