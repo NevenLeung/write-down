@@ -1,9 +1,10 @@
 import MarkdownIt from "markdown-it";
+
 import anchor from "markdown-it-anchor";
 import TOC from "markdown-it-table-of-contents";
 import taskList from "markdown-it-task-lists";
 import emoji from "markdown-it-emoji";
-import hljs from "markdown-it-highlightjs";
+import highlight from "markdown-it-highlightjs";
 
 const markdownOption = {
   html:         false,        // Enable HTML tags in source
@@ -17,6 +18,7 @@ const markdownOption = {
 
 const md = new MarkdownIt(markdownOption);
 
+// todo: 没有起作用
 const anchorOption = {
   level: [1, 2, 3, 4, 5, 6]
 };
@@ -35,6 +37,6 @@ md.use(anchor, anchorOption)
   .use(TOC, TOC_Option)
   .use(taskList)
   .use(emoji)
-  .use(hljs);
+  .use(highlight);
 
 export default md;

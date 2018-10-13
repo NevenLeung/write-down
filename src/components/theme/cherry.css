@@ -1,0 +1,85 @@
+.cm-s-cherry {
+  font-size: 1em;
+  line-height: 1.5em;
+  /*font-family: inconsolata, monospace;*/
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0.3px;
+  word-spacing: 1px;
+  background: #fff;
+  color: #282c34;
+}
+
+.cm-s-cherry .cm-header {
+  color: #F25565;
+  font-family: 'Lora', serif;
+}
+
+.cm-s-cherry .CodeMirror-lines {
+  padding: 8px 0;
+}
+
+.cm-s-cherry .CodeMirror-gutters {
+  box-shadow: 1px 0 2px 0 rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 0 2px 0 rgba(0, 0, 0, 0.5);
+  background-color: #010304;
+  padding-right: 10px;
+  z-index: 3;
+  border: none;
+}
+.cm-s-cherry div.CodeMirror-cursor {
+  border-left: 2px solid #aaa;
+}
+
+.cm-s-cherry .CodeMirror-activeline-background {
+  background: #FFFFFF0D;
+}
+
+.cm-s-cherry .CodeMirror-selected {
+  background: #DDF0FF33;
+}
+
+/* code, code block */
+.cm-s-cherry .cm-comment {
+  color: #999;
+}
+
+/* list level 1 */
+.cm-s-cherry .cm-variable-2 {
+  color: #A94CAF;
+}
+
+/* list level 2 */
+.cm-s-cherry .cm-variable-3 {
+  color: #11CD86;
+}
+
+/* list level 3 */
+.cm-s-cherry .cm-keyword {
+  color: #fa8e82;
+}
+
+/* url or image link */
+.cm-s-cherry .cm-string {
+  color: #0366d6;
+  /*color: #0080ff;*/
+  /*color: #f2671f;*/
+}
+
+.cm-s-cherry .cm-property {
+  color: #DAD085;
+}
+
+.cm-s-cherry .cm-atom {
+  color: #DAD085;
+}
+
+.cm-s-cherry .cm-number {
+  color: #DAD085;
+}
+
+.cm-s-cherry .cm-operator {
+  color: #FF4A1A;
+}
+.cm-s-cherry .CodeMirror-linenumber {
+  color: black;
+}

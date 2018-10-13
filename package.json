@@ -4,7 +4,10 @@
   "private": true,
   "homepage": "https://nevenleung.github.io/write-down/",
   "dependencies": {
+    "code-mirror-themes": "^1.0.0",
     "codemirror": "^5.40.2",
+    "github-markdown-css": "^2.10.0",
+    "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
     "markdown-it-emoji": "^1.4.0",
