@@ -77,6 +77,11 @@ Start numbering with offset:
 57. foo
 1. bar
 
+GFM task list
+
+- [ ] Not done.
+- [X] Done.
+
 
 ## Code
 
@@ -104,6 +109,13 @@ var foo = function (bar) {
 };
 
 console.log(foo(5));
+\`\`\`
+
+Diff comparison
+
+\`\`\`diff
++ this text is highlighted in green
+- this text is highlighted in red
 \`\`\`
 
 ## Tables
@@ -134,8 +146,8 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 
 ## Images
 
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+![Minion](https://octodex.github.com/images/minion.png =100x)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat" =200x)
 
 Like links, Images also have a footnote style syntax
 
@@ -154,9 +166,9 @@ The killer feature of \`markdown-it\` is very effective support of
 
 ### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
 
-> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
+> Classic markup: :wink: :scream: :joy_cat: :scream_cat: :laughing: :yum:
 >
-> Shortcuts (emoticons): :-) :-( 8-) ;)
+> Shortcuts (emoticons): :-D ;) 8-) 
 
 see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
 
@@ -165,11 +177,6 @@ see [how to change output](https://github.com/markdown-it/markdown-it-emoji#chan
 
 - 19^th^
 - H~2~O
-
-
-### [\\<ins>](https://github.com/markdown-it/markdown-it-ins)
-
-++Inserted text++
 
 
 ### [\\<mark>](https://github.com/markdown-it/markdown-it-mark)
@@ -226,12 +233,6 @@ This is HTML abbreviation example.
 It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 
 *[HTML]: Hyper Text Markup Language
-
-### [Custom containers](https://github.com/markdown-it/markdown-it-container)
-
-::: warning
-*here be dragons*
-:::
 
 `;
 
