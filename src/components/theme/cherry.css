@@ -5,7 +5,8 @@
   font-family: 'Open Sans', sans-serif;
   letter-spacing: 0.3px;
   word-spacing: 1px;
-  background: #fff;
+  /*background: rgba(234, 255, 208, 0.4);*/
+  background: rgba(255, 238, 204, 0.5);
   color: #282c34;
 }
 
@@ -15,7 +16,7 @@
 }
 
 .cm-s-cherry .CodeMirror-lines {
-  padding: 8px 0;
+  padding: 4px 0;
 }
 
 .cm-s-cherry .CodeMirror-gutters {
@@ -31,11 +32,11 @@
 }
 
 .cm-s-cherry .CodeMirror-activeline-background {
-  background: #FFFFFF0D;
+  background: #fec;
 }
 
 .cm-s-cherry .CodeMirror-selected {
-  background: #DDF0FF33;
+  background: #eee;
 }
 
 /* code, code block */
@@ -65,8 +66,13 @@
   /*color: #f2671f;*/
 }
 
+.cm-s-cherry .cm-quote {
+  font-style: italic;
+}
+
+/* check-box */
 .cm-s-cherry .cm-property {
-  color: #DAD085;
+  color: gray;
 }
 
 .cm-s-cherry .cm-atom {
