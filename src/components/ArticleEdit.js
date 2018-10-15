@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 
+import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
+
 import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
 
@@ -38,19 +40,26 @@ class MarkdownPanel extends Component {
     };
 
     return (
-      <div className="edit-wrapper">
-        <div className='editor'>
-          <Editor
-            value={this.state.src}
-            options={this.state.option}
-            handleUpdate={this.handleSourceUpdate}
-          />
-        </div>
+      <ScrollSync>
+        <div className="edit-wrapper">
+          <ScrollSyncPane>
+            <div className='editor'>
+              <Editor
+                value={this.state.src}
+                options={this.state.option}
+                handleUpdate={this.handleSourceUpdate}
+              />
+            </div>
+          </ScrollSyncPane>
 
-        <div className='rendering'>
-          <RenderingPanel renderResult={renderResult}/>
+          <ScrollSyncPane>
+            <div className='rendering'>
+              <RenderingPanel renderResult={renderResult}/>
+            </div>
+          </ScrollSyncPane>
         </div>
-      </div>
+      </ScrollSync>
+
     );
   }
 }

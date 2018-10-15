@@ -2,6 +2,11 @@
   "name": "write-down",
   "version": "0.1.0",
   "private": true,
+  "keywords": [
+    "markdown",
+    "writing platform",
+    "editor"
+  ],
   "homepage": "https://nevenleung.github.io/write-down/",
   "dependencies": {
     "code-mirror-themes": "^1.0.0",
@@ -27,6 +32,7 @@
     "react-codemirror2": "^5.1.0",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.4",
+    "react-scroll-sync": "^0.7.0",
     "react-syntax-highlighter": "^9.0.0",
     "twemoji": "^11.0.1"
   },
