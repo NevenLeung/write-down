@@ -5,6 +5,8 @@ import React, { Component } from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import 'codemirror/mode/gfm/gfm.js';
 import "codemirror/addon/selection/active-line";
+// import 'codemirror/addon/scroll/simplescrollbars';
+// import 'codemirror/addon/scroll/simplescrollbars.css';
 
 import 'codemirror/lib/codemirror.css';
 import './theme/cherry.css';
@@ -33,7 +35,9 @@ class Editor extends Component {
         theme: 'cherry',
         tabSize: 2,
         styleActiveLine: true,
-        highlightFormatting: true
+        lineWrapping: true,
+        // scrollbarStyle: 'overlay',
+        // allowDropFileTypes: ['text/markdown']
       }
     };
   }
