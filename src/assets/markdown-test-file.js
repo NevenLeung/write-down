@@ -6,15 +6,18 @@ const markdownContent = `
 ##### h5 Heading
 ###### h6 Heading
 
+## Table of content
+
+Use \`[[toc]]\` to display the table of content.
+
+[[toc]]
 
 ## Horizontal Rules
-
 ___
 
 ---
 
 ***
-
 
 ## Typographic replacements
 
@@ -28,7 +31,6 @@ test.. test... test..... test?..... test!....
 
 "Smartypants, double quotes" and 'single quotes'
 
-
 ## Emphasis
 
 **This is bold text**
@@ -41,14 +43,11 @@ _This is italic text_
 
 ~~Strikethrough~~
 
-
 ## Blockquotes
-
 
 > Blockquotes can also be nested...
 >> ...by using additional greater-than signs right next to each other...
 > > > ...or with spaces between arrows.
-
 
 ## Lists
 
@@ -68,7 +67,6 @@ Ordered
 2. Consectetur adipiscing elit
 3. Integer molestie lorem at massa
 
-
 1. You can use sequential numbers...
 1. ...or keep all the numbers as \`1.\`
 
@@ -82,7 +80,6 @@ GFM task list
 - [ ] Not done.
 - [X] Done.
 
-
 ## Code
 
 Inline \`code\`
@@ -93,7 +90,6 @@ Indented code
     line 1 of code
     line 2 of code
     line 3 of code
-
 
 Block code "fences"
 
@@ -134,7 +130,6 @@ Right aligned columns
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 
-
 ## Links
 
 [link text](http://dev.nodeca.com)
@@ -142,7 +137,6 @@ Right aligned columns
 [link with title](http://nodeca.github.io/pica/demo/ "title text!")
 
 Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
-
 
 ## Images
 
@@ -157,12 +151,10 @@ With a reference later in the document defining the URL location:
 
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
-
 ## Plugins
 
 The killer feature of \`markdown-it\` is very effective support of
 [syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).
-
 
 ### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
 
@@ -171,7 +163,6 @@ The killer feature of \`markdown-it\` is very effective support of
 > Shortcuts (emoticons): :-D ;) 8-) 
 
 see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
-
 
 ### [Subscript](https://github.com/markdown-it/markdown-it-sub) / [Superscript](https://github.com/markdown-it/markdown-it-sup)
 
@@ -182,7 +173,6 @@ see [how to change output](https://github.com/markdown-it/markdown-it-emoji#chan
 ### [\\<mark>](https://github.com/markdown-it/markdown-it-mark)
 
 ==Marked text==
-
 
 ### [Footnotes](https://github.com/markdown-it/markdown-it-footnote)
 
@@ -199,7 +189,6 @@ Duplicated footnote reference[^second].
     and multiple paragraphs.
 
 [^second]: Footnote text.
-
 
 ### [Definition lists](https://github.com/markdown-it/markdown-it-deflist)
 
@@ -225,7 +214,6 @@ Term 2
   ~ Definition 2a
   ~ Definition 2b
 
-
 ### [Abbreviations](https://github.com/markdown-it/markdown-it-abbr)
 
 This is HTML abbreviation example.
@@ -233,7 +221,6 @@ This is HTML abbreviation example.
 It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 
 *[HTML]: Hyper Text Markup Language
-
 `;
 
-export default markdownContent;
+export default markdownContent.trim();
