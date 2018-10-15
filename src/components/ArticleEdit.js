@@ -5,7 +5,7 @@ import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
 
 import 'github-markdown-css';
-import 'highlight.js/styles/docco.css';
+import 'highlight.js/styles/github.css';
 
 import './ArticleEdit.css';
 

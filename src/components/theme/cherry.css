@@ -32,11 +32,11 @@
 }
 
 .cm-s-cherry .CodeMirror-activeline-background {
-  background: #fec;
+  background: #ffebbd;
 }
 
 .cm-s-cherry .CodeMirror-selected {
-  background: #eee;
+  background: #ffebbd;
 }
 
 /* code, code block */

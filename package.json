@@ -21,6 +21,7 @@
     "markdown-it-sup": "^1.0.0",
     "markdown-it-table-of-contents": "^0.4.3",
     "markdown-it-task-lists": "^2.1.1",
+    "normalize.css": "^8.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-codemirror2": "^5.1.0",

@@ -1,6 +1,6 @@
 .edit-wrapper {
   display: flex;
-  border: 2px solid #eee;
+  height: 90vh;
 }
 
 .edit-wrapper .editor, .edit-wrapper .rendering {
@@ -9,17 +9,24 @@
 }
 
 .editor {
-  max-width: 660px;
-  /*height: 600px;*/
+  height: auto;
+  position: relative;
+  overflow: auto;
 }
 
 .CodeMirror {
-  height: 100%;
-  width: 100%;
-  max-width: 660px;
-  white-space: pre;
-  word-break: break-all;
-  overflow-wrap: break-spaces;
+  /* 使用绝对定位，来显示code mirror的其他样式的滚动条。如果我不修改.CodeMirror的高度，样式其实是可以正常用上的，不知道为什么 */
+  /*position: absolute;*/
+  /*top: 10px;*/
+  /*left: 10px;*/
+  /*right: 10px;*/
+  /*bottom: 10px;*/
+  width: auto;
+  height: auto;
+}
+
+.rendering {
+  overflow: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
