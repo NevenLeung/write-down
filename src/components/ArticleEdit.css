@@ -1,10 +1,22 @@
+/* Custom scrollbar style */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #ddd;
+}
+
+
 .edit-wrapper {
   display: flex;
   height: 90vh;
 }
 
 .edit-wrapper .editor, .edit-wrapper .rendering {
-  padding: 10px;
+  padding: 0 0 0 10px;
   flex: 1;
 }
 
