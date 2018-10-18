@@ -36,6 +36,7 @@ class Editor extends Component {
         tabSize: 2,
         styleActiveLine: true,
         lineWrapping: true,
+        viewportMargin: Infinity
         // scrollbarStyle: 'overlay',
         // allowDropFileTypes: ['text/markdown']
       }
