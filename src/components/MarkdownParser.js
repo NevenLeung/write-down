@@ -27,22 +27,16 @@ const markdownOption = {
 
 const md = new MarkdownIt(markdownOption);
 
-// todo: 没有起作用
 const anchorOption = {
-  level: [1, 2, 3, 4, 5, 6]
+  level: [1, 2, 3]
 };
 
 const imsizeOption = {
   autofill: true
 };
 
-const taskListOption = {
-  enabled: true,
-  label: true
-};
-
 const TOC_Option = {
-  includeLevel: [1, 2, 3, 4, 5, 6]
+  includeLevel: [1, 2, 3]
 };
 
 

@@ -59,7 +59,6 @@ class MarkdownPanel extends Component {
           </ScrollSyncPane>
         </div>
       </ScrollSync>
-
     );
   }
 }
