@@ -9,36 +9,34 @@
   background-color: #ddd;
 }
 
+/*.container {*/
+  /*height: 90%;*/
+/*}*/
 
 .edit-wrapper {
   display: flex;
   height: 90vh;
-}
-
-.edit-wrapper .editor, .edit-wrapper .rendering {
-  padding: 0 0 0 10px;
-  flex: 1;
+  justify-content: center;
 }
 
 .editor {
+  width: 50%;
   height: auto;
   position: relative;
+  padding: 10px 0 10px 20px;
   overflow: auto;
 }
 
 .CodeMirror {
-  /* 使用绝对定位，来显示code mirror的其他样式的滚动条。如果我不修改.CodeMirror的高度，样式其实是可以正常用上的，不知道为什么 */
-  /*position: absolute;*/
-  /*top: 10px;*/
-  /*left: 10px;*/
-  /*right: 10px;*/
-  /*bottom: 10px;*/
   width: auto;
   height: auto;
 }
 
 .rendering {
+  width: 50%;
+  padding: 10px 20px;
   overflow: auto;
+  transition: all 500ms ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -50,4 +48,33 @@ p, ul, li, a, table {
 
 .emoji {
   height: 1.2em;
+}
+
+.edit-mode-is-on {
+  width: 50%;
+  opacity: 1;
+  /* 这是展开editor时的动画 */
+  transition: opacity 400ms 100ms ease, width 500ms ease;
+}
+
+.edit-mode-is-off {
+  width: 0;
+  opacity: 0;
+  /* 这是收起editor时的动画 */
+  transition: opacity 500ms ease-in-out, width 400ms 100ms ease-in-out;
+}
+
+.read-mode-is-on {
+  width: 100%;
+  max-height: 1000px;
+  padding: 10px 200px;
+  transition: all 400ms 100ms ease-in-out;
+}
+
+.tool-bar {
+  background-color: palegreen;
+}
+
+.ant-switch-checked {
+  background-color: rgba(0, 0, 0, 0.25);
 }

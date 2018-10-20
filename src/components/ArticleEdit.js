@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
+import {Row, Col, Switch} from 'antd';
 
 import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
@@ -14,12 +15,13 @@ import './ArticleEdit.css';
 import markdownFeatureSrc from '../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
 
-class MarkdownPanel extends Component {
+class ArticleEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
       src: markdownFeatureSrc,
-      option: {
+      isEditModeOn: true,
+      codeMirrorOption: {
         mode: 'gfm',
         theme: 'cherry',
         tabSize: 2,
@@ -34,31 +36,42 @@ class MarkdownPanel extends Component {
     });
   };
 
+  handleModeToggle = (checked) => {
+    this.setState({
+      isEditModeOn: checked
+    });
+  };
+
   render() {
     let renderResult = {
       __html: MarkdownParser.render(this.state.src)
     };
 
     return (
-      <ScrollSync>
-        <div className="edit-wrapper">
-          <ScrollSyncPane>
-            <div className='editor'>
-              <Editor
-                value={this.state.src}
-                options={this.state.option}
-                handleUpdate={this.handleSourceUpdate}
-              />
-            </div>
-          </ScrollSyncPane>
+      <div>
+        <Row>
+          <ToolBar modeToggle={this.handleModeToggle}/>
+        </Row>
+        <ScrollSync>
+          <Row className="edit-wrapper">
+            <ScrollSyncPane>
+              <Col className={this.state.isEditModeOn? 'editor edit-mode-is-on': 'editor edit-mode-is-off'}>
+                <Editor
+                  value={this.state.src}
+                  options={this.state.codeMirrorOption}
+                  handleUpdate={this.handleSourceUpdate}
+                />
+              </Col>
+            </ScrollSyncPane>
 
-          <ScrollSyncPane>
-            <div className='rendering'>
-              <RenderingPanel renderResult={renderResult}/>
-            </div>
-          </ScrollSyncPane>
-        </div>
-      </ScrollSync>
+            <ScrollSyncPane>
+              <Col className={this.state.isEditModeOn? 'rendering': 'rendering read-mode-is-on'}>
+                <RenderingPanel renderResult={renderResult}/>
+              </Col>
+            </ScrollSyncPane>
+          </Row>
+        </ScrollSync>
+      </div>
     );
   }
 }
@@ -73,6 +86,17 @@ RenderingPanel.propTypes = {
   renderResult: PropTypes.object
 };
 
+function ToolBar(props) {
+  return (
+    <div className={'tool-bar'}>
+      ToolBar
+      <Switch defaultChecked checkedChildren={'Edit'} unCheckedChildren={'Read'} onChange={props.modeToggle}/>
+    </div>
+  )
+}
 
+ToolBar.propTypes = {
+  modeToggle: PropTypes.func.required
+};
 
-export default MarkdownPanel;
+export default ArticleEdit;

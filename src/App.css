@@ -2,11 +2,12 @@
 
 .App {
   scroll-behavior: smooth;
+  min-height: 100vh;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 10vh;
+  height: 10ch;
   display: flex;
   flex-direction: column;
   align-items: center;
