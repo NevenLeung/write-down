@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import 'normalize.css/normalize.css';
 
+import 'antd/dist/antd.css';
 import './App.css';
 
+// import Layout from './layout/Layout';
 import ArticleEdit from './components/ArticleEdit';
+// import TestToggle from './components/TestToggle';
 
 class App extends Component {
   render() {
@@ -11,6 +14,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">Let's start to write down.</header>
         <ArticleEdit/>
+        {/*<TestToggle/>*/}
+        {/*<Layout/>*/}
       </div>
     );
   }
