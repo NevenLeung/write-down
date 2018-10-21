@@ -13,7 +13,7 @@
   /*height: 90%;*/
 /*}*/
 
-.edit-wrapper {
+.editWrapper {
   display: flex;
   height: 90vh;
   justify-content: center;
@@ -32,11 +32,16 @@
   height: auto;
 }
 
-.rendering {
+.previewer {
   width: 50%;
   padding: 10px 20px;
   overflow: auto;
-  transition: all 500ms ease;
+  /*transition: all 500ms ease;*/
+
+  /*width: 50%;*/
+  opacity: 1;
+  /* 这是展开editor时的动画 */
+  transition: opacity 400ms 100ms ease, width 500ms ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,6 +53,19 @@ p, ul, li, a, table {
 
 .emoji {
   height: 1.2em;
+}
+
+.editorOnly {
+  /*composes: editor;*/
+
+}
+
+.editorHide {
+  composes: editor;
+  width: 0;
+  opacity: 0;
+  /* 这是收起editor时的动画 */
+  transition: opacity 500ms ease-in-out, width 400ms 100ms ease-in-out;
 }
 
 .edit-mode-is-on {
@@ -71,7 +89,20 @@ p, ul, li, a, table {
   transition: all 400ms 100ms ease-in-out;
 }
 
-.tool-bar {
+.previewerOnly {
+  composes: previewer;
+  width: 100%;
+  max-height: 1000px;
+  padding: 10px 200px;
+  transition: all 400ms 100ms ease-in-out;
+}
+
+.previewerHide {
+  /*composes: previewer;*/
+
+}
+
+.toolBar {
   background-color: palegreen;
 }
 

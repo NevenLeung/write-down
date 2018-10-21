@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
-import {Row, Col, Switch} from 'antd';
+import {Row, Col, Switch, Radio} from 'antd';
 
 import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
@@ -10,7 +10,7 @@ import Editor from './Editor';
 import 'github-markdown-css';
 import 'highlight.js/styles/github.css';
 
-import './ArticleEdit.css';
+import styles from './ArticleEdit.css';
 
 import markdownFeatureSrc from '../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
@@ -20,7 +20,7 @@ class ArticleEdit extends Component {
     super(props);
     this.state = {
       src: markdownFeatureSrc,
-      isEditModeOn: true,
+      displayMode: 'Editor & Previewer',
       codeMirrorOption: {
         mode: 'gfm',
         theme: 'cherry',
@@ -36,11 +36,35 @@ class ArticleEdit extends Component {
     });
   };
 
-  handleModeToggle = (checked) => {
+  handleModeChange = (e) => {
+    const displayMode = e.target.value;
+
     this.setState({
-      isEditModeOn: checked
+      displayMode
     });
   };
+
+  toggleStyleOfEditor (currentMode) {
+    switch (currentMode) {
+      case 'Editor Only':
+        return styles.editorOnly;
+      case 'Previewer Only':
+        return styles.editorHide;
+      default:
+        return styles.editor;
+    }
+  }
+
+  toggleStyleOfPreviewer (currentMode) {
+    switch (currentMode) {
+      case 'Editor Only':
+        return styles.previewerHide;
+      case 'Previewer Only':
+        return styles.previewerOnly;
+      default:
+        return styles.previewer;
+    }
+  }
 
   render() {
     let renderResult = {
@@ -50,25 +74,27 @@ class ArticleEdit extends Component {
     return (
       <div>
         <Row>
-          <ToolBar modeToggle={this.handleModeToggle}/>
+          <Col>
+            <ToolBar changeMode={this.handleModeChange}/>
+          </Col>
         </Row>
         <ScrollSync>
-          <Row className="edit-wrapper">
-            <ScrollSyncPane>
-              <Col className={this.state.isEditModeOn? 'editor edit-mode-is-on': 'editor edit-mode-is-off'}>
+          <Row className={styles.editWrapper}>
+            <Col className={this.toggleStyleOfEditor(this.state.displayMode)}>
+              <ScrollSyncPane>
                 <Editor
                   value={this.state.src}
                   options={this.state.codeMirrorOption}
                   handleUpdate={this.handleSourceUpdate}
                 />
-              </Col>
-            </ScrollSyncPane>
+              </ScrollSyncPane>
+            </Col>
 
-            <ScrollSyncPane>
-              <Col className={this.state.isEditModeOn? 'rendering': 'rendering read-mode-is-on'}>
-                <RenderingPanel renderResult={renderResult}/>
-              </Col>
-            </ScrollSyncPane>
+            <Col className={this.toggleStyleOfPreviewer(this.state.displayMode)}>
+              <ScrollSyncPane>
+                <Previewer renderResult={renderResult}/>
+              </ScrollSyncPane>
+            </Col>
           </Row>
         </ScrollSync>
       </div>
@@ -76,27 +102,49 @@ class ArticleEdit extends Component {
   }
 }
 
-function RenderingPanel(props) {
+function Previewer(props) {
   return (
     <div className='markdown-body' dangerouslySetInnerHTML={props.renderResult}/>
   )
 }
 
-RenderingPanel.propTypes = {
+Previewer.propTypes = {
   renderResult: PropTypes.object
 };
 
 function ToolBar(props) {
   return (
-    <div className={'tool-bar'}>
+    <div className={styles.toolBar}>
       ToolBar
-      <Switch defaultChecked checkedChildren={'Edit'} unCheckedChildren={'Read'} onChange={props.modeToggle}/>
+      <Col>
+        <DisplayMode changeDisplayMode={props.changeMode}/>
+      </Col>
+      {/*<Switch defaultChecked checkedChildren={'Edit'} unCheckedChildren={'Read'} onChange={props.modeToggle}/>*/}
     </div>
   )
 }
 
 ToolBar.propTypes = {
-  modeToggle: PropTypes.func.required
+  changeMode: PropTypes.func.required
+};
+
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
+
+function DisplayMode(props) {
+  return (
+    <div>
+      <RadioGroup onChange={props.changeDisplayMode} defaultValue="Editor & Previewer">
+        <RadioButton value="Editor Only">Editor Only</RadioButton>
+        <RadioButton value="Editor & Previewer">Editor & Previewer</RadioButton>
+        <RadioButton value="Previewer Only">Previewer Only</RadioButton>
+      </RadioGroup>
+    </div>
+  )
+}
+
+DisplayMode.propTypes = {
+  changeDisplayMode: PropTypes.func.required
 };
 
 export default ArticleEdit;
