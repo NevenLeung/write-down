@@ -1,0 +1,90 @@
+/* Custom scrollbar style */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #ddd;
+}
+
+/* global setting */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
+}
+p, ul, li, a, table {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* code mirror setting */
+:global .CodeMirror {
+  height: auto;
+}
+
+.articleEditWrapper {
+  height: 82vh;
+}
+
+.editor {
+  width: 50%;
+  height: auto;
+  opacity: 1;
+  position: relative;
+  padding: 10px 0 0 10px;
+  overflow: auto;
+  transition: opacity 400ms 100ms ease, width 500ms ease, padding 500ms ease;
+}
+
+.editorOnly {
+  composes: editor;
+  width: 100%;
+  max-width: 3000px;
+  opacity: 1;
+  padding: 10px 200px;
+  transition: all 500ms ease;
+}
+
+.editorHide {
+  composes: editor;
+  width: 0;
+  opacity: 0;
+  padding: 10px 0;
+  transition: all 500ms ease;
+}
+
+/* previewer setting */
+:global .emoji {
+  height: 1.2em;
+}
+
+.previewer {
+  width: 50%;
+  padding: 10px 10px;
+  overflow: auto;
+  transition: all 500ms ease;
+  opacity: 1;
+}
+
+.previewerOnly {
+  composes: previewer;
+  width: 100%;
+  max-width: 3000px;
+  opacity: 1;
+  padding: 10px 200px;
+  transition: all 500ms ease;
+}
+
+.previewerHide {
+  composes: previewer;
+  width: 0;
+  opacity: 0;
+  padding: 10px 0;
+  transition: all 500ms ease;
+}
+
+.toolBar {
+  height: 8vh;
+  background-color: #eee;
+}

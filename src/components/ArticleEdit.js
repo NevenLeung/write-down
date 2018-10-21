@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
-import {Row, Col, Switch, Radio} from 'antd';
+import {Row, Col, Radio} from 'antd';
 
 import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
@@ -10,7 +10,7 @@ import Editor from './Editor';
 import 'github-markdown-css';
 import 'highlight.js/styles/github.css';
 
-import styles from './ArticleEdit.css';
+import styles from './ArticleEdit.module.css';
 
 import markdownFeatureSrc from '../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
@@ -73,28 +73,26 @@ class ArticleEdit extends Component {
 
     return (
       <div>
-        <Row>
-          <Col>
-            <ToolBar changeMode={this.handleModeChange}/>
-          </Col>
+        <Row className={styles.toolBar} type="flex" justify="center" align="middle">
+          <ToolBar changeMode={this.handleModeChange}/>
         </Row>
         <ScrollSync>
-          <Row className={styles.editWrapper}>
-            <Col className={this.toggleStyleOfEditor(this.state.displayMode)}>
-              <ScrollSyncPane>
+          <Row className={styles.articleEditWrapper} type="flex" justify="center">
+            <ScrollSyncPane>
+              <Col className={this.toggleStyleOfEditor(this.state.displayMode)}>
                 <Editor
                   value={this.state.src}
                   options={this.state.codeMirrorOption}
                   handleUpdate={this.handleSourceUpdate}
                 />
-              </ScrollSyncPane>
-            </Col>
+              </Col>
+            </ScrollSyncPane>
 
-            <Col className={this.toggleStyleOfPreviewer(this.state.displayMode)}>
-              <ScrollSyncPane>
+            <ScrollSyncPane>
+              <Col className={this.toggleStyleOfPreviewer(this.state.displayMode)}>
                 <Previewer renderResult={renderResult}/>
-              </ScrollSyncPane>
-            </Col>
+              </Col>
+            </ScrollSyncPane>
           </Row>
         </ScrollSync>
       </div>
@@ -114,13 +112,11 @@ Previewer.propTypes = {
 
 function ToolBar(props) {
   return (
-    <div className={styles.toolBar}>
-      ToolBar
+    <>
       <Col>
         <DisplayMode changeDisplayMode={props.changeMode}/>
       </Col>
-      {/*<Switch defaultChecked checkedChildren={'Edit'} unCheckedChildren={'Read'} onChange={props.modeToggle}/>*/}
-    </div>
+    </>
   )
 }
 
@@ -134,7 +130,7 @@ const RadioGroup = Radio.Group;
 function DisplayMode(props) {
   return (
     <div>
-      <RadioGroup onChange={props.changeDisplayMode} defaultValue="Editor & Previewer">
+      <RadioGroup onChange={props.changeDisplayMode} defaultValue="Editor & Previewer" buttonStyle="solid">
         <RadioButton value="Editor Only">Editor Only</RadioButton>
         <RadioButton value="Editor & Previewer">Editor & Previewer</RadioButton>
         <RadioButton value="Previewer Only">Previewer Only</RadioButton>

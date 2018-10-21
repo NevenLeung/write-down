@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import SyntaxHighlighter from "react-syntax-highlighter";
-// import { docco } from "react-syntax-highlighter/styles/hljs";
 
 import { Controlled as CodeMirror } from "react-codemirror2";
 import 'codemirror/mode/gfm/gfm.js';
