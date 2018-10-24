@@ -40,7 +40,7 @@ p, ul, li, a, table {
 .editorOnly {
   composes: editor;
   width: 100%;
-  max-width: 3000px;
+  max-width: 2000px;
   opacity: 1;
   padding: 10px 200px;
   transition: all 500ms ease;
@@ -59,7 +59,7 @@ p, ul, li, a, table {
   height: 1.2em;
 }
 
-.previewer {
+.preview {
   width: 50%;
   padding: 10px 10px;
   overflow: auto;
@@ -67,17 +67,17 @@ p, ul, li, a, table {
   opacity: 1;
 }
 
-.previewerOnly {
-  composes: previewer;
+.previewOnly {
+  composes: preview;
   width: 100%;
-  max-width: 3000px;
+  max-width: 2000px;
   opacity: 1;
   padding: 10px 200px;
   transition: all 500ms ease;
 }
 
-.previewerHide {
-  composes: previewer;
+.previewHide {
+  composes: preview;
   width: 0;
   opacity: 0;
   padding: 10px 0;

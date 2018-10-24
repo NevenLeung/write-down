@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import throttle from 'lodash/throttle';
 
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import {Row, Col, Radio} from 'antd';
@@ -20,7 +21,8 @@ class ArticleEdit extends Component {
     super(props);
     this.state = {
       src: markdownFeatureSrc,
-      displayMode: 'Editor & Previewer',
+      displayMode: 'Editor & Preview',
+      scrollSync: true,
       codeMirrorOption: {
         mode: 'gfm',
         theme: 'cherry',
@@ -28,6 +30,19 @@ class ArticleEdit extends Component {
         styleActiveLine: true,
       }
     };
+
+    this.$editor = null;
+    this.$preview = null;
+
+    this.editorScrollDistance = 0;
+    this.previewScrollDistance = 0;
+
+    this.lastDisplayMode = 'Editor & Preview';
+  }
+
+  componentDidMount() {
+    this.$editor = document.querySelector('.editor');
+    this.$preview = document.querySelector('.preview');
   }
 
   handleSourceUpdate = (editor, data, value) => {
@@ -36,19 +51,96 @@ class ArticleEdit extends Component {
     });
   };
 
-  handleModeChange = (e) => {
-    const displayMode = e.target.value;
+  handleModeChange = async (e) => {
+    const nextDisplayMode = e.target.value;
 
     this.setState({
-      displayMode
+      displayMode: nextDisplayMode
     });
+
+    // 仅在'Editor & Preview'使用默认的scroll-sync功能，其他display mode采用this.syncScrollManually()来完成scroll-sync
+    if (nextDisplayMode === 'Editor & Preview') {
+      // 在页面还处于伸缩状态时，窗口的高度不定，scroll-sync会导致页面发生跳动
+      // 添加一个延时来延迟scroll-sync的开启
+      await delay(200);
+
+      this.setState({
+        scrollSync: true
+      });
+    } else {
+      // display mode切换至'Editor Only'或'Preview Only'，则要尽快地关闭scroll-sync，防止无效的同步
+      this.setState({
+        scrollSync: false
+      });
+    }
+
+    this.syncScrollManually(this.lastDisplayMode, nextDisplayMode);
+
+    // 保存前一次的display mode
+    this.lastDisplayMode = nextDisplayMode;
   };
+
+  saveScrollTop = () => {
+    this.editorScrollDistance = this.$editor.scrollTop;
+    this.previewScrollDistance = this.$preview.scrollTop;
+  };
+
+  syncScrollManually = async (prevDisplayMode, nextDisplayMode) => {
+    // 根据滚动百分比计算对应的滚动距离
+    if (prevDisplayMode === 'Editor Only' && nextDisplayMode === 'Preview Only') {
+      // 基于editor，计算preview
+      const scrollingProportion = this.getScrollingProportion(this.$editor);
+
+      // 防止在切换display mode时，高度突变引起的scrollHeight出错
+      await delay(200);
+      this.$preview.scrollTop = this.getCalculatedScrollTop(this.$preview, scrollingProportion);
+    }
+
+    if (prevDisplayMode === 'Preview Only' && nextDisplayMode === 'Editor Only') {
+      // 基于preview，计算editor
+      const scrollingProportion = this.getScrollingProportion(this.$preview);
+
+      // 防止在切换display mode时，高度突变引起的scrollHeight出错
+      await delay(200);
+      this.$editor.scrollTop = this.getCalculatedScrollTop(this.$editor, scrollingProportion);
+    }
+
+
+    // 根据切换至 "Editor & Preview" 之前的显示的内容的滚动距离来设定
+    if (prevDisplayMode === 'Editor Only' && nextDisplayMode === 'Editor & Preview') {
+      // 这里 +1 是为了稍微更新一下scrollTop，从而触发scroll sync组件的同步功能。
+      // 如果不进行 +1，scrollTop与editorScrollDistance是相等的，不会触发scroll sync组件的同步功能
+      this.$editor.scrollTop = this.editorScrollDistance + 1;
+    }
+
+    if (prevDisplayMode === 'Preview Only' && nextDisplayMode === 'Editor & Preview') {
+      this.$preview.scrollTop = this.previewScrollDistance + 1;
+    }
+  };
+
+  // 计算滚动距离所占的百分比
+  getScrollingProportion(node) {
+    if (node.matches('.editor')) {
+      console.log(this.editorScrollDistance, node.scrollHeight, node.clientHeight );
+      return (this.editorScrollDistance / (node.scrollHeight - node.clientHeight)).toFixed(4);
+    }
+
+    if (node.matches('.preview')) {
+      return (this.previewScrollDistance / (node.scrollHeight - node.clientHeight)).toFixed(4);
+    }
+  }
+
+  // 根据百分比计算出另一个窗口的滚动距离
+  getCalculatedScrollTop(node, proportion) {
+    console.log(proportion, node.scrollHeight, node.clientHeight );
+    return Math.round((node.scrollHeight - node.clientHeight) * proportion);
+  }
 
   toggleStyleOfEditor (currentMode) {
     switch (currentMode) {
       case 'Editor Only':
         return styles.editorOnly;
-      case 'Previewer Only':
+      case 'Preview Only':
         return styles.editorHide;
       default:
         return styles.editor;
@@ -58,11 +150,11 @@ class ArticleEdit extends Component {
   toggleStyleOfPreviewer (currentMode) {
     switch (currentMode) {
       case 'Editor Only':
-        return styles.previewerHide;
-      case 'Previewer Only':
-        return styles.previewerOnly;
+        return styles.previewHide;
+      case 'Preview Only':
+        return styles.previewOnly;
       default:
-        return styles.previewer;
+        return styles.preview;
     }
   }
 
@@ -76,10 +168,14 @@ class ArticleEdit extends Component {
         <Row className={styles.toolBar} type="flex" justify="center" align="middle">
           <ToolBar changeMode={this.handleModeChange}/>
         </Row>
-        <ScrollSync>
+        <ScrollSync enabled={this.state.scrollSync}>
           <Row className={styles.articleEditWrapper} type="flex" justify="center">
             <ScrollSyncPane>
-              <Col className={this.toggleStyleOfEditor(this.state.displayMode)}>
+              <Col
+                className={this.toggleStyleOfEditor(this.state.displayMode) + ' editor'}
+                ref={this.editor}
+                onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
+              >
                 <Editor
                   value={this.state.src}
                   options={this.state.codeMirrorOption}
@@ -89,8 +185,11 @@ class ArticleEdit extends Component {
             </ScrollSyncPane>
 
             <ScrollSyncPane>
-              <Col className={this.toggleStyleOfPreviewer(this.state.displayMode)}>
-                <Previewer renderResult={renderResult}/>
+              <Col
+                className={this.toggleStyleOfPreviewer(this.state.displayMode) + ' preview'}
+                onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
+              >
+                <Preview renderResult={renderResult}/>
               </Col>
             </ScrollSyncPane>
           </Row>
@@ -100,13 +199,15 @@ class ArticleEdit extends Component {
   }
 }
 
-function Previewer(props) {
-  return (
-    <div className='markdown-body' dangerouslySetInnerHTML={props.renderResult}/>
-  )
+class Preview extends Component {
+  render() {
+    return (
+      <div className='markdown-body' dangerouslySetInnerHTML={this.props.renderResult}/>
+      )
+    }
 }
 
-Previewer.propTypes = {
+Preview.propTypes = {
   renderResult: PropTypes.object
 };
 
@@ -121,7 +222,7 @@ function ToolBar(props) {
 }
 
 ToolBar.propTypes = {
-  changeMode: PropTypes.func.required
+  changeMode: PropTypes.func
 };
 
 const RadioButton = Radio.Button;
@@ -130,17 +231,21 @@ const RadioGroup = Radio.Group;
 function DisplayMode(props) {
   return (
     <div>
-      <RadioGroup onChange={props.changeDisplayMode} defaultValue="Editor & Previewer" buttonStyle="solid">
+      <RadioGroup onChange={props.changeDisplayMode} defaultValue="Editor & Preview" buttonStyle="solid">
         <RadioButton value="Editor Only">Editor Only</RadioButton>
-        <RadioButton value="Editor & Previewer">Editor & Previewer</RadioButton>
-        <RadioButton value="Previewer Only">Previewer Only</RadioButton>
+        <RadioButton value="Editor & Preview">Editor & Preview</RadioButton>
+        <RadioButton value="Preview Only">Preview Only</RadioButton>
       </RadioGroup>
     </div>
   )
 }
 
 DisplayMode.propTypes = {
-  changeDisplayMode: PropTypes.func.required
+  changeDisplayMode: PropTypes.func
 };
+
+function delay(timeout) {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 export default ArticleEdit;
