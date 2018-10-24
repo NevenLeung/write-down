@@ -6,12 +6,6 @@ const markdownContent = `
 ##### h5 Heading
 ###### h6 Heading
 
-## Table of content
-
-Use \`[[toc]]\` to display the table of content.
-
-[[toc]]
-
 ## Horizontal Rules
 ___
 
