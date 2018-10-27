@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
 
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
-import {Row, Col, Radio} from 'antd';
+import {Row, Col, Radio, Switch} from 'antd';
 
 import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
@@ -22,7 +22,10 @@ class ArticleEdit extends Component {
     this.state = {
       src: markdownFeatureSrc,
       displayMode: 'Editor & Preview',
-      scrollSync: true,
+      scrollSync: {
+        enabled: true,
+        locked: false
+      },
       codeMirrorOption: {
         mode: 'gfm',
         theme: 'cherry',
@@ -51,6 +54,15 @@ class ArticleEdit extends Component {
     });
   };
 
+  handleScrollSyncToggle = () => {
+    this.setState((prev) => ({
+      scrollSync: {
+        enabled: !prev.scrollSync.enabled,
+        locked: !prev.scrollSync.locked
+      }
+    }))
+  };
+
   handleModeChange = async (e) => {
     const nextDisplayMode = e.target.value;
 
@@ -60,17 +72,25 @@ class ArticleEdit extends Component {
 
     // 仅在'Editor & Preview'使用默认的scroll-sync功能，其他display mode采用this.syncScrollManually()来完成scroll-sync
     if (nextDisplayMode === 'Editor & Preview') {
-      // 在页面还处于伸缩状态时，窗口的高度不定，scroll-sync会导致页面发生跳动
-      // 添加一个延时来延迟scroll-sync的开启
-      await delay(200);
+      // 如果scroll-sync是通过switch设置为关闭后，此时locked为true，切换display mode不能开启它。
+      // 只要在switch为开启状态下，即locked为false时，切换回'Editor & Preview'才能开启它。
+      if (!this.state.scrollSync.locked) {
+        // 在页面还处于伸缩状态时，窗口的高度不定，scroll-sync会导致页面发生跳动
+        // 添加一个延时来延迟scroll-sync的开启
+        await delay(200);
 
-      this.setState({
-        scrollSync: true
-      });
+        this.setState({
+          scrollSync: {
+            enabled: true
+          }
+        });
+      }
     } else {
       // display mode切换至'Editor Only'或'Preview Only'，则要尽快地关闭scroll-sync，防止无效的同步
       this.setState({
-        scrollSync: false
+        scrollSync: {
+          enabled: false
+        }
       });
     }
 
@@ -121,7 +141,6 @@ class ArticleEdit extends Component {
   // 计算滚动距离所占的百分比
   getScrollingProportion(node) {
     if (node.matches('.editor')) {
-      console.log(this.editorScrollDistance, node.scrollHeight, node.clientHeight );
       return (this.editorScrollDistance / (node.scrollHeight - node.clientHeight)).toFixed(4);
     }
 
@@ -132,7 +151,6 @@ class ArticleEdit extends Component {
 
   // 根据百分比计算出另一个窗口的滚动距离
   getCalculatedScrollTop(node, proportion) {
-    console.log(proportion, node.scrollHeight, node.clientHeight );
     return Math.round((node.scrollHeight - node.clientHeight) * proportion);
   }
 
@@ -165,10 +183,10 @@ class ArticleEdit extends Component {
 
     return (
       <div>
-        <Row className={styles.toolBar} type="flex" justify="center" align="middle">
-          <ToolBar changeMode={this.handleModeChange}/>
+        <Row className={styles.toolBar} type="flex" justify="space-around" align="middle">
+          <ToolBar changeMode={this.handleModeChange} toggleScrollSync={this.handleScrollSyncToggle}/>
         </Row>
-        <ScrollSync enabled={this.state.scrollSync}>
+        <ScrollSync enabled={this.state.scrollSync.enabled}>
           <Row className={styles.articleEditWrapper} type="flex" justify="center">
             <ScrollSyncPane>
               <Col
@@ -203,8 +221,8 @@ class Preview extends Component {
   render() {
     return (
       <div className='markdown-body' dangerouslySetInnerHTML={this.props.renderResult}/>
-      )
-    }
+    )
+  }
 }
 
 Preview.propTypes = {
@@ -217,12 +235,17 @@ function ToolBar(props) {
       <Col>
         <DisplayMode changeDisplayMode={props.changeMode}/>
       </Col>
+      <Col>
+        Scroll-Sync&nbsp;
+        <ScrollSyncCtrl toggleScrollSync={props.toggleScrollSync}/>
+      </Col>
     </>
   )
 }
 
 ToolBar.propTypes = {
-  changeMode: PropTypes.func
+  changeMode: PropTypes.func,
+  toggleScrollSync: PropTypes.func
 };
 
 const RadioButton = Radio.Button;
@@ -247,5 +270,15 @@ DisplayMode.propTypes = {
 function delay(timeout) {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
+
+function ScrollSyncCtrl(props) {
+  return (
+    <Switch defaultChecked onChange={props.toggleScrollSync} />
+  );
+}
+
+ScrollSyncCtrl.propTypes = {
+  toggleScrollSync: PropTypes.func
+};
 
 export default ArticleEdit;
