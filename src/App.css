@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Libre+Lora');
 
+:focus {
+  outline: none;
+}
+
 .App {
   scroll-behavior: smooth;
   min-height: 100vh;
 }
 
 .App-header {
-  background-color: #282c34;
+  /*background-color: #282c34;*/
+  background-color: #fafafa;
   height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }

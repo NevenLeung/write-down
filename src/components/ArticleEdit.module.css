@@ -86,5 +86,6 @@ p, ul, li, a, table {
 
 .toolBar {
   height: 8vh;
-  background-color: #eee;
+  background-color: #fafafa;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,.05)
 }

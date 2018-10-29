@@ -1,0 +1,12 @@
+.button {
+  color: #282c34;
+  font-size: 1.4rem;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 1px 6px;
+}
+
+.divider {
+  margin: 8px 0;
+  top: 0;
+}
