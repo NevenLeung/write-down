@@ -1,14 +1,3 @@
-/* Custom scrollbar style */
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background-color: #ddd;
-}
-
 /* global setting */
 
 h1, h2, h3, h4, h5, h6 {
@@ -24,7 +13,8 @@ p, ul, li, a, table {
 }
 
 .articleEditWrapper {
-  height: 82vh;
+  height: 90vh;
+  padding: 10px 0;
 }
 
 .editor {
@@ -32,7 +22,7 @@ p, ul, li, a, table {
   height: auto;
   opacity: 1;
   position: relative;
-  padding: 10px 0 0 10px;
+  padding: 0;
   overflow: auto;
   transition: opacity 400ms 100ms ease, width 500ms ease, padding 500ms ease;
 }
@@ -42,7 +32,7 @@ p, ul, li, a, table {
   width: 100%;
   max-width: 2000px;
   opacity: 1;
-  padding: 10px 200px;
+  padding: 0 230px;
   transition: all 500ms ease;
 }
 
@@ -50,7 +40,7 @@ p, ul, li, a, table {
   composes: editor;
   width: 0;
   opacity: 0;
-  padding: 10px 0;
+  padding: 0 0;
   transition: all 500ms ease;
 }
 
@@ -61,7 +51,7 @@ p, ul, li, a, table {
 
 .preview {
   width: 50%;
-  padding: 10px 10px;
+  padding: 0 10px;
   overflow: auto;
   transition: all 500ms ease;
   opacity: 1;
@@ -72,7 +62,7 @@ p, ul, li, a, table {
   width: 100%;
   max-width: 2000px;
   opacity: 1;
-  padding: 10px 200px;
+  padding: 0 230px;
   transition: all 500ms ease;
 }
 
@@ -80,12 +70,6 @@ p, ul, li, a, table {
   composes: preview;
   width: 0;
   opacity: 0;
-  padding: 10px 0;
+  padding: 0 0;
   transition: all 500ms ease;
-}
-
-.toolBar {
-  height: 8vh;
-  background-color: #fafafa;
-  box-shadow: 0 4px 4px 0 rgba(0,0,0,.05)
 }

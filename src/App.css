@@ -7,17 +7,18 @@
 .App {
   scroll-behavior: smooth;
   min-height: 100vh;
+  min-width: 800px;
 }
 
-.App-header {
-  /*background-color: #282c34;*/
-  background-color: #fafafa;
-  height: 10vh;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Custom scrollbar style */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #ddd;
 }
 

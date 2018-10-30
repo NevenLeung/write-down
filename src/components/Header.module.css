@@ -1,3 +1,10 @@
+.header {
+  background-color: #fafafa;
+  height: 10vh;
+  font-size: calc(10px + 2vmin);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,.05)
+}
+
 .button {
   color: #282c34;
   font-size: 1.4rem;
@@ -9,4 +16,16 @@
 .divider {
   margin: 8px 0;
   top: 0;
+}
+
+.editorSettingContainer {
+  width: auto;
+}
+
+:global .ant-popover-title {
+  text-align: center;
+}
+
+.editorSettingItem {
+  margin: 4px 0;
 }
