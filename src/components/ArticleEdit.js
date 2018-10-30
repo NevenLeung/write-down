@@ -13,6 +13,7 @@ import 'highlight.js/styles/github.css';
 
 import styles from './ArticleEdit.module.css';
 
+import Header from './Header';
 import markdownFeatureSrc from '../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
 
@@ -130,11 +131,11 @@ class ArticleEdit extends Component {
     if (prevDisplayMode === 'Editor Only' && nextDisplayMode === 'Editor & Preview') {
       // 这里 +1 是为了稍微更新一下scrollTop，从而触发scroll sync组件的同步功能。
       // 如果不进行 +1，scrollTop与editorScrollDistance是相等的，不会触发scroll sync组件的同步功能
-      this.$editor.scrollTop = this.editorScrollDistance + 1;
+      this.$editor.scrollTop = this.editorScrollDistance - 1;
     }
 
     if (prevDisplayMode === 'Preview Only' && nextDisplayMode === 'Editor & Preview') {
-      this.$preview.scrollTop = this.previewScrollDistance + 1;
+      this.$preview.scrollTop = this.previewScrollDistance - 1;
     }
   };
 
@@ -183,9 +184,10 @@ class ArticleEdit extends Component {
 
     return (
       <div>
-        <Row className={styles.toolBar} type="flex" justify="space-around" align="middle">
-          <ToolBar changeMode={this.handleModeChange} toggleScrollSync={this.handleScrollSyncToggle}/>
-        </Row>
+        {/*<Row className={styles.toolBar} type="flex" justify="space-around" align="middle">*/}
+          {/*<ToolBar changeMode={this.handleModeChange} toggleScrollSync={this.handleScrollSyncToggle}/>*/}
+        {/*</Row>*/}
+        <Header toggleScrollSync={this.handleScrollSyncToggle} toggleDisplayMode={this.handleModeChange}/>
         <ScrollSync enabled={this.state.scrollSync.enabled}>
           <Row className={styles.articleEditWrapper} type="flex" justify="center">
             <ScrollSyncPane>
@@ -255,9 +257,9 @@ function DisplayMode(props) {
   return (
     <div>
       <RadioGroup onChange={props.changeDisplayMode} defaultValue="Editor & Preview" buttonStyle="solid">
-        <RadioButton value="Editor Only">Editor Only</RadioButton>
-        <RadioButton value="Editor & Preview">Editor & Preview</RadioButton>
-        <RadioButton value="Preview Only">Preview Only</RadioButton>
+        <RadioButton value="Editor Only">Editor</RadioButton>
+        <RadioButton value="Editor & Preview">Both</RadioButton>
+        <RadioButton value="Preview Only">Preview</RadioButton>
       </RadioGroup>
     </div>
   )
