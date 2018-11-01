@@ -44,7 +44,7 @@ const MoreMenu = (
 
 const MoreButton = props => {
   return (
-    <Dropdown className={styles.button} overlay={MoreMenu} trigger='click' placement='bottomCenter'>
+    <Dropdown className={styles.button} overlay={MoreMenu} trigger={['click']} placement='bottomCenter'>
       <Icon type="ellipsis" theme="outlined" />
     </Dropdown>
   );
@@ -61,7 +61,7 @@ const NavMenu = (
 
 const NavButton = props => {
   return (
-    <Dropdown className={styles.button} overlay={NavMenu} trigger='click' placement='bottomCenter'>
+    <Dropdown className={styles.button} overlay={NavMenu} trigger={['click']} placement='bottomCenter'>
       <Icon type="bars" theme="outlined" />
     </Dropdown>
   );
@@ -99,7 +99,7 @@ EditorSettingMenu.propTypes = {
 
 const SettingButton = props => {
   return (
-    <Popover content={<EditorSettingMenu toggleScrollSync={props.toggleScrollSync} toggleDisplayMode={props.toggleDisplayMode}/>} title="Editor Setting Controller" trigger="click">
+    <Popover content={<EditorSettingMenu toggleScrollSync={props.toggleScrollSync} toggleDisplayMode={props.toggleDisplayMode}/>} title="Editor Setting Controller" trigger={['click']}>
       <button className={styles.button}>
         <Icon type="setting" theme="outlined" />
       </button>
@@ -124,7 +124,7 @@ const UserMenu = (
 
 const UserButton = props => {
   return (
-    <Dropdown className={styles.button} overlay={UserMenu} trigger='click' placement='bottomCenter'>
+    <Dropdown className={styles.button} overlay={UserMenu} trigger={['click']} placement='bottomCenter'>
       <Icon type="user" theme="outlined" />
     </Dropdown>
   )

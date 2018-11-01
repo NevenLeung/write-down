@@ -22,19 +22,22 @@ class ArticleEdit extends Component {
     super(props);
     this.state = {
       src: markdownFeatureSrc,
+      // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
       displayMode: 'Editor & Preview',
       scrollSync: {
         enabled: true,
         locked: false
-      },
-      codeMirrorOption: {
-        mode: 'gfm',
-        theme: 'cherry',
-        tabSize: 2,
-        styleActiveLine: true,
       }
     };
 
+    this.codeMirrorOption = {
+      mode: 'gfm',
+      theme: 'cherry',
+      tabSize: 2,
+      styleActiveLine: true
+    };
+
+    // 用于保存相应的节点
     this.$editor = null;
     this.$preview = null;
 
@@ -198,7 +201,7 @@ class ArticleEdit extends Component {
               >
                 <Editor
                   value={this.state.src}
-                  options={this.state.codeMirrorOption}
+                  options={this.codeMirrorOption}
                   handleUpdate={this.handleSourceUpdate}
                 />
               </Col>
