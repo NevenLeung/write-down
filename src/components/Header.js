@@ -1,14 +1,80 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 import { Row, Col, Button, Icon, Menu, List, Dropdown, Popover, Divider, Radio, Switch } from "antd";
 
 import styles from './Header.module.css';
 
-class Header extends Component {
+class EditPageHeader extends Component {
   render() {
     return (
-      <Row className={styles.header} type="flex" justify="start" align="middle" >
+      <Row
+        className={styles.header}
+        type="flex"
+        justify="start"
+        align="middle"
+      >
+        <Col span={4} offset={4}>
+          <button className={styles.button}>
+            Write Down
+          </button>
+        </Col>
+        <Col span={1} offset={9}>
+          <MoreButton/>
+        </Col>
+        <Col span={1}>
+          <SettingButton
+            toggleDisplayMode={this.props.toggleDisplayMode}
+            toggleScrollSync={this.props.toggleScrollSync}
+          />
+        </Col>
+        <Col span={1}>
+          <UserButton/>
+        </Col>
+      </Row>
+    );
+  }
+}
+
+class GeneralHeader extends Component {
+  render() {
+    return (
+      <Row
+        className={styles.header}
+        type="flex"
+        justify="start"
+        align="middle"
+      >
+        <Col span={4} offset={4}>
+          <button className={styles.button}>
+            {/*<Icon type="build" theme="outlined" />*/}
+            Write Down
+          </button>
+        </Col>
+        <Col span={1} offset={10}>
+          <MoreButton/>
+        </Col>
+        {/*<Col span={1}>*/}
+        {/*<NavButton/>*/}
+        {/*</Col>*/}
+        <Col span={1}>
+          <UserButton/>
+        </Col>
+      </Row>
+    );
+  }
+}
+
+class Header3 extends Component {
+  render() {
+    return (
+      <Row
+        className={styles.header}
+        type="flex"
+        justify="start"
+        align="middle"
+      >
         <Col span={4} offset={4}>
           <button className={styles.button}>
             {/*<Icon type="build" theme="outlined" />*/}
@@ -19,10 +85,13 @@ class Header extends Component {
           <MoreButton/>
         </Col>
         {/*<Col span={1}>*/}
-          {/*<NavButton/>*/}
+        {/*<NavButton/>*/}
         {/*</Col>*/}
         <Col span={1}>
-          <SettingButton toggleDisplayMode={this.props.toggleDisplayMode} toggleScrollSync={this.props.toggleScrollSync}/>
+          <SettingButton
+            toggleDisplayMode={this.props.toggleDisplayMode}
+            toggleScrollSync={this.props.toggleScrollSync}
+          />
         </Col>
         <Col span={1}>
           <UserButton/>
@@ -44,7 +113,12 @@ const MoreMenu = (
 
 const MoreButton = props => {
   return (
-    <Dropdown className={styles.button} overlay={MoreMenu} trigger={['click']} placement='bottomCenter'>
+    <Dropdown
+      className={styles.button}
+      overlay={MoreMenu}
+      trigger={['click']}
+      placement='bottomCenter'
+    >
       <Icon type="ellipsis" theme="outlined" />
     </Dropdown>
   );
@@ -69,7 +143,12 @@ const NavButton = props => {
 
 const EditorSettingMenu = props => (
   <div className={styles.editorSettingContainer}>
-    <Row className={styles.editorSettingItem} type="flex" justify="space-between" align="middle">
+    <Row
+      className={styles.editorSettingItem}
+      type="flex"
+      justify="space-between"
+      align="middle"
+    >
       <Col>
         Scroll-Sync
       </Col>
@@ -77,12 +156,22 @@ const EditorSettingMenu = props => (
         <Switch defaultChecked onChange={props.toggleScrollSync} />
       </Col>
     </Row>
-    <Row className={styles.editorSettingItem} type="flex" justify="space-between" align="middle" gutter={16}>
+    <Row
+      className={styles.editorSettingItem}
+      type="flex"
+      justify="space-between"
+      align="middle"
+      gutter={16}
+    >
       <Col>
         Display Mode
       </Col>
       <Col>
-        <Radio.Group onChange={props.toggleDisplayMode} defaultValue="Editor & Preview" buttonStyle="solid" size='small'>
+        <Radio.Group
+          onChange={props.toggleDisplayMode}
+          defaultValue="Editor & Preview"
+          buttonStyle="solid" size='small'
+        >
           <Radio.Button value="Editor Only">Editor</Radio.Button>
           <Radio.Button value="Editor & Preview">Both</Radio.Button>
           <Radio.Button value="Preview Only">Preview</Radio.Button>
@@ -99,7 +188,16 @@ EditorSettingMenu.propTypes = {
 
 const SettingButton = props => {
   return (
-    <Popover content={<EditorSettingMenu toggleScrollSync={props.toggleScrollSync} toggleDisplayMode={props.toggleDisplayMode}/>} title="Editor Setting Controller" trigger={['click']}>
+    <Popover
+      content={
+        <EditorSettingMenu
+          toggleScrollSync={props.toggleScrollSync}
+          toggleDisplayMode={props.toggleDisplayMode}
+        />
+      }
+      title="Editor Setting Controller"
+      trigger={['click']}
+    >
       <button className={styles.button}>
         <Icon type="setting" theme="outlined" />
       </button>
@@ -114,25 +212,39 @@ SettingButton.propTypes = {
 
 const UserMenu = (
   <Menu>
-    <Menu.Item key="1">New Article</Menu.Item>
-    <Menu.Item key="2">My Articles</Menu.Item>
+    <Menu.Item key="1">
+      <Link to={'/draft'}>New Article</Link>
+    </Menu.Item>
+    <Menu.Item key="2">
+      <Link to={'/articles'}>My Articles</Link>
+    </Menu.Item>
     <Divider className={styles.divider}/>
-    <Menu.Item key="3">User Profile</Menu.Item>
+    <Menu.Item key="3">
+      <Link to={'/user'}>User Profile</Link>
+    </Menu.Item>
     <Menu.Item key="4">Log out</Menu.Item>
   </Menu>
 );
 
 const UserButton = props => {
   return (
-    <Dropdown className={styles.button} overlay={UserMenu} trigger={['click']} placement='bottomCenter'>
+    <Dropdown
+      className={styles.button}
+      overlay={UserMenu}
+      trigger={['click']}
+      placement='bottomCenter'
+    >
       <Icon type="user" theme="outlined" />
     </Dropdown>
   )
 };
 
-Header.propTypes = {
+EditPageHeader.propTypes = {
   toggleScrollSync: PropTypes.func.isRequired,
   toggleDisplayMode: PropTypes.func.isRequired
 };
 
-export default Header;
+export {
+  EditPageHeader,
+  GeneralHeader
+};

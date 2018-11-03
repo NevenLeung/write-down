@@ -1,26 +1,59 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+
 import 'normalize.css/normalize.css';
 
 import 'antd/dist/antd.css';
+import './overwrite.css';
+
 import './App.css';
 
 // import Layout from './layout/Layout';
-// import Header from './components/Header';
+import { GeneralHeader as Header } from './components/Header';
+
 import ArticleEdit from './components/ArticleEdit';
-// import TestToggle from './components/TestToggle';
+// import Navigator from './components/Navigator';
+// import Test from './page/article-manage';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        {/*<header className="App-header">Let's start to write down.</header>*/}
-        {/*<Header/>*/}
-        <ArticleEdit/>
-        {/*<TestToggle/>*/}
-        {/*<Layout/>*/}
-      </div>
+      <Router>
+        <AppRouter/>
+      </Router>
     );
   }
 }
+
+const AppRouter = () => (
+  <div className="App">
+    <Route exact path={'/'} component={ArticleEdit}/>
+    <Route path={'/draft'} component={DraftPage}/>
+    <Route path={'/articles'} component={ArticlePage}/>
+    <Route path={'/user'} component={UserPage}/>
+  </div>
+);
+
+const DraftPage = () => (
+  <div>
+    <Header/>
+    <h1>Draft Page</h1>
+  </div>
+);
+
+const ArticlePage = () => (
+  <div>
+    <Header/>
+    <h1>Article Page</h1>
+  </div>
+);
+
+const UserPage = () => (
+  <div>
+    <Header/>
+    <h1>User Page</h1>
+  </div>
+);
 
 export default App;
