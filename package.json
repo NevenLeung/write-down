@@ -9,7 +9,7 @@
   ],
   "homepage": "https://nevenleung.github.io/write-down/",
   "dependencies": {
-    "antd": "^3.10.2",
+    "antd": "^3.10.3",
     "code-mirror-themes": "^1.0.0",
     "codemirror": "^5.40.2",
     "github-markdown-css": "^2.10.0",
@@ -33,6 +33,7 @@
     "react": "^16.6.0",
     "react-codemirror2": "^5.1.0",
     "react-dom": "^16.6.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "^2.0.5",
     "react-scroll-sync": "^0.7.0",
     "twemoji": "^11.2.0"

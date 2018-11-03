@@ -13,7 +13,7 @@ import 'highlight.js/styles/github.css';
 
 import styles from './ArticleEdit.module.css';
 
-import Header from './Header';
+import {EditPageHeader as Header} from './Header';
 import markdownFeatureSrc from '../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
 
@@ -24,10 +24,7 @@ class ArticleEdit extends Component {
       src: markdownFeatureSrc,
       // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
       displayMode: 'Editor & Preview',
-      scrollSync: {
-        enabled: true,
-        locked: false
-      }
+      scrollSync: true
     };
 
     this.codeMirrorOption = {
@@ -40,6 +37,9 @@ class ArticleEdit extends Component {
     // 用于保存相应的节点
     this.$editor = null;
     this.$preview = null;
+
+    // 使用这个变量来保存对应switch的控制
+    this.isScrollSyncEnabled = true;
 
     this.editorScrollDistance = 0;
     this.previewScrollDistance = 0;
@@ -58,16 +58,24 @@ class ArticleEdit extends Component {
     });
   };
 
-  handleScrollSyncToggle = () => {
-    this.setState((prev) => ({
-      scrollSync: {
-        enabled: !prev.scrollSync.enabled,
-        locked: !prev.scrollSync.locked
-      }
-    }))
+  onScrollSyncChange = () => {
+    console.log('scroll-sync');
   };
 
-  handleModeChange = async (e) => {
+  onDisplayModeChange = () => {
+    console.log('display-mode');
+  };
+
+  handleScrollSyncToggle = () => {
+    // 更新switch控制的选项
+    this.isScrollSyncEnabled = !this.isScrollSyncEnabled;
+
+    this.setState({
+      scrollSync: this.isScrollSyncEnabled
+    });
+  };
+
+  handleDisplayModeChange = async (e) => {
     const nextDisplayMode = e.target.value;
 
     this.setState({
@@ -76,29 +84,25 @@ class ArticleEdit extends Component {
 
     // 仅在'Editor & Preview'使用默认的scroll-sync功能，其他display mode采用this.syncScrollManually()来完成scroll-sync
     if (nextDisplayMode === 'Editor & Preview') {
-      // 如果scroll-sync是通过switch设置为关闭后，此时locked为true，切换display mode不能开启它。
-      // 只要在switch为开启状态下，即locked为false时，切换回'Editor & Preview'才能开启它。
-      if (!this.state.scrollSync.locked) {
+      // 如果scroll-sync是通过switch设置为关闭后，此时this.isScrollSyncEnabled为true，切换display mode不能开启它。
+      // 只要在switch为开启状态下，即this.isScrollSyncEnabled时，切换回'Editor & Preview'才能开启它。
+      if (this.isScrollSyncEnabled) {
         // 在页面还处于伸缩状态时，窗口的高度不定，scroll-sync会导致页面发生跳动
         // 添加一个延时来延迟scroll-sync的开启
         await delay(200);
 
         this.setState({
-          scrollSync: {
-            enabled: true
-          }
+          scrollSync: true
         });
       }
     } else {
       // display mode切换至'Editor Only'或'Preview Only'，则要尽快地关闭scroll-sync，防止无效的同步
       this.setState({
-        scrollSync: {
-          enabled: false
-        }
+        scrollSync: false
       });
     }
 
-    this.syncScrollManually(this.lastDisplayMode, nextDisplayMode);
+    this.syncScrollManually(this.isScrollSyncEnabled, this.lastDisplayMode, nextDisplayMode);
 
     // 保存前一次的display mode
     this.lastDisplayMode = nextDisplayMode;
@@ -109,7 +113,12 @@ class ArticleEdit extends Component {
     this.previewScrollDistance = this.$preview.scrollTop;
   };
 
-  syncScrollManually = async (prevDisplayMode, nextDisplayMode) => {
+  syncScrollManually = async (isScrollSyncEnabled, prevDisplayMode, nextDisplayMode) => {
+    // 如果switch控制的scroll-sync是关闭的，那不需要手动同步
+    if (!isScrollSyncEnabled) {
+      return;
+    }
+
     // 根据滚动百分比计算对应的滚动距离
     if (prevDisplayMode === 'Editor Only' && nextDisplayMode === 'Preview Only') {
       // 基于editor，计算preview
@@ -187,11 +196,14 @@ class ArticleEdit extends Component {
 
     return (
       <div>
+        <Header
+          toggleDisplayMode={this.handleDisplayModeChange}
+          toggleScrollSync={this.handleScrollSyncToggle}
+        />
         {/*<Row className={styles.toolBar} type="flex" justify="space-around" align="middle">*/}
-          {/*<ToolBar changeMode={this.handleModeChange} toggleScrollSync={this.handleScrollSyncToggle}/>*/}
+          {/*<ToolBar changeMode={this.handleDisplayModeChange} toggleScrollSync={this.handleScrollSyncToggle}/>*/}
         {/*</Row>*/}
-        <Header toggleScrollSync={this.handleScrollSyncToggle} toggleDisplayMode={this.handleModeChange}/>
-        <ScrollSync enabled={this.state.scrollSync.enabled}>
+        <ScrollSync enabled={this.state.scrollSync}>
           <Row className={styles.articleEditWrapper} type="flex" justify="center">
             <ScrollSyncPane>
               <Col
