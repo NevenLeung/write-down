@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-import { Row, Col, Button, Icon, Menu, List, Dropdown, Popover, Divider, Radio, Switch } from "antd";
+import { Row, Col, Button, Icon, Menu, Form, Input, Modal, Dropdown, Popover, Divider, Radio, Switch } from "antd";
 
 import styles from './Header.module.css';
 
@@ -20,8 +20,11 @@ class EditPageHeader extends Component {
             Write Down
           </button>
         </Col>
-        <Col span={1} offset={9}>
+        <Col span={1} offset={8}>
           <MoreButton/>
+        </Col>
+        <Col span={1}>
+          <ArticleInfoSettingModal/>
         </Col>
         <Col span={1}>
           <SettingButton
@@ -238,6 +241,126 @@ const UserButton = props => {
     </Dropdown>
   )
 };
+
+const formItemLayout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 20 },
+};
+
+class ArticleInfoSettingModal extends React.Component {
+  state = {
+    visible: false,
+    data: ''
+  };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <button className={styles.button} type="primary" onClick={this.showModal}>
+          <Icon type="profile" theme="outlined" />
+        </button>
+        <Modal
+          title="Article Info Setting"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <WrappedFormInModal/>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+class ArticleInfoForm extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.getFieldsValue((errors, values) => {
+      if (!errors) {
+        console.log(values);
+      }
+    });
+    // this.setState({
+    //
+    // });
+  };
+
+  render() {
+    const { getFieldDecorator } = this.props.form;
+
+    return (
+      <div>
+        <Form layout={'vertical'}>
+          <Form.Item {...formItemLayout} label={'Title'}>
+            {getFieldDecorator('title', {
+              rules: [{
+                required: true,
+                message: 'Please input your article header',
+              }]
+            })(
+              <Input placeholder="Please input your article header" />
+            )}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label={'Excerpt'}>
+            {getFieldDecorator('excerpt', {
+              rules: [{
+                required: true,
+                message: 'Please input your article header',
+              }]
+            })(
+              <Input.TextArea
+                rows={8}
+                autosize={true}
+                placeholder='Please write something as article excerpt.'
+              />
+            )}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label={'Cover'}>
+            {getFieldDecorator('cover', {
+              rules: [{
+
+              }]
+            })(
+              <Input placeholder="Please input your article cover url" />
+            )}
+          </Form.Item>
+          <Form.Item >
+            <Button type="primary" onClick={this.onSubmit}>
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    );
+  }
+}
+
+const WrappedFormInModal = Form.create()(ArticleInfoForm);
 
 EditPageHeader.propTypes = {
   toggleScrollSync: PropTypes.func.isRequired,
