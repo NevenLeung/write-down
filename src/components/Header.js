@@ -248,10 +248,19 @@ const formItemLayout = {
 };
 
 class ArticleInfoSettingModal extends React.Component {
-  state = {
-    visible: false,
-    data: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+      data: ''
+    };
+
+    this.formRef = null;
+
+    this.setFormRef = (form) => {
+      this.formRef = form
+    };
+  }
 
   showModal = () => {
     this.setState({
@@ -260,14 +269,15 @@ class ArticleInfoSettingModal extends React.Component {
   };
 
   handleOk = (e) => {
-    console.log(e);
     this.setState({
       visible: false,
     });
+
+    const data = this.formRef.props.form.getFieldsValue();
+    console.log(data);
   };
 
   handleCancel = (e) => {
-    console.log(e);
     this.setState({
       visible: false,
     });
@@ -285,7 +295,7 @@ class ArticleInfoSettingModal extends React.Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          <WrappedFormInModal/>
+          <WrappedFormInModal wrappedComponentRef={this.setFormRef}/>
         </Modal>
       </div>
     );
@@ -300,14 +310,8 @@ class ArticleInfoForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.form.getFieldsValue((errors, values) => {
-      if (!errors) {
-        console.log(values);
-      }
-    });
-    // this.setState({
-    //
-    // });
+    const data = this.props.form.getFieldsValue();
+    console.log(data);
   };
 
   render() {
@@ -349,11 +353,11 @@ class ArticleInfoForm extends Component {
               <Input placeholder="Please input your article cover url" />
             )}
           </Form.Item>
-          <Form.Item >
-            <Button type="primary" onClick={this.onSubmit}>
-              Submit
-            </Button>
-          </Form.Item>
+          {/*<Form.Item >*/}
+            {/*<Button type="primary" onClick={this.onSubmit}>*/}
+              {/*Submit*/}
+            {/*</Button>*/}
+          {/*</Form.Item>*/}
         </Form>
       </div>
     );
