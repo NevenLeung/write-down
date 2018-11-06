@@ -10,6 +10,11 @@ p, ul, li, a, table {
 /* code mirror setting */
 :global .CodeMirror {
   height: auto;
+  min-height: calc(100vh - 10vh - 20px);
+}
+
+:global .CodeMirror pre {
+  font-size: 1rem;
 }
 
 .articleEditWrapper {
@@ -39,6 +44,7 @@ p, ul, li, a, table {
 .editorHide {
   composes: editor;
   width: 0;
+  opacity: 0;
   padding: 0 0;
   transition: all 500ms ease;
 }

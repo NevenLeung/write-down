@@ -31,7 +31,8 @@ class ArticleEdit extends Component {
       mode: 'gfm',
       theme: 'cherry',
       tabSize: 2,
-      styleActiveLine: true
+      styleActiveLine: true,
+      lineWiseCopyCut: true,
     };
 
     // 用于保存相应的节点
