@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-import { Row, Col, Button, Icon, Menu, Form, Input, Modal, Dropdown, Popover, Divider, Radio, Switch } from "antd";
+import { Row, Col, Button, Icon, Menu, Form, Input, Modal, Tabs, Dropdown, Popover, Divider, Radio, Switch } from "antd";
 
 import styles from './Header.module.css';
 
@@ -80,16 +80,12 @@ class Header3 extends Component {
       >
         <Col span={4} offset={4}>
           <button className={styles.button}>
-            {/*<Icon type="build" theme="outlined" />*/}
             Write Down
           </button>
         </Col>
         <Col span={1} offset={9}>
           <MoreButton/>
         </Col>
-        {/*<Col span={1}>*/}
-        {/*<NavButton/>*/}
-        {/*</Col>*/}
         <Col span={1}>
           <SettingButton
             toggleDisplayMode={this.props.toggleDisplayMode}
@@ -127,22 +123,22 @@ const MoreButton = props => {
   );
 };
 
-const NavMenu = (
-  <Menu>
-    <Menu.Item key="1">Get</Menu.Item>
-    <Menu.Item key="2">Some</Menu.Item>
-    <Menu.Item key="3">Help</Menu.Item>
-  </Menu>
-);
-
-
-const NavButton = props => {
-  return (
-    <Dropdown className={styles.button} overlay={NavMenu} trigger={['click']} placement='bottomCenter'>
-      <Icon type="bars" theme="outlined" />
-    </Dropdown>
-  );
-};
+// const NavMenu = (
+//   <Menu>
+//     <Menu.Item key="1">Get</Menu.Item>
+//     <Menu.Item key="2">Some</Menu.Item>
+//     <Menu.Item key="3">Help</Menu.Item>
+//   </Menu>
+// );
+//
+//
+// const NavButton = props => {
+//   return (
+//     <Dropdown className={styles.button} overlay={NavMenu} trigger={['click']} placement='bottomCenter'>
+//       <Icon type="bars" theme="outlined" />
+//     </Dropdown>
+//   );
+// };
 
 const EditorSettingMenu = props => (
   <div className={styles.editorSettingContainer}>
@@ -268,7 +264,7 @@ class ArticleInfoSettingModal extends React.Component {
     });
   };
 
-  handleOk = (e) => {
+  handleOk = () => {
     this.setState({
       visible: false,
     });
@@ -277,7 +273,7 @@ class ArticleInfoSettingModal extends React.Component {
     console.log(data);
   };
 
-  handleCancel = (e) => {
+  handleCancel = () => {
     this.setState({
       visible: false,
     });
@@ -290,6 +286,7 @@ class ArticleInfoSettingModal extends React.Component {
           <Icon type="profile" theme="outlined" />
         </button>
         <Modal
+          className={styles.infoSettingModal}
           title="Article Info Setting"
           visible={this.state.visible}
           onOk={this.handleOk}
@@ -353,11 +350,23 @@ class ArticleInfoForm extends Component {
               <Input placeholder="Please input your article cover url" />
             )}
           </Form.Item>
-          {/*<Form.Item >*/}
-            {/*<Button type="primary" onClick={this.onSubmit}>*/}
-              {/*Submit*/}
-            {/*</Button>*/}
-          {/*</Form.Item>*/}
+          <Form.Item >
+            Choose an approach to set your cover
+            <Tabs defaultActiveKey="1" >
+              <Tabs.TabPane 
+                tab="Choose a photo from Unsplash"
+                key="1"
+              >
+                Content of Tab Pane 1
+              </Tabs.TabPane>
+              <Tabs.TabPane
+                tab="Upload your photo"
+                key="2"
+              >
+                Content of Tab Pane 2
+              </Tabs.TabPane>
+            </Tabs>
+          </Form.Item>
         </Form>
       </div>
     );
