@@ -3,7 +3,7 @@ import { Row, Col, Input } from 'antd'
 
 import Unsplash, {toJson  } from 'unsplash-js';
 
-import PhotoList from './PhotoList';
+import PhotoSearchList from './PhotoSearchList';
 
 
 
@@ -19,27 +19,26 @@ class PhotoSearch extends Component {
     super(props);
     this.state = {
       keyword: '',
+      currentPage: 1,
       dataResult: '',
-      isNewSearch: false
     };
 
-    this.currentPage = 1;
     this.pageSize = 12;
   }
 
   getTheKeyword = (keyword) => {
     this.setState({
       keyword: keyword,
-      isNewSearch: true
+      currentPage: 1
     });
 
-    this.doSearch(keyword, this.currentPage);
+    this.doSearch(keyword, this.state.currentPage);
   };
 
   onPageChange = (newPage) => {
-    // this.setState({
-    //   currentPage: newPage
-    // });
+    this.setState({
+      currentPage: newPage
+    });
 
     this.doSearch(this.state.keyword, newPage);
   };
@@ -79,12 +78,12 @@ class PhotoSearch extends Component {
           align="middle"
         >
           <Col>
-            <PhotoList
+            <PhotoSearchList
               data={this.state.dataResult}
               onSelect={this.SelectPhoto}
+              currentPage={this.state.currentPage}
               pageSize={this.pageSize}
               onPageChange={this.onPageChange}
-              isNewSearch={this.state.isNewSearch}
             />
           </Col>
         </Row>
@@ -94,13 +93,6 @@ class PhotoSearch extends Component {
 }
 
 class PhotoSearchBar extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     searchText: ''
-  //   };
-  // }
-
   onSearch = (value) => {
     this.props.getTheKeyword(value);
   };

@@ -2,41 +2,20 @@ import React, { Component } from "react";
 import { Icon, Pagination } from "antd";
 import StackGrid from "react-stack-grid";
 
-import styles from './Photo.module.css';
-import './Photo.css';
+import styles from './PhotoSearch.module.css';
+import './PhotoSearch.css';
 
-class PhotoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPage: 1
-    };
-  }
-
-  onNewSearch() {
-    this.setState({
-      currentPage: 1
-    });
-  };
-
+class PhotoSearchList extends Component {
   selectPhoto = (photoLink) => {
     this.props.onSelect(photoLink);
   };
 
   onPageChange = (newPage) => {
     console.log(newPage);
-    this.setState({
-      currentPage: newPage
-    });
-
     this.props.onPageChange(newPage);
   };
 
   render() {
-    if (this.props.isNewSearch) {
-      this.onNewSearch();
-    }
-
     const total = this.props.data.total;
     const results = this.props.data.results;
 
@@ -58,7 +37,7 @@ class PhotoList extends Component {
         <>
           <Pagination
             simple
-            current={this.state.currentPage}
+            current={this.props.currentPage}
             pageSize={this.props.pageSize}
             total={total}
             onChange={this.onPageChange}
@@ -74,7 +53,7 @@ class PhotoList extends Component {
 
           <Pagination
             simple
-            current={this.state.currentPage}
+            current={this.props.currentPage}
             pageSize={this.props.pageSize}
             total={total}
             onChange={this.onPageChange}
@@ -136,4 +115,4 @@ const NoImgs = props => (
   </li>
 );
 
-export default PhotoList;
+export default PhotoSearchList;
