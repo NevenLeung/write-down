@@ -1,6 +1,14 @@
-.photoListContainer {
+.photoGridContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;;
+}
+
+.photoGrid {
   width: 860px;
   max-height: 1500px;
+  margin: 20px 0 0;
 }
 
 .photoItemContainer {
@@ -42,6 +50,10 @@
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   background-color: rgba(40, 44, 52, 0.5);
+}
+
+.pager {
+  margin: 20px 0 0;
 }
 
 .noImageFeedback {

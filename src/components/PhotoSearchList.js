@@ -34,8 +34,9 @@ class PhotoSearchList extends Component {
       );
 
       return (
-        <>
+        <div className={styles.photoGridContainer}>
           <Pagination
+            className={styles.pager}
             simple
             current={this.props.currentPage}
             pageSize={this.props.pageSize}
@@ -44,7 +45,7 @@ class PhotoSearchList extends Component {
           />
 
           <StackGrid
-            className={styles.photoListContainer}
+            className={styles.photoGrid}
             columnWidth={210}
             monitorImagesLoaded={true}
           >
@@ -52,13 +53,14 @@ class PhotoSearchList extends Component {
           </StackGrid>
 
           <Pagination
+            className={styles.pager}
             simple
             current={this.props.currentPage}
             pageSize={this.props.pageSize}
             total={total}
             onChange={this.onPageChange}
           />
-        </>
+        </div>
       );
     } else {
       return (
@@ -79,7 +81,7 @@ class Photo extends Component {
         <img
           className={styles.photo + ' photo'}
           src={this.props.url}
-          alt="loading..."
+          alt=" loading..."
           onClick={this.onClick}
         />
 

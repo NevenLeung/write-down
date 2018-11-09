@@ -287,11 +287,13 @@ class ArticleInfoSettingModal extends React.Component {
           <Icon type="profile" theme="outlined" />
         </button>
         <Modal
-          className={styles.infoSettingModal}
+          style={{top: 20}}
+          width={920}
           title="Article Info Setting"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
+          destroyOnClose={true}
         >
           <WrappedFormInModal wrappedComponentRef={this.setFormRef}/>
         </Modal>
@@ -338,7 +340,7 @@ class ArticleInfoForm extends Component {
               <Input.TextArea
                 rows={8}
                 autosize={true}
-                placeholder='Please write something as article excerpt.'
+                placeholder='Please input your article excerpt'
               />
             )}
           </Form.Item>
@@ -348,10 +350,10 @@ class ArticleInfoForm extends Component {
 
               }]
             })(
-              <Input placeholder="Please input your article cover url" />
+              <Input placeholder="Please input a valid url of the cover of your article" />
             )}
           </Form.Item>
-          <Form.Item >
+          <Form.Item style={{margin: 0}}>
             Choose an approach to set your cover
             <Tabs defaultActiveKey="1" >
               <Tabs.TabPane 
