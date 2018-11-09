@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, Button, Icon, Menu, Form, Input, Modal, Tabs, Dropdown, Popover, Divider, Radio, Switch } from "antd";
 
+import PhotoSearch from './PhotoSearch';
 import styles from './Header.module.css';
 
 class EditPageHeader extends Component {
@@ -357,7 +358,7 @@ class ArticleInfoForm extends Component {
                 tab="Choose a photo from Unsplash"
                 key="1"
               >
-                Content of Tab Pane 1
+                <PhotoSearch/>
               </Tabs.TabPane>
               <Tabs.TabPane
                 tab="Upload your photo"

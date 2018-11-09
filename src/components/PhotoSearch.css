@@ -1,0 +1,17 @@
+.photo-container a {
+  color: #fff;
+}
+
+.photo-container:hover {
+  transform: scale(1.02);
+}
+
+.photo-container:active {
+  transform: scale(0.98);
+}
+
+.photo-container:hover > .photo-link,
+.photo-container:hover > .photo-author,
+.photo-container:hover > .photo-mask {
+  display: inherit;
+}

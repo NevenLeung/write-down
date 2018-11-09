@@ -36,7 +36,9 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.0.5",
     "react-scroll-sync": "^0.7.0",
-    "twemoji": "^11.2.0"
+    "react-stack-grid": "^0.7.1",
+    "twemoji": "^11.2.0",
+    "unsplash-js": "^4.8.0"
   },
   "devDependencies": {
     "gh-pages": "^2.0.1"

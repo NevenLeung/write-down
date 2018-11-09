@@ -1,0 +1,49 @@
+.photoListContainer {
+  width: 650px;
+  max-height: 1500px;
+}
+
+.photoItemContainer {
+  position: relative;
+  margin: 4px;
+  transition: all 75ms ease;
+}
+
+.photo {
+  width: 200px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.photoAuthor {
+  display: none;
+  position: absolute;
+  left: 4px;
+  bottom: 2px;
+  color: #fff;
+}
+
+.photoLink {
+  display: none;
+  position: absolute;
+  right: 6px;
+  bottom: 2px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.photoMask {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 24px;
+  width: 200px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background-color: rgba(40, 44, 52, 0.5);
+}
+
+.noImageFeedback {
+
+}

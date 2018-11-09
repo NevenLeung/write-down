@@ -31,5 +31,6 @@
 }
 
 .infoSettingModal {
-  top: 20px
+  top: 20px;
+  width: 700px !important;
 }
