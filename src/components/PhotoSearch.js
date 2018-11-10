@@ -57,7 +57,8 @@ class PhotoSearch extends Component {
 
   SelectPhoto = (photoLink) => {
     // photoID
-    console.log(photoLink);
+    this.props.selectCover(photoLink);
+    // console.log(photoLink);
   };
 
   render() {

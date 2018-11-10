@@ -29,3 +29,36 @@
 .editorSettingItem {
   margin: 4px 0;
 }
+
+.coverPreviewArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 580px;
+  margin: 0 auto 24px;
+}
+
+.coverPreviewImage {
+  height: 290px;
+  border-radius: 10px;
+}
+
+.coverPreviewAreaTipWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+}
+
+.coverPreviewAreaTip {
+  font-size: 20px;
+}
+
+.coverPreviewAreaTipWithFeedback {
+  composes: coverPreviewAreaTip;
+  color: salmon;
+}

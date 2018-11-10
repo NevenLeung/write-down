@@ -24,7 +24,8 @@ class PhotoSearchList extends Component {
     if (results && results.length > 0) {
       PhotoItems = results.map(img =>
         <Photo
-          url={img.urls.thumb}
+          thumbUrl={img.urls.thumb}
+          regularUrl={img.urls.regular}
           user={img.user.links.html}
           name={img.user.name}
           link={img.links.html}
@@ -72,7 +73,7 @@ class PhotoSearchList extends Component {
 
 class Photo extends Component {
   onClick = () => {
-    this.props.onPhotoSelect(this.props.link);
+    this.props.onPhotoSelect(this.props.regularUrl);
   };
 
   render() {
@@ -80,7 +81,7 @@ class Photo extends Component {
       <div className={styles.photoItemContainer + ' photo-container'}>
         <img
           className={styles.photo + ' photo'}
-          src={this.props.url}
+          src={this.props.thumbUrl}
           alt=" loading..."
           onClick={this.onClick}
         />

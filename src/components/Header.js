@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-import { Row, Col, Button, Icon, Menu, Form, Input, Modal, Tabs, Dropdown, Popover, Divider, Radio, Switch } from "antd";
+import { Row, Col, Button, Icon, Menu, Dropdown, Popover, Divider, Radio, Switch } from "antd";
 
-import PhotoSearch from './PhotoSearch';
+import ArticleInfoSetting from './ArticleInfoSetting';
+
 import styles from './Header.module.css';
 
 class EditPageHeader extends Component {
@@ -25,7 +26,7 @@ class EditPageHeader extends Component {
           <MoreButton/>
         </Col>
         <Col span={1}>
-          <ArticleInfoSettingModal/>
+          <ArticleInfoSetting/>
         </Col>
         <Col span={1}>
           <SettingButton
@@ -238,145 +239,6 @@ const UserButton = props => {
     </Dropdown>
   )
 };
-
-const formItemLayout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 20 },
-};
-
-class ArticleInfoSettingModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false,
-      data: ''
-    };
-
-    this.formRef = null;
-
-    this.setFormRef = (form) => {
-      this.formRef = form
-    };
-  }
-
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  handleOk = () => {
-    this.setState({
-      visible: false,
-    });
-
-    const data = this.formRef.props.form.getFieldsValue();
-    console.log(data);
-  };
-
-  handleCancel = () => {
-    this.setState({
-      visible: false,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <button className={styles.button} type="primary" onClick={this.showModal}>
-          <Icon type="profile" theme="outlined" />
-        </button>
-        <Modal
-          style={{top: 20}}
-          width={920}
-          title="Article Info Setting"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          destroyOnClose={true}
-        >
-          <WrappedFormInModal wrappedComponentRef={this.setFormRef}/>
-        </Modal>
-      </div>
-    );
-  }
-}
-
-class ArticleInfoForm extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  onSubmit = (e) => {
-    e.preventDefault();
-    const data = this.props.form.getFieldsValue();
-    console.log(data);
-  };
-
-  render() {
-    const { getFieldDecorator } = this.props.form;
-
-    return (
-      <div>
-        <Form layout={'vertical'}>
-          <Form.Item {...formItemLayout} label={'Title'}>
-            {getFieldDecorator('title', {
-              rules: [{
-                required: true,
-                message: 'Please input your article header',
-              }]
-            })(
-              <Input placeholder="Please input your article header" />
-            )}
-          </Form.Item>
-          <Form.Item {...formItemLayout} label={'Excerpt'}>
-            {getFieldDecorator('excerpt', {
-              rules: [{
-                required: true,
-                message: 'Please input your article header',
-              }]
-            })(
-              <Input.TextArea
-                rows={8}
-                autosize={true}
-                placeholder='Please input your article excerpt'
-              />
-            )}
-          </Form.Item>
-          <Form.Item {...formItemLayout} label={'Cover'}>
-            {getFieldDecorator('cover', {
-              rules: [{
-
-              }]
-            })(
-              <Input placeholder="Please input a valid url of the cover of your article" />
-            )}
-          </Form.Item>
-          <Form.Item style={{margin: 0}}>
-            Choose an approach to set your cover
-            <Tabs defaultActiveKey="1" >
-              <Tabs.TabPane 
-                tab="Choose a photo from Unsplash"
-                key="1"
-              >
-                <PhotoSearch/>
-              </Tabs.TabPane>
-              <Tabs.TabPane
-                tab="Upload your photo"
-                key="2"
-              >
-                Content of Tab Pane 2
-              </Tabs.TabPane>
-            </Tabs>
-          </Form.Item>
-        </Form>
-      </div>
-    );
-  }
-}
-
-const WrappedFormInModal = Form.create()(ArticleInfoForm);
 
 EditPageHeader.propTypes = {
   toggleScrollSync: PropTypes.func.isRequired,
