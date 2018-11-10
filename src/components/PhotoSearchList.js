@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Icon, Pagination } from "antd";
+import { Icon, Pagination, Spin } from "antd";
 import StackGrid from "react-stack-grid";
+
+import { delay } from "../utils";
 
 import styles from './PhotoSearch.module.css';
 import './PhotoSearch.css';
@@ -21,52 +23,56 @@ class PhotoSearchList extends Component {
 
     let PhotoItems;
 
-    if (results && results.length > 0) {
-      PhotoItems = results.map(img =>
-        <Photo
-          thumbUrl={img.urls.thumb}
-          regularUrl={img.urls.regular}
-          user={img.user.links.html}
-          name={img.user.name}
-          link={img.links.html}
-          key={img.id}
-          onPhotoSelect={this.selectPhoto}
-        />
-      );
-
-      return (
-        <div className={styles.photoGridContainer}>
-          <Pagination
-            className={styles.pager}
-            simple
-            current={this.props.currentPage}
-            pageSize={this.props.pageSize}
-            total={total}
-            onChange={this.onPageChange}
-          />
-
-          <StackGrid
-            className={styles.photoGrid}
-            columnWidth={210}
-            monitorImagesLoaded={true}
-          >
-            {PhotoItems}
-          </StackGrid>
-
-          <Pagination
-            className={styles.pager}
-            simple
-            current={this.props.currentPage}
-            pageSize={this.props.pageSize}
-            total={total}
-            onChange={this.onPageChange}
-          />
-        </div>
-      );
-    } else {
+    if (typeof total === 'undefined') {
+      return null;
+    } else if (total === 0) {
       return (
         <div className={styles.noImageFeedback}>No photos match your requirement.</div>
       )
+    } else {
+      if (results && results.length > 0) {
+        PhotoItems = results.map(img =>
+          <Photo
+            thumbUrl={img.urls.thumb}
+            regularUrl={img.urls.regular}
+            user={img.user.links.html}
+            name={img.user.name}
+            link={img.links.html}
+            key={img.id}
+            onPhotoSelect={this.selectPhoto}
+          />
+        );
+
+        return (
+          <div className={styles.photoGridContainer}>
+            <Pagination
+              className={styles.pager}
+              simple
+              current={this.props.currentPage}
+              pageSize={this.props.pageSize}
+              total={total}
+              onChange={this.onPageChange}
+            />
+
+            <StackGrid
+              className={styles.photoGrid}
+              columnWidth={210}
+              monitorImagesLoaded={true}
+            >
+              {PhotoItems}
+            </StackGrid>
+
+            <Pagination
+              className={styles.pager}
+              simple
+              current={this.props.currentPage}
+              pageSize={this.props.pageSize}
+              total={total}
+              onChange={this.onPageChange}
+            />
+          </div>
+        );
+      }
     }
   }
 }

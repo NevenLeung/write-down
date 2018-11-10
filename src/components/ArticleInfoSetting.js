@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Modal, Tabs } from "antd";
+import { Form, Icon, Input, Modal, Collapse ,Tabs } from "antd";
 
 import PhotoSearch from "./PhotoSearch";
 
@@ -169,13 +169,34 @@ class ArticleInfoForm extends Component {
             }
           </div>
           <Form.Item style={{margin: 0}}>
-            Choose an approach to set your cover
-            <Tabs defaultActiveKey="1" >
+            <Collapse bordered={false}>
+              <Collapse.Panel header={"Tips for setting cover"} key={"tips"}>
+                <pre className={styles.coverSettingTip}>
+                Choose an approach to set your cover:
+                <br/>
+                1. Search photo from Unsplash by keyword and click on the photo you selected. The url of the photo will be filled in automatically.
+                <br/>
+                2. Upload the cover to image hosting service, and paste the valid image url to the cover field.
+                <br/>
+                <br/>
+                Important: Image in landscape mode is recommended.
+                </pre>
+              </Collapse.Panel>
+            </Collapse>
+
+            <Tabs defaultActiveKey="1">
               <Tabs.TabPane tab="Choose a photo from Unsplash" key="1">
                 <PhotoSearch selectCover={this.selectCover}/>
               </Tabs.TabPane>
               <Tabs.TabPane tab="Upload your photo" key="2">
-                Content of Tab Pane 2
+                <div style={{marginTop: 12}}>
+                  <pre className={styles.coverSettingTip}>
+                    You can use any image hosting service to store your cover, like <a href="http://imgur.com/" target="_blank" rel="noopener noreferrer">Imgur</a>, <a href="https://www.dropbox.com/" target="_blank" rel="noopener noreferrer">Dropbox</a>, <a href="https://imageshack.us/" target="_blank" rel="noopener noreferrer">Imageshack</a>, and other free image hosting service.
+                    <br/>
+                    <br/>
+                    Remember to paste url back to the cover field.
+                  </pre>
+                </div>
               </Tabs.TabPane>
             </Tabs>
           </Form.Item>

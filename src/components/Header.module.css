@@ -30,6 +30,10 @@
   margin: 4px 0;
 }
 
+.coverSettingTip {
+  white-space: pre-wrap;
+}
+
 .coverPreviewArea {
   display: flex;
   align-items: center;

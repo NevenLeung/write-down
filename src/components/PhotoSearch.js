@@ -58,12 +58,11 @@ class PhotoSearch extends Component {
   SelectPhoto = (photoLink) => {
     // photoID
     this.props.selectCover(photoLink);
-    // console.log(photoLink);
   };
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: 12}}>
         <Row
           type="flex"
           justify="center"
@@ -101,7 +100,7 @@ class PhotoSearchBar extends React.Component {
   render() {
     return (
       <Input.Search
-        placeholder="Input your keyword, like windmill"
+        placeholder="Input your keyword, like beach"
         onSearch={this.onSearch}
         enterButton
       />

@@ -5,6 +5,7 @@ import throttle from 'lodash/throttle';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import {Row, Col, Radio, Switch} from 'antd';
 
+import { delay } from "../utils";
 import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
 
@@ -284,10 +285,6 @@ function DisplayMode(props) {
 DisplayMode.propTypes = {
   changeDisplayMode: PropTypes.func
 };
-
-function delay(timeout) {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
 
 function ScrollSyncCtrl(props) {
   return (
