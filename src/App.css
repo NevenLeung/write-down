@@ -7,7 +7,7 @@
 .App {
   scroll-behavior: smooth;
   min-height: 100vh;
-  min-width: 800px;
+  min-width: 840px;
 }
 
 /* Custom scrollbar style */

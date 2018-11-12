@@ -1,3 +1,11 @@
+:global .ant-popover-title {
+  text-align: center;
+}
+
+:global .ant-modal-title {
+  text-align: center;
+}
+
 .header {
   background-color: #fafafa;
   height: 10vh;
@@ -20,10 +28,6 @@
 
 .editorSettingContainer {
   width: auto;
-}
-
-:global .ant-popover-title {
-  text-align: center;
 }
 
 .editorSettingItem {

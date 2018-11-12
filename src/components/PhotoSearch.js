@@ -61,20 +61,12 @@ class PhotoSearch extends Component {
   render() {
     return (
       <div style={{marginTop: 12}}>
-        <Row
-          type="flex"
-          justify="center"
-          align="middle"
-        >
+        <Row type="flex"  justify="center" align="middle">
           <Col style={{width: '300px'}}>
             <PhotoSearchBar getTheKeyword={this.getTheKeyword}/>
           </Col>
         </Row>
-        <Row
-          type="flex"
-          justify="center"
-          align="middle"
-        >
+        <Row type="flex" justify="center" align="middle">
           <Col>
             <PhotoSearchList
               data={this.state.dataResult}

@@ -3,7 +3,6 @@ import { Icon, Pagination } from "antd";
 import StackGrid from "react-stack-grid";
 
 import styles from './PhotoSearch.module.css';
-import './PhotoSearch.css';
 
 class PhotoSearchList extends Component {
   selectPhoto = (photoLink) => {
@@ -85,7 +84,7 @@ class Photo extends Component {
 
   render() {
     return (
-      <div className={styles.photoItemContainer + ' photo-container'}>
+      <div className={styles.photoItemWrapper}>
         <img
           className={styles.photo + ' photo'}
           src={this.props.thumbUrl}
@@ -93,9 +92,9 @@ class Photo extends Component {
           onClick={this.onClick}
         />
 
-        <div className={styles.photoMask + ' photo-mask'}/>
+        <div className={styles.photoMask}/>
 
-        <span className={styles.photoAuthor + ' photo-author'}>
+        <span className={styles.photoAuthor}>
           @
           <a
             href={this.props.user}
@@ -106,7 +105,7 @@ class Photo extends Component {
           </a>
         </span>
 
-        <a className={styles.photoLink + ' photo-link'}
+        <a className={styles.photoLink}
            href={this.props.link}
            target="_blank"
            rel="noopener noreferrer"

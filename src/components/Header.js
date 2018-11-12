@@ -11,15 +11,10 @@ import styles from './Header.module.css';
 class EditPageHeader extends Component {
   render() {
     return (
-      <Row
-        className={styles.header}
-        type="flex"
-        justify="start"
-        align="middle"
-      >
+      <Row className={styles.header} type="flex" justify="start" align="middle">
         <Col span={4} offset={4}>
           <Link to={'/'}>
-            <button className={styles.button} onClick={() => {console.log('write down')}}>
+            <button className={styles.button}>
               Write Down
             </button>
           </Link>
@@ -47,12 +42,7 @@ class EditPageHeader extends Component {
 class GeneralHeader extends Component {
   render() {
     return (
-      <Row
-        className={styles.header}
-        type="flex"
-        justify="start"
-        align="middle"
-      >
+      <Row className={styles.header} type="flex" justify="start" align="middle">
         <Col span={4} offset={4}>
           <Link to={'/'}>
             <button className={styles.button}>
@@ -77,12 +67,7 @@ class GeneralHeader extends Component {
 class Header3 extends Component {
   render() {
     return (
-      <Row
-        className={styles.header}
-        type="flex"
-        justify="start"
-        align="middle"
-      >
+      <Row className={styles.header + ' ' + styles.home} type="flex" justify="start" align="middle">
         <Col span={4} offset={4}>
           <button className={styles.button}>
             Write Down
@@ -147,12 +132,7 @@ const MoreButton = props => {
 
 const EditorSettingMenu = props => (
   <div className={styles.editorSettingContainer}>
-    <Row
-      className={styles.editorSettingItem}
-      type="flex"
-      justify="space-between"
-      align="middle"
-    >
+    <Row className={styles.editorSettingItem} type="flex" justify="space-between" align="middle">
       <Col>
         Scroll-Sync
       </Col>
