@@ -18,9 +18,11 @@ class EditPageHeader extends Component {
         align="middle"
       >
         <Col span={4} offset={4}>
-          <button className={styles.button}>
-            Write Down
-          </button>
+          <Link to={'/'}>
+            <button className={styles.button} onClick={() => {console.log('write down')}}>
+              Write Down
+            </button>
+          </Link>
         </Col>
         <Col span={1} offset={8}>
           <MoreButton/>
@@ -52,10 +54,11 @@ class GeneralHeader extends Component {
         align="middle"
       >
         <Col span={4} offset={4}>
-          <button className={styles.button}>
-            {/*<Icon type="build" theme="outlined" />*/}
-            Write Down
-          </button>
+          <Link to={'/'}>
+            <button className={styles.button}>
+              Write Down
+            </button>
+          </Link>
         </Col>
         <Col span={1} offset={10}>
           <MoreButton/>

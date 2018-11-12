@@ -7,13 +7,9 @@ import 'antd/dist/antd.css';
 
 import './App.css';
 
-// import Layout from './layout/Layout';
 import { GeneralHeader as Header } from './components/Header';
 
 import ArticleEdit from './components/ArticleEdit';
-// import Navigator from './components/Navigator';
-// import Test from './page/article-manage';
-import PhotoSearch from './components/PhotoSearch';
 
 class App extends Component {
   render() {
@@ -38,7 +34,6 @@ const DraftPage = () => (
   <div>
     <Header/>
     <h1>Draft Page</h1>
-    {/*<PhotoSearch/>*/}
   </div>
 );
 

@@ -44,11 +44,9 @@ class PhotoSearch extends Component {
   };
 
   doSearch = (keyword, currentPage) => {
-    console.log(keyword);
     unsplash.search.photos(keyword, currentPage, this.pageSize)
       .then(toJson)
       .then(searchResult => {
-        // console.log(searchResult);
         this.setState({
           dataResult: searchResult
         });

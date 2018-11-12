@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Icon, Pagination, Spin } from "antd";
+import { Icon, Pagination } from "antd";
 import StackGrid from "react-stack-grid";
-
-import { delay } from "../utils";
 
 import styles from './PhotoSearch.module.css';
 import './PhotoSearch.css';
@@ -27,10 +25,13 @@ class PhotoSearchList extends Component {
       return null;
     } else if (total === 0) {
       return (
-        <div className={styles.noImageFeedback}>No photos match your requirement.</div>
+        <div className={styles.noImageFeedback}>
+          No photos match your requirement.
+        </div>
       )
     } else {
       if (results && results.length > 0) {
+
         PhotoItems = results.map(img =>
           <Photo
             thumbUrl={img.urls.thumb}
@@ -116,12 +117,5 @@ class Photo extends Component {
     );
   }
 }
-
-const NoImgs = props => (
-  <li className='no-imgs'>
-    <i className="material-icons icon-img">sentiment_very_dissatisfied</i>
-    <h3>No Images match your search.</h3>
-  </li>
-);
 
 export default PhotoSearchList;
