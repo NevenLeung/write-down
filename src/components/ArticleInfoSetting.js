@@ -1,9 +1,27 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Modal, Collapse ,Tabs } from "antd";
+import { Form, Icon, Input, Popover, Modal, Collapse ,Tabs, Button } from "antd";
 
 import PhotoSearch from "./PhotoSearch";
+import { checkImageUrlIsValid } from "../utils";
+import formData from './data';
 
 import styles from "./Header.module.css";
+
+const InfoSettingButton = props => {
+  return (
+    <Popover
+      content={
+        <div>content</div>
+      }
+      title="Article Info Preview"
+      trigger={['hover']}
+    >
+      <button className={styles.button} onClick={props.onClick}>
+        <Icon type="profile" theme="outlined" />
+      </button>
+    </Popover>
+  );
+};
 
 const formItemLayout = {
   labelCol: { span: 4 },
@@ -38,6 +56,7 @@ class ArticleInfoSettingModal extends React.Component {
 
     const data = this.formRef.props.form.getFieldsValue();
     console.log(data);
+    console.log('ok');
   };
 
   handleCancel = () => {
@@ -49,19 +68,21 @@ class ArticleInfoSettingModal extends React.Component {
   render() {
     return (
       <div>
-        <button className={styles.button} type="primary" onClick={this.showModal}>
-          <Icon type="profile" theme="outlined" />
-        </button>
+        {/*<button className={styles.button} type="primary" onClick={this.showModal}>*/}
+          {/*<Icon type="profile" theme="outlined" />*/}
+        {/*</button>*/}
+        <InfoSettingButton onClick={this.showModal}/>
         <Modal
           style={{top: 20}}
           width={920}
           title="Article Info Setting"
           visible={this.state.visible}
-          onOk={this.handleOk}
           onCancel={this.handleCancel}
+          footer={null}
           destroyOnClose={true}
         >
-          <WrappedFormInModal wrappedComponentRef={this.setFormRef}/>
+          {/*<WrappedFormInModal wrappedComponentRef={this.setFormRef}/>*/}
+          <WrappedFormInModal afterSubmit={this.handleCancel}/>
         </Modal>
       </div>
     );
@@ -79,6 +100,14 @@ class ArticleInfoForm extends Component {
     };
   }
 
+  componentDidMount() {
+    // To load the cover based on saved url.
+    this.checkCoverUrl(undefined, formData.coverUrl, ()=>{});
+    // To disabled submit button at the beginning.
+    this.props.form.validateFields();
+  }
+
+
   selectCover = (cover) => {
     const form = this.props.form;
 
@@ -88,20 +117,22 @@ class ArticleInfoForm extends Component {
   };
 
   checkCoverUrl = async(rule, url, cb) => {
-    try {
-      const coverUrl = await checkImageUrlIsValid(url);
+    if (url) {
+      try {
+        const coverUrl = await checkImageUrlIsValid(url);
 
-      this.setState({
-        coverUrl: coverUrl,
-        isUrlChanged: true,
-        isCoverUrlValid: true
-      });
-    } catch (error) {
-      this.setState({
-        coverPreviewMsg: 'The url of cover is invalid. Please check the url.',
-        isUrlChanged: true,
-        isCoverUrlValid: false
-      });
+        this.setState({
+          coverUrl: coverUrl,
+          isUrlChanged: true,
+          isCoverUrlValid: true
+        });
+      } catch (error) {
+        this.setState({
+          coverPreviewMsg: 'The url of cover is invalid. Please check the url.',
+          isUrlChanged: true,
+          isCoverUrlValid: false
+        });
+      }
     }
 
     cb();
@@ -110,54 +141,87 @@ class ArticleInfoForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const data = this.props.form.getFieldsValue();
+    // 这里只需要使用data提交表单的数据即可
     console.log(data);
+    this.props.afterSubmit();
+    // console.log(formData);
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldsError, isFieldTouched, getFieldError } = this.props.form;
+
+    const titleError = isFieldTouched('userName') && getFieldError('userName');
+    const excerptError = isFieldTouched('password') && getFieldError('password');
 
     return (
       <div>
         <Form layout={'vertical'}>
-          <Form.Item {...formItemLayout} label={'Title'}>
+          <Form.Item
+            {...formItemLayout}
+            label={'Title'}
+            // validateStatus={titleError ? 'error' : ''}
+            // help={titleError || ''}
+          >
             {getFieldDecorator('title', {
-              rules: [{
-                required: true,
-                message: 'Please input your article header',
-              }]
+              initialValue: formData.title,
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input your article title. ',
+                },
+                {
+                  max: 100,
+                  message: 'The maximum letters of title is 100. '
+                }
+              ]
             })(
-              <Input placeholder="Please input your article header" />
+              <Input placeholder="Please input your article title." />
             )}
           </Form.Item>
-          <Form.Item {...formItemLayout} label={'Excerpt'}>
+          <Form.Item
+            {...formItemLayout}
+            label={'Excerpt'}
+            // validateStatus={excerptError ? 'error' : ''}
+          >
             {getFieldDecorator('excerpt', {
-              rules: [{
-                required: true,
-                message: 'Please input your article header',
-              }]
+              initialValue: formData.excerpt,
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input your article excerpt. ',
+                },
+                {
+                  max: 400,
+                  message: 'The maximum letters of excerpt is 400. '
+                }
+              ]
             })(
               <Input.TextArea
                 rows={8}
                 autosize={true}
-                placeholder='Please input your article excerpt'
+                placeholder='Please input your article excerpt.'
               />
             )}
           </Form.Item>
-          <Form.Item {...formItemLayout} label={'Cover'}>
+          <Form.Item
+            {...formItemLayout}
+            label={'Cover'}
+          >
             {getFieldDecorator('cover', {
+              initialValue: formData.coverUrl,
               rules: [{
+                required: true,
                 validator: this.checkCoverUrl
               }]
             })(
-              <Input placeholder="Please input a valid url of the cover of your article" />
+              <Input placeholder="Please input a valid url of the cover of your article. " />
             )}
           </Form.Item>
           <div className={styles.coverPreviewArea}>
             {
               this.state.isCoverUrlValid
                 ? <img className={styles.coverPreviewImage} src={this.state.coverUrl} alt=" loading..."/>
-                :
-                (
+                : (
                   <div className={styles.coverPreviewAreaTipWrapper}>
                     {
                       this.state.isUrlChanged
@@ -200,6 +264,16 @@ class ArticleInfoForm extends Component {
               </Tabs.TabPane>
             </Tabs>
           </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={hasErrors(getFieldsError())}
+              onClick={this.onSubmit}
+            >
+              Submit
+            </Button>
+          </Form.Item>
         </Form>
       </div>
     );
@@ -208,26 +282,9 @@ class ArticleInfoForm extends Component {
 
 const WrappedFormInModal = Form.create()(ArticleInfoForm);
 
-
-/**
- * checkImageUrlIsValid 检查url是否是合法的
- *
- * @param url
- * @return {Promise<any>}
- */
-function checkImageUrlIsValid(url) {
-  return new Promise(function(resolve, reject) {
-    const img = new Image();
-    img.onload = function() {
-      resolve(url);
-    };
-
-    img.onerror = function(){
-      reject('The url of image is invalid.');
-    };
-
-    img.src = url;
-  });
+function hasErrors(fieldsError) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
+
 
 export default ArticleInfoSettingModal;
