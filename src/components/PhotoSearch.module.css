@@ -13,7 +13,8 @@
 
 .photoItemWrapper {
   position: relative;
-  margin: 4px;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
   transition: all 75ms ease;
 }
 
@@ -22,7 +23,8 @@
 }
 
 .photoItemWrapper:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
 }
 
 .photoItemWrapper:active {
@@ -32,7 +34,7 @@
 .photoItemWrapper:hover .photoLink,
 .photoItemWrapper:hover .photoAuthor,
 .photoItemWrapper:hover .photoMask {
-  display: inherit;
+  opacity: 1;
 }
 
 .photoItemWrapper:hover .photo {
@@ -41,14 +43,13 @@
 }
 
 .photo {
-  width: 200px;
+  width: 195px;
   border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
   cursor: pointer;
 }
 
 .photoAuthor {
-  display: none;
+  opacity: 0;
   position: absolute;
   left: 4px;
   bottom: 2px;
@@ -56,21 +57,21 @@
 }
 
 .photoLink {
-  display: none;
+  opacity: 0;
   position: absolute;
-  right: 6px;
+  right: 10px;
   bottom: 2px;
   color: #fff;
   font-size: 14px;
 }
 
 .photoMask {
-  display: none;
+  opacity: 0;
   position: absolute;
   left: 0;
   bottom: 0;
   height: 24px;
-  width: 200px;
+  width: 195px;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   background-color: rgba(40, 44, 52, 0.5);

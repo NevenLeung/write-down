@@ -56,7 +56,9 @@ class PhotoSearchList extends Component {
 
             <StackGrid
               className={styles.photoGrid}
-              columnWidth={210}
+              gutterWidth={16}
+              gutterHeight={16}
+              columnWidth={195}
               monitorImagesLoaded={true}
             >
               {PhotoItems}
