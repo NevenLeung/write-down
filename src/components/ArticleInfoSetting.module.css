@@ -1,0 +1,100 @@
+.button {
+  composes: button from './Header.module.css';
+}
+
+/**
+  Article Info Setting Form Style
+ */
+
+.submitButtonWrapper {
+  display: flex;
+  height: 300px;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.coverSettingTip {
+  white-space: pre-wrap;
+}
+
+.coverPreviewArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 100%;
+  margin: 0 0 24px;
+}
+
+.coverPreviewImage {
+  height: 290px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  transition: all ease-in 300ms;
+}
+
+.coverPreviewImage:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+}
+
+.coverPreviewAreaTipWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+}
+
+.coverPreviewAreaTip {
+  font-size: 20px;
+}
+
+.coverPreviewAreaTipWithFeedback {
+  composes: coverPreviewAreaTip;
+  color: salmon;
+}
+
+/**
+  Article Info Setting Preview Style
+ */
+
+.infoPreviewWrapper {
+  display: flex;
+  width: 500px;
+  max-height: 160px;
+  padding: 4px 0;
+  overflow: hidden;
+}
+
+.infoPreviewImageWrapper {
+  margin-right: 16px;
+}
+
+.infoPreviewImage {
+  height: 150px;
+  width: 150px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+}
+
+.infoPreviewHeader {
+  display: flex;
+}
+
+.infoPreviewTitle {
+  max-height: 31px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+.infoPreviewExcerpt {
+  margin: 0;
+}
