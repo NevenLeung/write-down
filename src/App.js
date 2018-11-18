@@ -10,6 +10,7 @@ import './App.css';
 import { GeneralHeader as Header } from './components/Header';
 
 import ArticleEdit from './components/ArticleEdit';
+import ArticlesPage from './components/ArticleList';
 
 class App extends Component {
   render() {
@@ -24,8 +25,9 @@ class App extends Component {
 const AppRouter = () => (
   <div className="App">
     <Route exact path={'/'} component={ArticleEdit}/>
+    {/*<Route exact path={'/'} component={ArticlesPage}/>*/}
     <Route path={'/draft'} component={DraftPage}/>
-    <Route path={'/articles'} component={ArticlePage}/>
+    <Route path={'/articles'} component={ArticlesPage}/>
     <Route path={'/user'} component={UserPage}/>
   </div>
 );
@@ -37,12 +39,12 @@ const DraftPage = () => (
   </div>
 );
 
-const ArticlePage = () => (
-  <div>
-    <Header/>
-    <h1>Article Page</h1>
-  </div>
-);
+// const ArticlePage = () => (
+//   <div>
+//     <Header/>
+//     <ArticleList/>
+//   </div>
+// );
 
 const UserPage = () => (
   <div>
