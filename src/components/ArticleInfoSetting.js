@@ -19,21 +19,17 @@ class InfoSettingPreview extends Component {
   }
 
   async componentDidMount() {
-    const coverUrl = await checkImageUrlIsValid(metaData.coverUrl);
+    try {
+      const coverUrl = await checkImageUrlIsValid(this.props.metaData.coverUrl);
 
-    if (coverUrl) {
       this.setState({
         coverUrl: coverUrl,
         isCoverUrlValid: true
       });
-    } else {
-      this.setState({
-        coverUrl: coverUrl,
-        isCoverUrlValid: false
-      });
+    } catch (error) {
+
     }
   }
-
 
   render() {
     return (
@@ -240,8 +236,8 @@ class ArticleInfoForm extends Component {
                   message: 'Please input your article excerpt. ',
                 },
                 {
-                  max: 400,
-                  message: 'The maximum letters of excerpt is 400. '
+                  max: 320,
+                  message: 'The maximum letters of excerpt is 320. '
                 }
               ]
             })(

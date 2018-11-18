@@ -82,6 +82,7 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
+/* 可能不需要 */
 .infoPreviewHeader {
   display: flex;
 }
@@ -97,4 +98,6 @@
 
 .infoPreviewExcerpt {
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
