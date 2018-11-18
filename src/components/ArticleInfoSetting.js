@@ -7,7 +7,7 @@ import mockData from './data';
 
 import styles from "./ArticleInfoSetting.module.css";
 
-const metaData = mockData[1];
+const metaData = mockData[0];
 
 class InfoSettingPreview extends Component {
   constructor(props) {

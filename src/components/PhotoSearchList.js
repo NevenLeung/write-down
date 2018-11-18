@@ -10,7 +10,6 @@ class PhotoSearchList extends Component {
   };
 
   onPageChange = (newPage) => {
-    console.log(newPage);
     this.props.onPageChange(newPage);
   };
 
