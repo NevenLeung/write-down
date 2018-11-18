@@ -202,7 +202,7 @@ const UserMenu = (
     <Menu.Item key="2">
       <Link to={'/articles'}>My Articles</Link>
     </Menu.Item>
-    <Divider className={styles.divider}/>
+    <Menu.Divider/>
     <Menu.Item key="3">
       <Link to={'/user'}>User Profile</Link>
     </Menu.Item>
