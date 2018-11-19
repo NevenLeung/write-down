@@ -20,7 +20,7 @@ class InfoSettingPreview extends Component {
 
   async componentDidMount() {
     try {
-      const coverUrl = await checkImageUrlIsValid(this.props.metaData.coverUrl);
+      const coverUrl = await checkImageUrlIsValid(metaData.coverUrl);
 
       this.setState({
         coverUrl: coverUrl,
