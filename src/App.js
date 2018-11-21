@@ -25,9 +25,9 @@ class App extends Component {
 const AppRouter = () => (
   <div className="App">
     <Route exact path={'/'} component={ArticleEdit}/>
-    {/*<Route exact path={'/'} component={ArticlesPage}/>*/}
     <Route path={'/draft'} component={DraftPage}/>
     <Route path={'/articles'} component={ArticlesPage}/>
+    <Route path={'/article/:id/edit/'} component={ArticleEdit}/>
     <Route path={'/user'} component={UserPage}/>
   </div>
 );

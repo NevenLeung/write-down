@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Tag } from "antd";
+import { Col, Row, Tag, Icon } from "antd";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
 
@@ -8,6 +8,7 @@ import mockData from './data';
 import { checkImageUrlIsValid } from "../utils";
 
 import styles from "./ArticleList.module.css";
+import { Link } from "react-router-dom";
 
 dayjs.extend(relativeTime);
 
@@ -16,6 +17,7 @@ class ArticlesPage extends Component {
     super(props);
     this.state = {
       src: [],
+      isLoggedIn: true
     };
   }
 
@@ -28,7 +30,7 @@ class ArticlesPage extends Component {
 
   render() {
     const ArticleList = this.state.src.map(data => (
-      <ArticleItem metaData={data} key={data._id}/>
+      <ArticleItem metaData={data} key={data._id} isLoggedIn={this.state.isLoggedIn}/>
     ));
 
 
@@ -36,13 +38,13 @@ class ArticlesPage extends Component {
       <>
         <Header/>
         <Row>
-          <Col span={4}>
+          <Col md={4} sm={2} xs={0}>
 
           </Col>
-          <Col span={16} className={styles.list}>
+          <Col className={styles.list} md={16} sm={20} xs={24}>
             {ArticleList}
           </Col>
-          <Col span={4}>
+          <Col md={4} sm={2} xs={0}>
 
           </Col>
 
@@ -75,7 +77,7 @@ class ArticleItem extends Component{
   }
 
   render() {
-    const { title, author, excerpt, updatedAt, tags } = this.props.metaData;
+    const { _id, title, author, excerpt, updatedAt, tags } = this.props.metaData;
 
     const tagList = tags.map((tag, index) => {
       if (index % 4 === 0) {
@@ -93,7 +95,8 @@ class ArticleItem extends Component{
       <div className={styles.itemWrapper}>
         {
           this.state.isCoverUrlValid
-            ? <div className={styles.imageWrapper}>
+            ?
+            <div className={styles.imageWrapper}>
               <div
                 className={styles.image}
                 style={{backgroundImage: `url(${this.state.coverUrl})`}}
@@ -111,7 +114,37 @@ class ArticleItem extends Component{
               <span className={styles.postedTime}>{dayjs(updatedAt).fromNow()}</span>
             </Col>
           </Row>
-          <p className={styles.excerpt}>{excerpt.trim()}</p>
+          <p className={styles.excerpt}>
+            {
+              excerpt.length > 300
+              ? <span>
+                  {excerpt.slice(0, 300) + ' ... '}<a href = "#" >Read More</a>
+                </span>
+              : <span>
+                  {excerpt + ' '} <a href="#">Read More</a>
+                </span>
+            }
+          </p>
+          <div>
+            {
+              this.props.isLoggedIn
+                ?
+                <div className={styles.editOptionsBar}>
+                  <Link to={`/article/${_id}/edit`}>
+                    <button className={styles.editOption} title='jump to the edit page'>
+                      <Icon type="edit" />
+                    </button>
+                  </Link>
+                  <button className={styles.editOption} title='modify the tags on the right side'>
+                    <Icon type="tags" />
+                  </button>
+                  <button className={styles.editOption} title='delete this article'>
+                    <Icon type="delete" />
+                  </button>
+                </div>
+                : null
+            }
+          </div>
           <div className={styles.tagListWrapper}>
             <div className={styles.tagList}>
               {tagList}
