@@ -105,6 +105,13 @@
   text-align: right;
 }
 
+.tagInput {
+  height: 22px;
+  width: 78px;
+  line-height: 20px;
+  margin: 0 0 0 8px;
+}
+
 :global(.ant-tag) {
   margin: 0 0 0 8px;
 }

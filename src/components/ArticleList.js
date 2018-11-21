@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Col, Row, Tag, Icon } from "antd";
+import { Col, Row, Tag, Icon, Input, Tooltip } from "antd";
+
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
 
@@ -59,7 +60,9 @@ class ArticleItem extends Component{
     super(props);
     this.state = {
       coverUrl: '',
-      isCoverUrlValid: false
+      tags: this.props.metaData.tags,
+      isCoverUrlValid: false,
+      isTagsEditable: false
     };
   }
 
@@ -76,20 +79,24 @@ class ArticleItem extends Component{
     }
   }
 
-  render() {
-    const { _id, title, author, excerpt, updatedAt, tags } = this.props.metaData;
+  handleTagsEditableToggle = () => {
+    this.setState((prevState) => ({
+      isTagsEditable: !prevState.isTagsEditable
+    }));
+  };
 
-    const tagList = tags.map((tag, index) => {
-      if (index % 4 === 0) {
-        return <Tag color={'orange'} key={index}>{tag}</Tag>;
-      } else if(index % 4 === 1) {
-        return <Tag color={'green'} key={index}>{tag}</Tag>;
-      } else if(index % 4 === 2) {
-        return <Tag color={'volcano'} key={index}>{tag}</Tag>;
-      } else {
-        return <Tag color={'blue'} key={index}>{tag}</Tag>;
-      }
+  handleTagsUpdate = (newTagsArray) => {
+    this.setState({
+      tags: newTagsArray
     });
+
+    // todo: update the database
+  };
+
+  render() {
+    const { _id, title, author, excerpt, updatedAt } = this.props.metaData;
+
+    const { tags } = this.state;
 
     return (
       <div className={styles.itemWrapper}>
@@ -131,14 +138,17 @@ class ArticleItem extends Component{
                 ?
                 <div className={styles.editOptionsBar}>
                   <Link to={`/article/${_id}/edit`}>
-                    <button className={styles.editOption} title='jump to the edit page'>
+                    <button className={styles.editOption} title='Jump to the edit page.'>
                       <Icon type="edit" />
                     </button>
                   </Link>
-                  <button className={styles.editOption} title='modify the tags on the right side'>
+                  <button
+                    className={styles.editOption}
+                    onClick={this.handleTagsEditableToggle}
+                    title='Toggle the tags edit option to modify the tags on the right side.'>
                     <Icon type="tags" />
                   </button>
-                  <button className={styles.editOption} title='delete this article'>
+                  <button className={styles.editOption} title='Notice! It will delete the article from Database.'>
                     <Icon type="delete" />
                   </button>
                 </div>
@@ -147,7 +157,7 @@ class ArticleItem extends Component{
           </div>
           <div className={styles.tagListWrapper}>
             <div className={styles.tagList}>
-              {tagList}
+              <EditableTagGroup tags={tags} isEditable={this.state.isTagsEditable} handleTagsUpdate={this.handleTagsUpdate}/>
             </div>
           </div>
         </div>
@@ -156,5 +166,88 @@ class ArticleItem extends Component{
   }
 }
 
+class EditableTagGroup extends React.Component {
+  state = {
+    inputVisible: false,
+    inputValue: '',
+  };
+
+  saveInputRef = input => this.input = input;
+
+  handleClose = (removedTag) => {
+    const tags = this.props.tags.filter(tag => tag !== removedTag);
+
+    this.props.handleTagsUpdate(tags);
+  };
+
+  showInput = () => {
+    this.setState(
+      { inputVisible: true },
+      () => this.input.focus()
+    );
+  };
+
+  handleInputChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  };
+
+  handleInputConfirm = () => {
+    const { inputValue } = this.state;
+    let tags = this.props.tags.slice();
+    if (inputValue && tags.indexOf(inputValue) === -1) {
+      tags = [...tags, inputValue];
+    }
+    this.setState({
+      inputVisible: false,
+      inputValue: '',
+    });
+
+    this.props.handleTagsUpdate(tags);
+  };
+
+  render() {
+    const { inputVisible, inputValue } = this.state;
+    const { tags, isEditable } = this.props;
+    return (
+      <div>
+        {
+          tags.map((tag) => {
+            const isLongTag = tag.length > 12;
+            const tagElem = (
+              <Tag key={tag} closable={isEditable} afterClose={() => this.handleClose(tag)}>
+                {isLongTag ? `${tag.slice(0, 12)}...` : tag}
+              </Tag>
+            );
+            return isLongTag ? <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
+          })
+        }
+        {
+          inputVisible && (
+            <Input
+              ref={this.saveInputRef}
+              type="text"
+              size="small"
+              className={styles.tagInput}
+              value={inputValue}
+              onChange={this.handleInputChange}
+              onBlur={this.handleInputConfirm}
+              onPressEnter={this.handleInputConfirm}
+            />
+          )
+        }
+        {
+          isEditable && !inputVisible && (
+            <Tag
+              onClick={this.showInput}
+              style={{ borderStyle: 'dashed' }}
+            >
+              <Icon type="plus" /> New Tag
+            </Tag>
+          )
+        }
+      </div>
+    );
+  }
+}
 
 export default ArticlesPage;
