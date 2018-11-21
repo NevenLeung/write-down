@@ -59,10 +59,10 @@ const InfoSettingButton = props => {
       content={<InfoSettingPreview/>}
       title="Article Info Preview"
       trigger={['hover']}
-      mouseEnterDelay={0.5}
+      mouseEnterDelay={0.8}
     >
       <button className={styles.button} onClick={props.onClick}>
-        <Icon type="profile" theme="outlined" />
+        <Icon type="form" theme="outlined" />
       </button>
     </Popover>
   );

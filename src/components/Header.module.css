@@ -24,6 +24,7 @@
   background-color: transparent;
   border: 1px solid transparent;
   padding: 1px 6px;
+  cursor: pointer;
 }
 
 .divider {
