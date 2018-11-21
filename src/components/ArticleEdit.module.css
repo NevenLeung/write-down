@@ -22,6 +22,15 @@ p, ul, li, a, table {
   padding: 10px 0;
 }
 
+/**
+  可能要删除的
+ */
+.editorWrapper {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .editor {
   width: 50%;
   height: auto;
@@ -49,17 +58,34 @@ p, ul, li, a, table {
   transition: all 500ms ease;
 }
 
+/**
+  可能要删除的
+ */
+.editorHide .editorWrapper {
+  width: calc(100vw - 460px);
+  /*width: 671px;*/
+}
+
 /* previewer setting */
 :global .emoji {
   height: 1.2em;
+}
+
+/**
+  可能要删除的
+ */
+.previewWrapper {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .preview {
   width: 50%;
   padding: 0 10px;
   overflow: auto;
-  transition: all 500ms ease;
   opacity: 1;
+  transition: all 500ms ease;
 }
 
 .previewOnly {
@@ -77,4 +103,12 @@ p, ul, li, a, table {
   opacity: 0;
   padding: 0 0;
   transition: all 500ms ease;
+}
+
+/**
+  可能要删除的
+ */
+.previewHide .previewWrapper {
+  width: calc(100vw - 460px);
+  /*width: 671px;*/
 }

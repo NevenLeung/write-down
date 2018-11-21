@@ -18,11 +18,15 @@ import {EditPageHeader as Header} from './Header';
 import markdownFeatureSrc from '../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
 
+import mockData from './data';
+
 class ArticleEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       src: markdownFeatureSrc,
+      // src: '',
       // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
       displayMode: 'Editor & Preview',
       scrollSync: true
@@ -52,20 +56,22 @@ class ArticleEdit extends Component {
   componentDidMount() {
     this.$editor = document.querySelector('.editor');
     this.$preview = document.querySelector('.preview');
+
+    // get the parameter in the url
+    const id = this.props.match.params.id;
+
+    if (id) {
+      this.setState({
+        id: id,
+        src: mockData[id].markdown
+      });
+    }
   }
 
   handleSourceUpdate = (editor, data, value) => {
     this.setState({
       src: value
     });
-  };
-
-  onScrollSyncChange = () => {
-    console.log('scroll-sync');
-  };
-
-  onDisplayModeChange = () => {
-    console.log('display-mode');
   };
 
   handleScrollSyncToggle = () => {
@@ -202,9 +208,6 @@ class ArticleEdit extends Component {
           toggleDisplayMode={this.handleDisplayModeChange}
           toggleScrollSync={this.handleScrollSyncToggle}
         />
-        {/*<Row className={styles.toolBar} type="flex" justify="space-around" align="middle">*/}
-          {/*<ToolBar changeMode={this.handleDisplayModeChange} toggleScrollSync={this.handleScrollSyncToggle}/>*/}
-        {/*</Row>*/}
         <ScrollSync enabled={this.state.scrollSync}>
           <Row className={styles.articleEditWrapper} type="flex" justify="center">
             <ScrollSyncPane>
@@ -213,11 +216,13 @@ class ArticleEdit extends Component {
                 ref={this.editor}
                 onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
               >
-                <Editor
-                  value={this.state.src}
-                  options={this.codeMirrorOption}
-                  handleUpdate={this.handleSourceUpdate}
-                />
+                {/*<div className={styles.editorWrapper}>*/}
+                  <Editor
+                    value={this.state.src}
+                    options={this.codeMirrorOption}
+                    handleUpdate={this.handleSourceUpdate}
+                  />
+                {/*</div>*/}
               </Col>
             </ScrollSyncPane>
 
@@ -226,7 +231,9 @@ class ArticleEdit extends Component {
                 className={this.toggleStyleOfPreviewer(this.state.displayMode) + ' preview'}
                 onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
               >
-                <Preview renderResult={renderResult}/>
+                {/*<div className={styles.previewWrapper}>*/}
+                  <Preview renderResult={renderResult}/>
+                {/*</div>*/}
               </Col>
             </ScrollSyncPane>
           </Row>
