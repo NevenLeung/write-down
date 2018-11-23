@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Input } from 'antd'
 
-import Unsplash, {toJson  } from 'unsplash-js';
+import Unsplash, { toJson } from 'unsplash-js';
 
 import PhotoSearchList from './PhotoSearchList';
 
