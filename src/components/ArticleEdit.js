@@ -25,6 +25,7 @@ class ArticleEdit extends Component {
     super(props);
     this.state = {
       id: '',
+      title: 'Featured Test ',
       src: markdownFeatureSrc,
       // src: '',
       // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
@@ -63,7 +64,8 @@ class ArticleEdit extends Component {
     if (id) {
       this.setState({
         id: id,
-        src: mockData[id].markdown
+        src: mockData[id].markdown,
+        title: mockData[id].title
       });
     }
   }
@@ -205,6 +207,8 @@ class ArticleEdit extends Component {
     return (
       <div>
         <Header
+          markdown={this.state.src}
+          title={this.state.title}
           toggleDisplayMode={this.handleDisplayModeChange}
           toggleScrollSync={this.handleScrollSyncToggle}
         />

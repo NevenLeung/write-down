@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-import { Row, Col, Button, Icon, Menu, Dropdown, Popover, Divider, Radio, Switch } from "antd";
+import { Row, Col, Icon, Menu, Dropdown, Popover, Radio, Switch } from "antd";
 
 import ArticleInfoSetting from './ArticleInfoSetting';
+import { exportFile } from "../utils";
 
 import styles from './Header.module.css';
 
@@ -20,7 +21,10 @@ class EditPageHeader extends Component {
           </Link>
         </Col>
         <Col span={1} offset={8}>
-          <MoreButton/>
+          <MoreButtonOnEditPage
+            markdown={this.props.markdown}
+            title={this.props.title}
+          />
         </Col>
         <Col span={1}>
           <ArticleInfoSetting/>
@@ -90,7 +94,6 @@ class Header3 extends Component {
   }
 }
 
-
 const MoreMenu = (
   <Menu>
     <Menu.Item key="1">Get</Menu.Item>
@@ -99,12 +102,47 @@ const MoreMenu = (
   </Menu>
 );
 
-
 const MoreButton = props => {
   return (
     <Dropdown
       className={styles.button}
       overlay={MoreMenu}
+      trigger={['click']}
+      placement='bottomCenter'
+    >
+      <Icon type="ellipsis" theme="outlined" />
+    </Dropdown>
+  );
+};
+
+
+class MoreMenuOnEditPage extends Component {
+  handleMenuItemClick= ({item, key, keyPath}) => {
+    if (key === 'markdown') {
+      exportFile(this.props.markdown, 'text/markdown;charset=utf-8', this.props.title + '.md');
+    }
+  };
+
+  render() {
+    return (
+      // {...this.props} 是为了让Menu组件正确地获取到作为overlay的样式属性,
+      // 这一点并没有在官方文档中有所说明，但在issue中找到这个解决方法
+      <Menu {...this.props} onClick={this.handleMenuItemClick}>
+        <Menu.Item key="markdown">
+          Export Markdown
+        </Menu.Item>
+        <Menu.Item key="2">Some</Menu.Item>
+        <Menu.Item key="3">Help</Menu.Item>
+      </Menu>
+    );
+  }
+}
+
+const MoreButtonOnEditPage = props => {
+  return (
+    <Dropdown
+      className={styles.button}
+      overlay={<MoreMenuOnEditPage markdown={props.markdown} title={props.title}/>}
       trigger={['click']}
       placement='bottomCenter'
     >
@@ -224,8 +262,10 @@ const UserButton = props => {
 };
 
 EditPageHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  markdown: PropTypes.string.isRequired,
   toggleScrollSync: PropTypes.func.isRequired,
-  toggleDisplayMode: PropTypes.func.isRequired
+  toggleDisplayMode: PropTypes.func.isRequired,
 };
 
 export {

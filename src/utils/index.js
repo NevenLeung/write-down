@@ -1,3 +1,5 @@
+import FileSaver from 'file-saver';
+
 /**
  * delay 生成一个异步的延时
  *
@@ -29,7 +31,13 @@ function checkImageUrlIsValid(url) {
   });
 }
 
+function exportFile(data, type, fileName) {
+  const blob = new Blob([data], {type: type});
+  FileSaver.saveAs(blob, fileName);
+}
+
 export {
   delay,
-  checkImageUrlIsValid
+  checkImageUrlIsValid,
+  exportFile
 }
