@@ -71,6 +71,20 @@ p, ul, li, a, table {
   height: 1.2em;
 }
 
+:global .token.inserted {
+  color: #50fa7b;
+  background: transparent;
+}
+
+:global .token.deleted {
+  color: #ff5555;
+  background: transparent;
+}
+
+:global .token.keyword {
+  font-weight: 900;
+}
+
 /**
   可能要删除的
  */

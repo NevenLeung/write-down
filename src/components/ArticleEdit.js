@@ -10,7 +10,7 @@ import MarkdownParser from './MarkdownParser';
 import Editor from './Editor';
 
 import 'github-markdown-css';
-import 'highlight.js/styles/github.css';
+import 'prism-themes/themes/prism-darcula.css';
 
 import styles from './ArticleEdit.module.css';
 
