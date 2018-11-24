@@ -25,9 +25,10 @@ class ArticleEdit extends Component {
     super(props);
     this.state = {
       id: '',
-      title: 'Featured Test ',
+      title: 'Featured Test',
       src: markdownFeatureSrc,
       // src: '',
+      htmlOutput: MarkdownParser.render(markdownFeatureSrc),
       // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
       displayMode: 'Editor & Preview',
       scrollSync: true
@@ -65,14 +66,17 @@ class ArticleEdit extends Component {
       this.setState({
         id: id,
         src: mockData[id].markdown,
-        title: mockData[id].title
+        title: mockData[id].title,
+        htmlOutput: MarkdownParser.render(mockData[id].markdown)
       });
     }
+
   }
 
   handleSourceUpdate = (editor, data, value) => {
     this.setState({
-      src: value
+      src: value,
+      htmlOutput: MarkdownParser.render(value)
     });
   };
 
@@ -200,15 +204,12 @@ class ArticleEdit extends Component {
   }
 
   render() {
-    let renderResult = {
-      __html: MarkdownParser.render(this.state.src)
-    };
-
     return (
       <div>
         <Header
           markdown={this.state.src}
           title={this.state.title}
+          htmlOutput={this.state.htmlOutput}
           toggleDisplayMode={this.handleDisplayModeChange}
           toggleScrollSync={this.handleScrollSyncToggle}
         />
@@ -236,7 +237,9 @@ class ArticleEdit extends Component {
                 onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
               >
                 {/*<div className={styles.previewWrapper}>*/}
-                  <Preview renderResult={renderResult}/>
+                  <Preview renderResult={{
+                    __html: this.state.htmlOutput
+                  }}/>
                 {/*</div>*/}
               </Col>
             </ScrollSyncPane>

@@ -24,6 +24,7 @@ class EditPageHeader extends Component {
           <MoreButtonOnEditPage
             markdown={this.props.markdown}
             title={this.props.title}
+            htmlOutput={this.props.htmlOutput}
           />
         </Col>
         <Col span={1}>
@@ -120,6 +121,8 @@ class MoreMenuOnEditPage extends Component {
   handleMenuItemClick= ({item, key, keyPath}) => {
     if (key === 'markdown') {
       exportFile(this.props.markdown, 'text/markdown;charset=utf-8', this.props.title + '.md');
+    } else if (key === 'html') {
+      exportFile(this.props.htmlOutput, 'text/html;charset=utf-8', this.props.title + '.html');
     }
   };
 
@@ -129,10 +132,14 @@ class MoreMenuOnEditPage extends Component {
       // 这一点并没有在官方文档中有所说明，但在issue中找到这个解决方法
       <Menu {...this.props} onClick={this.handleMenuItemClick}>
         <Menu.Item key="markdown">
-          Export Markdown
+          Export as Markdown
         </Menu.Item>
-        <Menu.Item key="2">Some</Menu.Item>
-        <Menu.Item key="3">Help</Menu.Item>
+        <Menu.Item key="html">
+          Export as HTML
+        </Menu.Item>
+        <Menu.Item key="3">
+          Help
+        </Menu.Item>
       </Menu>
     );
   }
@@ -142,7 +149,13 @@ const MoreButtonOnEditPage = props => {
   return (
     <Dropdown
       className={styles.button}
-      overlay={<MoreMenuOnEditPage markdown={props.markdown} title={props.title}/>}
+      overlay={
+        <MoreMenuOnEditPage
+          title={props.title}
+          markdown={props.markdown}
+          htmlOutput={props.htmlOutput}
+        />
+      }
       trigger={['click']}
       placement='bottomCenter'
     >
