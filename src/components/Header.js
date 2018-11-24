@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Icon, Menu, Dropdown, Popover, Radio, Switch } from "antd";
 
 import ArticleInfoSetting from './ArticleInfoSetting';
-import { exportFile } from "../utils";
+import { exportFile, generateStyledHTML } from "../utils";
 
 import styles from './Header.module.css';
 
@@ -120,9 +120,11 @@ const MoreButton = props => {
 class MoreMenuOnEditPage extends Component {
   handleMenuItemClick= ({item, key, keyPath}) => {
     if (key === 'markdown') {
-      exportFile(this.props.markdown, 'text/markdown;charset=utf-8', this.props.title + '.md');
+      exportFile(this.props.markdown, 'text/markdown; charset=utf-8', this.props.title + '.md');
     } else if (key === 'html') {
-      exportFile(this.props.htmlOutput, 'text/html;charset=utf-8', this.props.title + '.html');
+      const file = generateStyledHTML(this.props.title, this.props.html);
+
+      exportFile(file, 'text/plain; charset=utf-8', this.props.title + '.html');
     }
   };
 
@@ -153,7 +155,7 @@ const MoreButtonOnEditPage = props => {
         <MoreMenuOnEditPage
           title={props.title}
           markdown={props.markdown}
-          htmlOutput={props.htmlOutput}
+          html={props.htmlOutput}
         />
       }
       trigger={['click']}
