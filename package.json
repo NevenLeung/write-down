@@ -30,6 +30,7 @@
     "markdown-it-table-of-contents": "^0.4.3",
     "markdown-it-task-lists": "^2.1.1",
     "normalize.css": "^8.0.0",
+    "pouchdb": "^7.0.0",
     "prism-themes": "^1.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
@@ -39,6 +40,7 @@
     "react-scripts": "^2.0.5",
     "react-scroll-sync": "^0.7.0",
     "react-stack-grid": "^0.7.1",
+    "redux": "^4.0.1",
     "twemoji": "^11.2.0",
     "unsplash-js": "^4.8.0"
   },
