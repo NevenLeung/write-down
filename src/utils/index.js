@@ -1,4 +1,3 @@
-import React from 'react';
 import FileSaver from 'file-saver';
 
 /**
@@ -30,6 +29,23 @@ function checkImageUrlIsValid(url) {
 
     img.src = url;
   });
+}
+
+
+/**
+ * getAllDataFromDatabase()  获取某个数据库的所有数据
+ *
+ * @param db  db为pouchDB的实例
+ * @return {Promise<*>}
+ */
+async function getAllDataFromDatabase(db) {
+  try {
+    return db.allDocs({include_docs: true});
+  } catch (e) {
+    console.log(e);
+
+    return undefined;
+  }
 }
 
 /**
@@ -118,6 +134,7 @@ function generateStyledHTML(title, content) {
 export {
   delay,
   checkImageUrlIsValid,
+  getAllDataFromDatabase,
   exportFile,
   generateStyledHTML
 }
