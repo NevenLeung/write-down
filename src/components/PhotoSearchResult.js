@@ -4,7 +4,7 @@ import StackGrid from "react-stack-grid";
 
 import styles from './PhotoSearch.module.css';
 
-class PhotoSearchList extends Component {
+class PhotoSearchResult extends Component {
   selectPhoto = (photoLink) => {
     this.props.onSelect(photoLink);
   };
@@ -118,4 +118,4 @@ class Photo extends Component {
   }
 }
 
-export default PhotoSearchList;
+export default PhotoSearchResult;

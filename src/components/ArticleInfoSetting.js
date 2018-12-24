@@ -78,14 +78,13 @@ class ArticleInfoSettingModal extends React.Component {
     super(props);
     this.state = {
       visible: false,
-      data: ''
     };
 
-    this.formRef = null;
+    // this.formRef = null;
 
-    this.setFormRef = (form) => {
-      this.formRef = form
-    };
+    // this.setFormRef = (form) => {
+    //   this.formRef = form
+    // };
   }
 
   showModal = () => {
@@ -99,9 +98,9 @@ class ArticleInfoSettingModal extends React.Component {
       visible: false,
     });
 
-    const data = this.formRef.props.form.getFieldsValue();
-    console.log(data);
-    console.log('ok');
+    // const data = this.formRef.props.form.getFieldsValue();
+    // console.log(data);
+    // console.log('ok');
   };
 
   handleCancel = () => {

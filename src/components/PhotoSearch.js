@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Row, Col, Input } from 'antd'
+import { Row, Col } from 'antd';
 
 import Unsplash, { toJson } from 'unsplash-js';
 
-import PhotoSearchList from './PhotoSearchList';
+import PhotoSearchBar from './PhotoSearchBar';
+import PhotoSearchResult from './PhotoSearchResult';
 
 
 
@@ -68,7 +69,7 @@ class PhotoSearch extends Component {
         </Row>
         <Row type="flex" justify="center" align="middle">
           <Col>
-            <PhotoSearchList
+            <PhotoSearchResult
               data={this.state.dataResult}
               onSelect={this.SelectPhoto}
               currentPage={this.state.currentPage}
@@ -78,22 +79,6 @@ class PhotoSearch extends Component {
           </Col>
         </Row>
       </div>
-    );
-  }
-}
-
-class PhotoSearchBar extends React.Component {
-  onSearch = (value) => {
-    this.props.getTheKeyword(value);
-  };
-
-  render() {
-    return (
-      <Input.Search
-        placeholder="Input your keyword, like beach"
-        onSearch={this.onSearch}
-        enterButton
-      />
     );
   }
 }
