@@ -1,4 +1,4 @@
-let formData = [
+let data = [
   {
     _id: 0,
     title: 'Title No.1',
@@ -46,4 +46,4 @@ let formData = [
 
 ];
 
-export default formData;
+export default data;
