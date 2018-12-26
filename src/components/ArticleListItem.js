@@ -40,10 +40,6 @@ class ArticleItem extends Component{
     }));
   };
 
-  handleDelete = () => {
-    this.props.deleteArticle();
-  };
-
   handleTagsUpdate = (newTagsArray) => {
     this.setState({
       tags: newTagsArray
@@ -52,8 +48,16 @@ class ArticleItem extends Component{
     // todo: update the database
   };
 
+  handleEdit = () => {
+    this.props.editArticle();
+  };
+
+  handleDelete = () => {
+    this.props.deleteArticle();
+  };
+
   render() {
-    const { _id, title, author, excerpt, updatedAt } = this.props.metaData;
+    const { id, title, author, excerpt, updatedAt } = this.props.metaData;
 
     const { tags } = this.state;
 
@@ -96,8 +100,10 @@ class ArticleItem extends Component{
               this.props.isLoggedIn
                 ?
                 <div className={styles.editOptionsBar}>
-                  <Link to={`/article/${_id}/edit`}>
-                    <button className={styles.editOption} title='Jump to the edit page.'>
+                  <Link to={`/article/${id}/edit`}>
+                    <button className={styles.editOption} title='Jump to the edit page.'
+                      onClick={this.handleEdit}
+                      >
                       <Icon type="edit" />
                     </button>
                   </Link>

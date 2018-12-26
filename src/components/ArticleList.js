@@ -32,9 +32,10 @@ class ArticlesPage extends Component {
     const ArticleList = this.props.articles.map(data => (
       <ArticleItem
         metaData={data}
-        key={data._id}
+        key={data.id}
         isLoggedIn={this.state.isLoggedIn}
-        deleteArticle={ () => this.props.deleteArticle(data._id) }
+        editArticle={() => this.props.editArticle(data.id)}
+        deleteArticle={() => this.props.deleteArticle(data.id)}
       />
     ));
 

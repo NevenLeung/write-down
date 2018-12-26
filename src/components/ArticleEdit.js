@@ -62,15 +62,25 @@ class ArticleEdit extends Component {
     // get the parameter in the url
     const id = this.props.match.params.id;
 
+    // if (id) {
+    //   this.setState({
+    //     id: id,
+    //     src: mockData[id].markdown,
+    //     title: mockData[id].title,
+    //     htmlOutput: MarkdownParser.render(mockData[id].markdown)
+    //   });
+    // }
+
     if (id) {
+      const { id, title, markdown } = this.props.data;
+
       this.setState({
         id: id,
-        src: mockData[id].markdown,
-        title: mockData[id].title,
-        htmlOutput: MarkdownParser.render(mockData[id].markdown)
+        src: markdown,
+        title: title,
+        htmlOutput: MarkdownParser.render(markdown)
       });
     }
-
   }
 
   handleSourceUpdate = (editor, data, value) => {
