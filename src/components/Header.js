@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-import { Row, Col, Icon, Menu, Dropdown, Popover, Radio, Switch } from "antd";
+import { Row, Col, Icon, Button, Menu, Dropdown, Popover, Radio, Switch } from "antd";
 
 import ArticleInfoSetting from './ArticleInfoSetting';
 import { exportFile, generateStyledHTML } from "../utils";
@@ -20,7 +20,10 @@ class EditPageHeader extends Component {
             </button>
           </Link>
         </Col>
-        <Col span={1} offset={8}>
+        <Col span={2} offset={6}>
+          <EditPageSaveOption/>
+        </Col>
+        <Col span={1}>
           <MoreButtonOnEditPage
             markdown={this.props.markdown}
             title={this.props.title}
@@ -31,7 +34,7 @@ class EditPageHeader extends Component {
           <ArticleInfoSetting/>
         </Col>
         <Col span={1}>
-          <SettingButton
+          <EditorSettingButton
             toggleDisplayMode={this.props.toggleDisplayMode}
             toggleScrollSync={this.props.toggleScrollSync}
           />
@@ -82,7 +85,7 @@ class Header3 extends Component {
           <MoreButton/>
         </Col>
         <Col span={1}>
-          <SettingButton
+          <EditorSettingButton
             toggleDisplayMode={this.props.toggleDisplayMode}
             toggleScrollSync={this.props.toggleScrollSync}
           />
@@ -183,7 +186,101 @@ const MoreButtonOnEditPage = props => {
 //   );
 // };
 
-const EditorSettingMenu = props => (
+class EditPageSaveOption extends Component {
+  state = {
+    visible: false
+  };
+
+  hidePopover = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleVisibleChange = (visible) => {
+    this.setState({ visible });
+  };
+
+  render() {
+    return (
+      <Popover
+        content={
+          <EditPageSaveOptionContent hidePopover={this.hidePopover}/>
+        }
+        title='Please choose the place you want to save'
+        trigger={['click']}
+        visible={this.state.visible}
+        onVisibleChange={this.handleVisibleChange}
+      >
+        <Button
+          type='primary'
+          htmlType='button'
+        >
+          Save
+        </Button>
+      </Popover>
+    );
+  }
+}
+
+const EditPageSaveOptionContent = ({hidePopover}) => {
+  const clickOnDraft = () => {
+
+    hidePopover();
+  };
+
+  const clickOnPublish = () => {
+
+    hidePopover();
+  };
+
+  return (
+    <div>
+      <Row type="flex" justify="space-between" align="middle">
+        <Col>
+          <Button type='primary' htmlType='button' onClick={clickOnDraft}>
+            Save as draft
+          </Button>
+        </Col>
+        <Col>
+          <Button type='primary' htmlType='button' onClick={clickOnPublish}>
+            Ready to publish
+          </Button>
+        </Col>
+      </Row>
+    </div>
+  )
+};
+
+EditPageSaveOptionContent.propsType = {
+  hidePopover: PropTypes.func.isRequired
+};
+
+const EditorSettingButton = props => {
+  return (
+    <Popover
+      content={
+        <EditorSettingContent
+          toggleScrollSync={props.toggleScrollSync}
+          toggleDisplayMode={props.toggleDisplayMode}
+        />
+      }
+      title="Editor Setting Controller"
+      trigger={['click']}
+    >
+      <button className={styles.button}>
+        <Icon type="setting" theme="outlined" />
+      </button>
+    </Popover>
+  );
+};
+
+EditorSettingButton.propTypes = {
+  toggleScrollSync: PropTypes.func.isRequired,
+  toggleDisplayMode: PropTypes.func.isRequired
+};
+
+const EditorSettingContent = props => (
   <div className={styles.editorSettingContainer}>
     <Row className={styles.editorSettingItem} type="flex" justify="space-between" align="middle">
       <Col>
@@ -218,33 +315,22 @@ const EditorSettingMenu = props => (
   </div>
 );
 
-EditorSettingMenu.propTypes = {
+EditorSettingContent.propTypes = {
   toggleScrollSync: PropTypes.func.isRequired,
   toggleDisplayMode: PropTypes.func.isRequired
 };
 
-const SettingButton = props => {
+const UserButton = props => {
   return (
-    <Popover
-      content={
-        <EditorSettingMenu
-          toggleScrollSync={props.toggleScrollSync}
-          toggleDisplayMode={props.toggleDisplayMode}
-        />
-      }
-      title="Editor Setting Controller"
+    <Dropdown
+      className={styles.button}
+      overlay={UserMenu}
       trigger={['click']}
+      placement='bottomCenter'
     >
-      <button className={styles.button}>
-        <Icon type="setting" theme="outlined" />
-      </button>
-    </Popover>
-  );
-};
-
-SettingButton.propTypes = {
-  toggleScrollSync: PropTypes.func.isRequired,
-  toggleDisplayMode: PropTypes.func.isRequired
+      <Icon type="user" theme="outlined" />
+    </Dropdown>
+  )
 };
 
 const UserMenu = (
@@ -262,19 +348,6 @@ const UserMenu = (
     <Menu.Item key="4">Log out</Menu.Item>
   </Menu>
 );
-
-const UserButton = props => {
-  return (
-    <Dropdown
-      className={styles.button}
-      overlay={UserMenu}
-      trigger={['click']}
-      placement='bottomCenter'
-    >
-      <Icon type="user" theme="outlined" />
-    </Dropdown>
-  )
-};
 
 EditPageHeader.propTypes = {
   title: PropTypes.string.isRequired,
