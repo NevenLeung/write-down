@@ -2,10 +2,16 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.pageIndicator {
+  padding: 4px 0 0 !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
+}
+
 .list {
   /*border: 2px solid #eee;*/
   /*border-radius: 32px;*/
-  margin: 40px 0;
+  margin: 0 0 40px;
   padding: 0 20px;
 }
 

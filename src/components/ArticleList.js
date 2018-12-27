@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Divider } from "antd";
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -48,6 +48,7 @@ class ArticlesPage extends Component {
 
           </Col>
           <Col className={styles.list} md={16} sm={20} xs={24}>
+            <Divider className={styles.pageIndicator}>Article list</Divider>
             {ArticleList}
           </Col>
           <Col md={4} sm={2} xs={0}>
