@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
 
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
-import {Row, Col, Radio, Switch} from 'antd';
+import {Row, Col } from 'antd';
 
 import { delay } from "../utils";
 import MarkdownParser from './MarkdownParser';
@@ -17,8 +17,6 @@ import styles from './ArticleEdit.module.css';
 import {EditPageHeader as Header} from './Header';
 import markdownFeatureSrc from '../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
-
-import mockData from './data';
 
 class ArticleEdit extends Component {
   constructor(props) {
@@ -59,17 +57,8 @@ class ArticleEdit extends Component {
     this.$editor = document.querySelector('.editor');
     this.$preview = document.querySelector('.preview');
 
-    // get the parameter in the url
+    // get the parameter from the url
     const id = this.props.match.params.id;
-
-    // if (id) {
-    //   this.setState({
-    //     id: id,
-    //     src: mockData[id].markdown,
-    //     title: mockData[id].title,
-    //     htmlOutput: MarkdownParser.render(mockData[id].markdown)
-    //   });
-    // }
 
     if (id) {
       const { id, title, markdown } = this.props.data;
@@ -270,54 +259,6 @@ class Preview extends Component {
 
 Preview.propTypes = {
   renderResult: PropTypes.object
-};
-
-function ToolBar(props) {
-  return (
-    <>
-      <Col>
-        <DisplayMode changeDisplayMode={props.changeMode}/>
-      </Col>
-      <Col>
-        Scroll-Sync&nbsp;
-        <ScrollSyncCtrl toggleScrollSync={props.toggleScrollSync}/>
-      </Col>
-    </>
-  )
-}
-
-ToolBar.propTypes = {
-  changeMode: PropTypes.func,
-  toggleScrollSync: PropTypes.func
-};
-
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
-
-function DisplayMode(props) {
-  return (
-    <div>
-      <RadioGroup onChange={props.changeDisplayMode} defaultValue="Editor & Preview" buttonStyle="solid">
-        <RadioButton value="Editor Only">Editor</RadioButton>
-        <RadioButton value="Editor & Preview">Both</RadioButton>
-        <RadioButton value="Preview Only">Preview</RadioButton>
-      </RadioGroup>
-    </div>
-  )
-}
-
-DisplayMode.propTypes = {
-  changeDisplayMode: PropTypes.func
-};
-
-function ScrollSyncCtrl(props) {
-  return (
-    <Switch defaultChecked onChange={props.toggleScrollSync} />
-  );
-}
-
-ScrollSyncCtrl.propTypes = {
-  toggleScrollSync: PropTypes.func
 };
 
 export default ArticleEdit;

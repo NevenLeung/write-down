@@ -42,8 +42,11 @@
     "react-scroll-sync": "^0.7.0",
     "react-stack-grid": "^0.7.1",
     "redux": "^4.0.1",
+    "redux-async-initial-state": "^0.3.0",
+    "redux-logger": "^3.0.6",
     "twemoji": "^11.2.0",
-    "unsplash-js": "^4.8.0"
+    "unsplash-js": "^4.8.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "gh-pages": "^2.0.1"
