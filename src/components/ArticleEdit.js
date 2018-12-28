@@ -61,7 +61,7 @@ class ArticleEdit extends Component {
     const id = this.props.match.params.id;
 
     if (id) {
-      const { id, title, markdown } = this.props.data;
+      const { id, title, markdown } = this.props;
 
       this.setState({
         id: id,

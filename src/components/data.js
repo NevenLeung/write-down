@@ -8,7 +8,8 @@ let data = [
     createdAt: '2018-11-15',
     updatedAt: '2018-11-16',
     tags: ['story', 'daily', "gathering"],
-    markdown: '# Title No.1'
+    markdown: '# Title No.1',
+    htmlOutput: ''
   },
   {
     id: 1,
