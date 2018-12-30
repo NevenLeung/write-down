@@ -4,8 +4,9 @@
 
 .pageIndicator {
   padding: 4px 0 0 !important;
+  font-family: 'Lora', serif;
   font-size: 24px !important;
-  font-weight: bold !important;
+  color: #ccc !important;
 }
 
 .list {
@@ -33,12 +34,12 @@
 }
 
 .imageWrapper {
-  composes: infoPreviewImageWrapper from './ArticleInfoSetting.module.css';
+  composes: infoPreviewImageWrapper from './article-edit/ArticleInfoSetting.module.css';
   margin-right: 30px;
 }
 
 .image {
-  composes: infoPreviewImage from './ArticleInfoSetting.module.css';
+  composes: infoPreviewImage from './article-edit/ArticleInfoSetting.module.css';
   height: 200px;
   width: 200px;
   box-shadow: none;
@@ -56,7 +57,7 @@
 }
 
 .title {
-  composes: infoPreviewTitle from './ArticleInfoSetting.module.css';
+  composes: infoPreviewTitle from './article-edit/ArticleInfoSetting.module.css';
   max-height: none;
   line-height: 1.4;
   font-weight: 600;
@@ -80,7 +81,7 @@
 }
 
 .excerpt {
-  composes: infoPreviewExcerpt from './ArticleInfoSetting.module.css';
+  composes: infoPreviewExcerpt from './article-edit/ArticleInfoSetting.module.css';
   margin: 4px 0;
   font-weight: 600;
 }
@@ -92,7 +93,7 @@
 }
 
 .editOption {
-  composes: button from './Header.module.css';
+  composes: button from './header/Header.module.css';
   font-size: 1.2rem;
   border: none;
   line-height: 24px;

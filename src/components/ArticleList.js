@@ -4,7 +4,7 @@ import { Col, Row, Divider } from "antd";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-import { GeneralHeader as Header } from './Header';
+import { GeneralHeader as Header } from './header/Header';
 import ArticleItem from './ArticleListItem';
 // import mockData from './data';
 
