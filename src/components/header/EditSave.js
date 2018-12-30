@@ -18,11 +18,23 @@ class EditPageSaveOption extends Component {
     this.setState({ visible });
   };
 
+  handleSave = () => {
+    const saveData = this.props.saveArticleContentToCurrentEdit;
+    const data = this.props.markdown;
+
+    saveData(data);
+  };
+
   render() {
     return (
       <Popover
         content={
-          <EditPageSaveOptionContent hidePopover={this.hidePopover}/>
+          <EditPageSaveOptionContent
+            id={this.props.id}
+            hidePopover={this.hidePopover}
+            publishArticle={this.props.publishArticle}
+            saveArticleAsDraft={this.props.saveArticleAsDraft}
+          />
         }
         title='Please choose the place you want to save'
         trigger={['click']}
@@ -33,6 +45,7 @@ class EditPageSaveOption extends Component {
           type='primary'
           htmlType='button'
           title='Just save the markdown and can be exported. It will not be abandoned unless there is another click on the option in the content of popover.'
+          onClick={this.handleSave}
         >
           Save
         </Button>
@@ -41,13 +54,15 @@ class EditPageSaveOption extends Component {
   }
 }
 
-const EditPageSaveOptionContent = ({hidePopover}) => {
+const EditPageSaveOptionContent = ({id, hidePopover, saveArticleAsDraft, publishArticle}) => {
   const clickOnDraft = () => {
+    saveArticleAsDraft(id);
 
     hidePopover();
   };
 
   const clickOnPublish = () => {
+    publishArticle(id);
 
     hidePopover();
   };
