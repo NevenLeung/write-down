@@ -5,8 +5,8 @@ import throttle from 'lodash/throttle';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import {Row, Col } from 'antd';
 
-import { delay } from "../utils";
-import MarkdownParser from './MarkdownParser';
+import { delay } from "../../utils/index";
+import MarkdownParser from '../../utils/MarkdownParser';
 import Editor from './Editor';
 
 import 'github-markdown-css';
@@ -14,8 +14,8 @@ import 'prism-themes/themes/prism-darcula.css';
 
 import styles from './ArticleEdit.module.css';
 
-import {EditPageHeader as Header} from './Header';
-import markdownFeatureSrc from '../assets/markdown-test-file';
+import {EditPageHeader as Header} from '../header/Header';
+import markdownFeatureSrc from '../../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
 
 class ArticleEdit extends Component {
@@ -24,8 +24,8 @@ class ArticleEdit extends Component {
     this.state = {
       id: '',
       title: 'Featured Test',
-      src: markdownFeatureSrc,
-      // src: '',
+      markdown: markdownFeatureSrc,
+      // markdown: '',
       htmlOutput: MarkdownParser.render(markdownFeatureSrc),
       // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
       displayMode: 'Editor & Preview',
@@ -65,7 +65,7 @@ class ArticleEdit extends Component {
 
       this.setState({
         id: id,
-        src: markdown,
+        markdown: markdown,
         title: title,
         htmlOutput: MarkdownParser.render(markdown)
       });
@@ -74,7 +74,7 @@ class ArticleEdit extends Component {
 
   handleSourceUpdate = (editor, data, value) => {
     this.setState({
-      src: value,
+      markdown: value,
       htmlOutput: MarkdownParser.render(value)
     });
   };
@@ -206,9 +206,7 @@ class ArticleEdit extends Component {
     return (
       <div>
         <Header
-          markdown={this.state.src}
-          title={this.state.title}
-          htmlOutput={this.state.htmlOutput}
+          markdown={this.state.markdown}
           toggleDisplayMode={this.handleDisplayModeChange}
           toggleScrollSync={this.handleScrollSyncToggle}
         />
@@ -222,7 +220,7 @@ class ArticleEdit extends Component {
               >
                 {/*<div className={styles.editorWrapper}>*/}
                   <Editor
-                    value={this.state.src}
+                    value={this.state.markdown}
                     options={this.codeMirrorOption}
                     handleUpdate={this.handleSourceUpdate}
                   />

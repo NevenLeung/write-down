@@ -40,7 +40,15 @@ function checkImageUrlIsValid(url) {
  */
 async function getAllDataFromDatabase(db) {
   try {
-    return db.allDocs({include_docs: true});
+    const data = await db.allDocs({include_docs: true});
+
+    let result = {};
+
+    data.rows.map((item) => result[item.id] = item.doc.state);
+
+    // console.log(result);
+    // return result;
+    return data;
   } catch (e) {
     console.log(e);
 
