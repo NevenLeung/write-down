@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import 'normalize.css/normalize.css';
 
@@ -7,27 +8,49 @@ import 'antd/dist/antd.css';
 
 import './App.css';
 
-import { GeneralHeader as Header } from './components/Header';
+import { GeneralHeader as Header } from './components/header/Header';
 
-import ArticleEdit from './components/ArticleEdit';
-import ArticlesPage from './components/ArticleList';
+// import ArticleEdit from './components/ArticleEdit';
+// import ArticlesPage from './components/ArticleList';
+import ArticleListPage from './containers/ArticleListContainer';
+import { ArticleEditContainer as ArticleEditPage } from './containers/ArticleEditContainer';
+
+
+import configureStore from './ducks/configureStore';
+// import CounterContainer from './containers/test';
+
+import fakeData from './components/data';
+
+const preloadedState = {
+  articles: {
+      data: fakeData
+    }
+};
+
+const store = configureStore(preloadedState);
+
+// console.log(store.getState());
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <AppRouter/>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <AppRouter/>
+        </Router>
+      </Provider>
+
     );
   }
 }
 
 const AppRouter = () => (
   <div className="App">
-    <Route exact path={'/'} component={ArticleEdit}/>
+    {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
+    <Route exact path={'/'} component={ArticleListPage}/>
     <Route path={'/draft'} component={DraftPage}/>
-    <Route path={'/articles'} component={ArticlesPage}/>
-    <Route path={'/article/:id/edit/'} component={ArticleEdit}/>
+    <Route path={'/articles'} component={ArticleListPage}/>
+    <Route path={'/article/:id/edit/'} component={ArticleEditPage}/>
     <Route path={'/user'} component={UserPage}/>
   </div>
 );
