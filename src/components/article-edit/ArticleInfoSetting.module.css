@@ -1,5 +1,5 @@
 .button {
-  composes: button from './Header.module.css';
+  composes: button from '../header/Header.module.css';
 }
 
 /**

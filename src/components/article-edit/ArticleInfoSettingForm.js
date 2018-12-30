@@ -1,137 +1,17 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Popover, Modal, Collapse ,Tabs, Button, Row, Col } from "antd";
 
-import PhotoSearch from "./PhotoSearch";
-import { checkImageUrlIsValid } from "../utils";
-import mockData from './data';
+import { Row, Col, Button, Form, Input, Collapse, Tabs } from "antd";
+
+import PhotoSearch from "../PhotoSearch";
+
+import { checkImageUrlIsValid } from "../../utils";
 
 import styles from "./ArticleInfoSetting.module.css";
-
-const metaData = mockData[0];
-
-class InfoSettingPreview extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      coverUrl: '',
-      isCoverUrlValid: false
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      const coverUrl = await checkImageUrlIsValid(metaData.coverUrl);
-
-      this.setState({
-        coverUrl: coverUrl,
-        isCoverUrlValid: true
-      });
-    } catch (error) {
-
-    }
-  }
-
-  render() {
-    return (
-      <div className={styles.infoPreviewWrapper}>
-        {
-          this.state.isCoverUrlValid
-            ? <div className={styles.infoPreviewImageWrapper}>
-                <div
-                  className={styles.infoPreviewImage}
-                  style={{backgroundImage: `url(${this.state.coverUrl})`}}
-                />
-              </div>
-            : null
-        }
-        <div>
-          <h2 className={styles.infoPreviewTitle}>{metaData.title}</h2>
-          <p className={styles.infoPreviewExcerpt}>{metaData.excerpt}</p>
-        </div>
-      </div>
-    );
-  }
-}
-
-const InfoSettingButton = props => {
-  return (
-    <Popover
-      content={<InfoSettingPreview/>}
-      title="Article Info Preview"
-      trigger={['hover']}
-      mouseEnterDelay={0.8}
-    >
-      <button className={styles.button} onClick={props.onClick}>
-        <Icon type="form" theme="outlined" />
-      </button>
-    </Popover>
-  );
-};
 
 const formItemLayout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 14 },
 };
-
-class ArticleInfoSettingModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false,
-    };
-
-    // this.formRef = null;
-
-    // this.setFormRef = (form) => {
-    //   this.formRef = form
-    // };
-  }
-
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  handleOk = () => {
-    this.setState({
-      visible: false,
-    });
-
-    // const data = this.formRef.props.form.getFieldsValue();
-    // console.log(data);
-    // console.log('ok');
-  };
-
-  handleCancel = () => {
-    this.setState({
-      visible: false,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        {/*<button className={styles.button} type="primary" onClick={this.showModal}>*/}
-          {/*<Icon type="profile" theme="outlined" />*/}
-        {/*</button>*/}
-        <InfoSettingButton onClick={this.showModal}/>
-        <Modal
-          style={{top: 20}}
-          width={880}
-          title="Article Info Setting"
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          footer={null}
-          destroyOnClose={true}
-        >
-          {/*<WrappedFormInModal wrappedComponentRef={this.setFormRef}/>*/}
-          <WrappedFormInModal afterSubmit={this.handleCancel}/>
-        </Modal>
-      </div>
-    );
-  }
-}
 
 class ArticleInfoForm extends Component {
   constructor(props) {
@@ -146,18 +26,18 @@ class ArticleInfoForm extends Component {
 
   componentDidMount() {
     // To load the cover based on saved url.
-    this.checkCoverUrl(undefined, metaData.coverUrl, ()=>{});
+    this.checkCoverUrl(undefined, this.props.coverUrl, ()=>{});
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
   }
 
 
-  selectCover = (cover) => {
+  selectCover = (coverUrl) => {
     const form = this.props.form;
 
-    form.setFieldsValue({ cover });
+    form.setFieldsValue({ coverUrl });
 
-    this.checkCoverUrl(undefined, cover, () => {});
+    this.checkCoverUrl(undefined, coverUrl, () => {});
   };
 
   checkCoverUrl = async(rule, url, cb) => {
@@ -187,6 +67,12 @@ class ArticleInfoForm extends Component {
     const data = this.props.form.getFieldsValue();
     // 这里只需要使用data提交表单的数据即可
     console.log(data);
+
+    const { title, excerpt, coverUrl } = data;
+    const saveData = this.props.saveArticleInfoToCurrentEdit;
+
+    saveData(title, excerpt, coverUrl);
+
     this.props.afterSubmit();
     // console.log(metaData);
   };
@@ -196,6 +82,8 @@ class ArticleInfoForm extends Component {
 
     const titleError = isFieldTouched('userName') && getFieldError('userName');
     const excerptError = isFieldTouched('password') && getFieldError('password');
+
+    const { title, excerpt, coverUrl } = this.props;
 
     return (
       <div>
@@ -207,7 +95,7 @@ class ArticleInfoForm extends Component {
             // help={titleError || ''}
           >
             {getFieldDecorator('title', {
-              initialValue: metaData.title,
+              initialValue: title,
               rules: [
                 {
                   required: true,
@@ -228,7 +116,7 @@ class ArticleInfoForm extends Component {
             // validateStatus={excerptError ? 'error' : ''}
           >
             {getFieldDecorator('excerpt', {
-              initialValue: metaData.excerpt,
+              initialValue: excerpt,
               rules: [
                 {
                   required: true,
@@ -251,8 +139,8 @@ class ArticleInfoForm extends Component {
             {...formItemLayout}
             label={'Cover Url'}
           >
-            {getFieldDecorator('cover', {
-              initialValue: metaData.coverUrl,
+            {getFieldDecorator('coverUrl', {
+              initialValue: coverUrl,
               rules: [{
                 validator: this.checkCoverUrl
               }]
@@ -335,5 +223,4 @@ function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-
-export default ArticleInfoSettingModal;
+export { WrappedFormInModal };
