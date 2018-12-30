@@ -35,7 +35,7 @@ class MoreMenuInEditPage extends Component {
   }
 }
 
-const MoreButtonInEditPage = ({title, markdown, htmlOutput}) => {
+const MoreButtonInEditPage = ({ title, markdown, htmlOutput }) => {
   return (
     <Dropdown
       className={styles.button}
@@ -55,5 +55,5 @@ const MoreButtonInEditPage = ({title, markdown, htmlOutput}) => {
 };
 
 export {
-  MoreMenuInEditPage
+  MoreButtonInEditPage
 };

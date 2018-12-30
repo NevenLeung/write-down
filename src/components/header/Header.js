@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col } from "antd";
 
-import ArticleInfoSetting from '../ArticleInfoSetting';
-import { ArticleInfoSettingContainer, ArticleExportContainer } from '../../containers/ArticleContainer';
+import ArticleInfoSetting from '../article-edit/ArticleInfoSetting';
 
-import { EditPageSaveOption } from "./EditSave";
+import { ArticleExportContainer } from "../../containers/ArticleExportContainer";
+import { ArticleEditSaveContainer } from '../../containers/ArticleEditSaveContainer';
+
 import { MoreButton } from "./MoreButton";
 import { EditorSettingButton } from "./EditorSetting";
 import { UserButton } from "./UserButton";
@@ -26,7 +27,7 @@ class EditPageHeader extends Component {
           </Link>
         </Col>
         <Col span={2} offset={6}>
-          <EditPageSaveOption/>
+          <ArticleEditSaveContainer markdown={this.props.markdown}/>
         </Col>
         <Col span={1}>
           <ArticleExportContainer/>
@@ -117,8 +118,6 @@ class Header3 extends Component {
 // };
 
 EditPageHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  markdown: PropTypes.string.isRequired,
   toggleScrollSync: PropTypes.func.isRequired,
   toggleDisplayMode: PropTypes.func.isRequired,
 };
