@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { MoreButtonInEditPage } from '../components/header/MoreButtonInEditPage';
 
 const articleExportMapState = (state) => {
-  const articleData = state.articles.currentEditing;
+  const articleData = state.currentEditing;
 
   if (articleData && Object.keys(articleData).length !== 0) {
     return {

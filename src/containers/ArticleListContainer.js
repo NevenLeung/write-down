@@ -1,22 +1,23 @@
 import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { createArticle, editArticle, deleteArticle } from '../ducks/article';
+import { createArticle, deleteArticle } from '../ducks/articles';
+import { editArticle } from "../ducks/currentEditing";
 
 import ArticleList from '../components/ArticleList';
 
 const mapState = (state) => (
   {
-    articles: state.articles.data
+    articles: state.articles
   }
 );
 
 const mapDispatch = (dispatch) => (
   bindActionCreators({
-      createArticle,
-      editArticle,
-      deleteArticle
-    }, dispatch)
+    createArticle,
+    editArticle,
+    deleteArticle
+  }, dispatch)
 );
 
 

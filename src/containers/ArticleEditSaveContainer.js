@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { saveArticleContentToCurrentEdit, publishArticle, saveArticleAsDraft } from "../ducks/article";
+import { saveArticleContentToCurrentEdit } from "../ducks/currentEditing";
+import { publishArticle, saveArticleAsDraft } from "../ducks/articles";
 
 import { EditPageSaveOption } from '../components/header/EditSave';
 
 const mapState = (state, ownProps) => (
   {
-    id:  state.articles.currentEditing.id,
+    id:  state.currentEditing.id,
     markdown: ownProps.markdown
   }
 );

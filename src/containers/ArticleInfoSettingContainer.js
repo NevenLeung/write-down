@@ -1,13 +1,13 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { saveArticleInfoToCurrentEdit } from "../ducks/article";
+import { saveArticleInfoToCurrentEdit } from "../ducks/currentEditing";
 
 import { InfoSettingPreview } from '../components/article-edit/ArticleInfoSettingPreview';
 import { WrappedFormInModal } from "../components/article-edit/ArticleInfoSettingForm";
 
 const mapState = (state) => {
-  const articleData = state.articles.currentEditing;
+  const articleData = state.currentEditing;
 
   if (articleData && Object.keys(articleData).length !== 0) {
     return {

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ArticleEdit from '../components/article-edit/ArticleEdit';
 
 const mapState = (state) => {
-  const articleData = state.articles.currentEditing;
+  const articleData = state.currentEditing;
 
   if (articleData && Object.keys(articleData).length !== 0) {
     return {

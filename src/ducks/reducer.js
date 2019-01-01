@@ -1,9 +1,11 @@
-import { combineReducers } from "redux";
+import { articles } from './articles';
+import { currentEditing } from "./currentEditing";
 
-import { articles } from  './article';
-
-const rootReducer = combineReducers({
-  articles
-});
+const rootReducer = (state, action) => (
+  {
+    articles: articles(state, action),
+    currentEditing: currentEditing(state, action)
+  }
+);
 
 export default rootReducer;
