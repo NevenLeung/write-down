@@ -13,6 +13,7 @@ import { GeneralHeader as Header } from './components/header/Header';
 // import ArticleEdit from './components/ArticleEdit';
 // import ArticlesPage from './components/ArticleList';
 import ArticleListPage from './containers/ArticleListContainer';
+import ArticleDraftListPage from './containers/ArticleDraftListContainer';
 import { ArticleEditContainer as ArticleEditPage } from './containers/ArticleEditContainer';
 
 
@@ -22,9 +23,8 @@ import configureStore from './ducks/configureStore';
 import fakeData from './components/data';
 
 const preloadedState = {
-  articles: {
-      data: fakeData
-    }
+  articles: fakeData,
+  draft: []
 };
 
 const store = configureStore(preloadedState);
@@ -48,9 +48,10 @@ const AppRouter = () => (
   <div className="App">
     {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
     <Route exact path={'/'} component={ArticleListPage}/>
-    <Route path={'/draft'} component={DraftPage}/>
-    <Route path={'/articles'} component={ArticleListPage}/>
-    <Route path={'/article/:id/edit/'} component={ArticleEditPage}/>
+    <Route exact path={'/articles'} component={ArticleListPage}/>
+    <Route path={'/articles/:id/edit/'} component={ArticleEditPage}/>
+    <Route exact path={'/draft'} component={ArticleDraftListPage}/>
+    <Route path={'/draft/:id/edit/'} component={ArticleEditPage}/>
     <Route path={'/user'} component={UserPage}/>
   </div>
 );

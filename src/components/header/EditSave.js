@@ -30,10 +30,8 @@ class EditPageSaveOption extends Component {
       <Popover
         content={
           <EditPageSaveOptionContent
-            id={this.props.id}
             hidePopover={this.hidePopover}
-            publishArticle={this.props.publishArticle}
-            saveArticleAsDraft={this.props.saveArticleAsDraft}
+            {...this.props}
           />
         }
         title='Please choose the place you want to save'
@@ -54,15 +52,24 @@ class EditPageSaveOption extends Component {
   }
 }
 
-const EditPageSaveOptionContent = ({id, hidePopover, saveArticleAsDraft, publishArticle}) => {
+const EditPageSaveOptionContent = ({
+  id,
+  hidePopover,
+  publishArticle,
+  deleteArticle,
+  saveArticleAsDraft,
+  deleteArticleFromDraft
+}) => {
   const clickOnDraft = () => {
     saveArticleAsDraft(id);
+    deleteArticle(id);
 
     hidePopover();
   };
 
   const clickOnPublish = () => {
     publishArticle(id);
+    deleteArticleFromDraft(id);
 
     hidePopover();
   };

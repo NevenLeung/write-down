@@ -2,7 +2,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { saveArticleContentToCurrentEdit } from "../ducks/currentEditing";
-import { publishArticle, saveArticleAsDraft } from "../ducks/articles";
+import { publishArticle, deleteArticle  } from "../ducks/articles";
+import { saveArticleAsDraft, deleteArticleFromDraft  } from "../ducks/draft";
 
 import { EditPageSaveOption } from '../components/header/EditSave';
 
@@ -17,7 +18,9 @@ const mapDispatch = (dispatch) => (
   bindActionCreators({
     saveArticleContentToCurrentEdit,
     publishArticle,
-    saveArticleAsDraft
+    deleteArticle,
+    saveArticleAsDraft,
+    deleteArticleFromDraft
   }, dispatch)
 );
 
