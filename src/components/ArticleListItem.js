@@ -100,7 +100,7 @@ class ArticleItem extends Component{
               this.props.isLoggedIn
                 ?
                 <div className={styles.editOptionsBar}>
-                  <Link to={`/article/${id}/edit`}>
+                  <Link to={`/articles/${id}/edit`}>
                     <button className={styles.editOption} title='Jump to the edit page.'
                       onClick={this.handleEdit}
                       >

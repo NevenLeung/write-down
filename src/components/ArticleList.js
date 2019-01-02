@@ -29,16 +29,19 @@ class ArticlesPage extends Component {
 
 
   render() {
-    const ArticleList = this.props.articles.map(data => (
-      <ArticleItem
-        metaData={data}
-        key={data.id}
-        isLoggedIn={this.state.isLoggedIn}
-        editArticle={() => this.props.editArticle(data.id)}
-        deleteArticle={() => this.props.deleteArticle(data.id)}
-      />
-    ));
+    let ArticleList = undefined;
 
+    if (Array.isArray(this.props.articles)) {
+      ArticleList = this.props.articles.map(data => (
+        <ArticleItem
+          metaData={data}
+          key={data.id}
+          isLoggedIn={this.state.isLoggedIn}
+          editArticle={() => this.props.editArticle(data.id)}
+          deleteArticle={() => this.props.deleteArticle(data.id)}
+        />
+      ));
+    }
 
     return (
       <>
@@ -49,7 +52,7 @@ class ArticlesPage extends Component {
           </Col>
           <Col className={styles.list} md={16} sm={20} xs={24}>
             <Divider className={styles.pageIndicator}>Article list</Divider>
-            {ArticleList}
+            {ArticleList? ArticleList: null}
           </Col>
           <Col md={4} sm={2} xs={0}>
 
