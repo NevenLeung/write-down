@@ -1,7 +1,15 @@
-const EDIT_ARTICLE = 'write-down/article/EDIT_ARTICLE';
+const EDIT_DRAFT = 'write-down/currentEditing/EDIT_DRAFT';
+const EDIT_ARTICLE = 'write-down/currentEditing/EDIT_ARTICLE';
 
-const SAVE_ARTICLE_INFO_TO_CURRENT_EDIT = 'write-down/article/SAVE_ARTICLE_INFO_TO_CURRENT_EDIT';
-const SAVE_ARTICLE_CONTENT_TO_CURRENT_EDIT = 'write-down/article/SAVE_ARTICLE_CONTENT_TO_CURRENT_EDIT';
+const SAVE_ARTICLE_INFO_TO_CURRENT_EDIT = 'write-down/currentEditing/SAVE_ARTICLE_INFO_TO_CURRENT_EDIT';
+const SAVE_ARTICLE_CONTENT_TO_CURRENT_EDIT = 'write-down/currentEditing/SAVE_ARTICLE_CONTENT_TO_CURRENT_EDIT';
+
+const editDraft = (id) => (
+  {
+    type: EDIT_DRAFT,
+    id
+  }
+);
 
 const editArticle = (id) => (
   {
@@ -30,7 +38,11 @@ const currentEditing = (state = {}, action) => {
   switch (action.type) {
     case EDIT_ARTICLE:
       return {
-        ...getArticleWithID(state.articles, action)
+        ...getArticle(state.articles, action)
+      };
+    case EDIT_DRAFT:
+      return {
+        ...getArticle(state.draft, action)
       };
     case SAVE_ARTICLE_INFO_TO_CURRENT_EDIT:
       return {
@@ -46,11 +58,11 @@ const currentEditing = (state = {}, action) => {
         markdown: action.markdown
       };
     default:
-      return state;
+      return state.currentEditing;
   }
 };
 
-const getArticleWithID = (list, action) => {
+const getArticle= (list, action) => {
   const result = list.filter(article => article.id === action.id);
 
   return result.length? result[0]: {};
@@ -58,6 +70,7 @@ const getArticleWithID = (list, action) => {
 
 export {
   currentEditing,
+  editDraft,
   editArticle,
   saveArticleInfoToCurrentEdit,
   saveArticleContentToCurrentEdit

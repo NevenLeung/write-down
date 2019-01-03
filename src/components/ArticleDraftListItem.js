@@ -49,7 +49,7 @@ class ArticleItem extends Component{
   };
 
   handleEdit = () => {
-    this.props.editArticle();
+    this.props.editDraft();
   };
 
   handleDelete = () => {

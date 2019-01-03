@@ -40,7 +40,7 @@ const draft = (state={draft: []}, action) => {
     case SAVE_ARTICLE_AS_DRAFT:
       return updateArticle(state, action);
     case DELETE_ARTICLE_FROM_DRAFT:
-      return removeArticle(state, action);
+      return removeArticle(state.draft, action);
     default:
       return state.draft
   }
@@ -69,9 +69,9 @@ const updateArticle = (state, action) => {
   }
 };
 
-const removeArticle = (state, action) => {
+const removeArticle = (list, action) => {
   // 从draft中删除相应id的article item
-  return state.draft.filter(article => article.id !== action.id);
+  return list.filter(article => article.id !== action.id);
 };
 
 export {

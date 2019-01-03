@@ -1,9 +1,9 @@
 import uuid from 'uuid';
 
-const CREATE_ARTICLE = 'write-down/article/CREATE_ARTICLE';
-const DELETE_ARTICLE = 'write-down/article/DELETE_ARTICLE';
+const CREATE_ARTICLE = 'write-down/articles/CREATE_ARTICLE';
+const DELETE_ARTICLE = 'write-down/articles/DELETE_ARTICLE';
 
-const PUBLISH_ARTICLE = 'write-down/article/PUBLISH_ARTICLE';
+const PUBLISH_ARTICLE = 'write-down/articles/PUBLISH_ARTICLE';
 
 const createArticle = () => (
   {
@@ -35,7 +35,7 @@ const articles = (state={articles: []}, action) => {
     case PUBLISH_ARTICLE:
       return updateArticle(state, action);
     case DELETE_ARTICLE:
-      return removeArticle(state, action);
+      return removeArticle(state.articles, action);
     default:
       return state.articles
   }
@@ -78,9 +78,9 @@ const updateArticle = (state, action) => {
   }
 };
 
-const removeArticle = (state, action) => {
+const removeArticle = (list, action) => {
   // 从articles中删除相应id的article item
-  return state.articles.filter(article => article.id !== action.id);
+  return list.filter(article => article.id !== action.id);
 };
 
 export {
