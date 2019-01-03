@@ -40,3 +40,40 @@
   margin: 4px 0;
 }
 
+.saveButton {
+  height: 32px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-family: Open Sans, sans-serif;
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+
+.saveButton:active {
+  transform: scale(0.98);
+}
+
+.publishButton {
+  composes: saveButton;
+  color: #fff;
+  background-color: #51e898;
+}
+
+.publishButton:hover {
+  color: #51e898;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.draftButton {
+  composes: saveButton;
+  color: #fff;
+  background-color: salmon;
+}
+
+.draftButton:hover {
+  color: salmon;
+  background-color: #fff;
+  border-color: #ccc;
+}

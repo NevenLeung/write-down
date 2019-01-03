@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-import { Button, Col, Popover, Row } from "antd";
+import { Button, Col, Popover, Row, Checkbox } from "antd";
+
+import styles from './Header.module.css';
 
 class EditPageSaveOption extends Component {
   state = {
@@ -14,7 +17,7 @@ class EditPageSaveOption extends Component {
     });
   };
 
-  handleVisibleChange = (visible) => {
+  handleVisibleChange = visible => {
     this.setState({ visible });
   };
 
@@ -34,15 +37,15 @@ class EditPageSaveOption extends Component {
             {...this.props}
           />
         }
-        title='Please choose the place you want to save'
-        trigger={['click']}
+        title="Please choose the place you want to save"
+        trigger={["click"]}
         visible={this.state.visible}
         onVisibleChange={this.handleVisibleChange}
       >
         <Button
-          type='primary'
-          htmlType='button'
-          title='Just save the markdown and can be exported. It will not be abandoned unless there is another click on the option in the content of popover.'
+          type="primary"
+          htmlType="button"
+          title="Just save the markdown and can be exported. It will not be abandoned unless there is another click on the option in the content of popover."
           onClick={this.handleSave}
         >
           Save
@@ -52,55 +55,106 @@ class EditPageSaveOption extends Component {
   }
 }
 
-const EditPageSaveOptionContent = ({
-  id,
-  hidePopover,
-  publishArticle,
-  deleteArticle,
-  saveArticleAsDraft,
-  deleteArticleFromDraft
-}) => {
-  const clickOnDraft = () => {
+class EditPageSaveOptionContent extends Component {
+  state = {
+    isRedirected: false
+  };
+
+  toggleCheckbox = () => {
+    this.setState((state) => ({
+      isRedirected: !state.isRedirected
+    }));
+  };
+
+  clickOnDraft = () => {
+    const { id, hidePopover, deleteArticle, saveArticleAsDraft } = this.props;
+
     saveArticleAsDraft(id);
     deleteArticle(id);
 
     hidePopover();
   };
 
-  const clickOnPublish = () => {
+  clickOnPublish = () => {
+    const {
+      id,
+      hidePopover,
+      publishArticle,
+      deleteArticleFromDraft
+    } = this.props;
+
     publishArticle(id);
     deleteArticleFromDraft(id);
 
     hidePopover();
   };
 
-  return (
-    <div>
-      <Row type="flex" justify="space-between" align="middle">
-        <Col>
-          <Button
-            type='primary'
-            htmlType='button'
-            onClick={clickOnDraft}
-            title='After saving in draft list, you can find it in draft list page.'
-          >
-            Save as draft
-          </Button>
-        </Col>
-        <Col>
-          <Button
-            type='primary'
-            htmlType='button'
-            onClick={clickOnPublish}
-            title='After publishing in article list, you can find it in article list page.'
+  render() {
+    const PublishOption = this.state.isRedirected ? (
+      <Col>
+        <Link to="/articles">
+          <button
+            className={styles.publishButton}
+            onClick={this.clickOnPublish}
+            title="After publishing in article list, you can find it in article list page."
           >
             Ready to publish
-          </Button>
-        </Col>
-      </Row>
-    </div>
-  )
-};
+          </button>
+        </Link>
+      </Col>
+    ) : (
+      <Col>
+        <button
+          className={styles.publishButton}
+          onClick={this.clickOnPublish}
+          title="After publishing in article list, you can find it in article list page."
+        >
+          Ready to publish
+        </button>
+      </Col>
+    );
+
+    const DraftOption = this.state.isRedirected ? (
+      <Col>
+        <Link to="/draft">
+          <button
+            className={styles.draftButton}
+            onClick={this.clickOnDraft}
+            title="After saving in draft list, you can find it in draft list page."
+          >
+            Save as draft
+          </button>
+        </Link>
+      </Col>
+    ) : (
+      <Col>
+        <button
+          className={styles.draftButton}
+          onClick={this.clickOnDraft}
+          title="After saving in draft list, you can find it in draft list page."
+        >
+          Save as draft
+        </button>
+      </Col>
+    );
+
+    return (
+      <div>
+        <Row type="flex" justify="space-between" align="middle">
+          {PublishOption}
+          {DraftOption}
+        </Row>
+        <Row type="flex" justify="center" align="middle">
+          <Col>
+            <Checkbox value={this.state.isRedirected} onChange={this.toggleCheckbox}>
+              Redirect to the relevant page later
+            </Checkbox>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+}
 
 EditPageSaveOptionContent.propsType = {
   hidePopover: PropTypes.func.isRequired
