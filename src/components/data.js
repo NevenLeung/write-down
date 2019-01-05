@@ -19,7 +19,7 @@ let data = [
     coverUrl: 'https://images.unsplash.com/photo-1464655646192-3cb2ace7a67e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjQxMzU5fQ&s=e5c92940908160ed6b1fce199d70df14',
     createdAt: '2018-10-15',
     updatedAt: '2018-10-16',
-    tags: ['story', 'daily'],
+    tags: ['121212121212', '23232323232323', '343434343434343', '4545454545454554', '5656565656565656'],
     markdown: '# Title No.2'
   },
   {

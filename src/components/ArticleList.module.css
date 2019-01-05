@@ -40,8 +40,8 @@
 
 .image {
   composes: infoPreviewImage from './article-edit/ArticleInfoSetting.module.css';
-  height: 200px;
-  width: 200px;
+  height: 210px;
+  width: 210px;
   box-shadow: none;
   border-radius: 8px;
   transition: all ease-in 300ms;
@@ -52,8 +52,9 @@
 }
 
 .contentWrapper {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  padding-bottom: 25px;
 }
 
 .title {
@@ -82,14 +83,14 @@
 
 .excerpt {
   composes: infoPreviewExcerpt from './article-edit/ArticleInfoSetting.module.css';
-  margin: 4px 0;
+  flex: 1;
+  margin: 4px 0 8px;
   font-weight: 600;
 }
 
-.editOptionsBar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.bottomBar {
+  /* 配合flex box，direction：column作sticky bottom bar */
+  flex-shrink: 0;
 }
 
 .editOption {
@@ -98,27 +99,22 @@
   border: none;
   line-height: 24px;
   padding: 0 6px;
-  margin: 0 8px 0 0;
+  margin: 0 0 0 8px;
 }
 
 .tagListWrapper {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+
 }
 
 .tagList {
   max-height: 22px;
   text-align: right;
+  font-weight: 600;
 }
 
 .tagInput {
   height: 22px;
   width: 78px;
   line-height: 20px;
-  margin: 0 0 0 8px;
-}
-
-:global(.ant-tag) {
   margin: 0 0 0 8px;
 }
