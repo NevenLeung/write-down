@@ -18,11 +18,12 @@ const editArticle = (id) => (
   }
 );
 
-const saveArticleInfoToCurrentEdit = (title, excerpt, coverUrl) => (
+const saveArticleInfoToCurrentEdit = (title, excerpt, tags, coverUrl) => (
   {
     type: SAVE_ARTICLE_INFO_TO_CURRENT_EDIT,
     title,
     excerpt,
+    tags,
     coverUrl
   }
 );
@@ -49,6 +50,7 @@ const currentEditing = (state = {}, action) => {
         ...state.currentEditing,
         title: action.title,
         excerpt: action.excerpt,
+        tags: action.tags,
         coverUrl: action.coverUrl,
         author: 'Author'
       };

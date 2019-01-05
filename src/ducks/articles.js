@@ -48,6 +48,7 @@ const article = (state={}, action) => {
         id: uuid.v4(),
         title: 'Title',
         excerpt: 'Here is the excerpt',
+        tags: [],
         author: 'Author'
       };
     default:
