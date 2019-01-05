@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Row, Col, Button, Form, Input, Collapse, Tabs } from "antd";
+import { Row, Col, Button, Form, Input, Select, Collapse, Tabs } from "antd";
 
 import PhotoSearch from "../PhotoSearch";
 
@@ -68,10 +68,10 @@ class ArticleInfoForm extends Component {
     // 这里只需要使用data提交表单的数据即可
     console.log(data);
 
-    const { title, excerpt, coverUrl } = data;
+    const { title, excerpt, tags, coverUrl } = data;
     const saveData = this.props.saveArticleInfoToCurrentEdit;
 
-    saveData(title, excerpt, coverUrl);
+    saveData(title, excerpt, tags, coverUrl);
 
     this.props.afterSubmit();
     // console.log(metaData);
@@ -83,7 +83,7 @@ class ArticleInfoForm extends Component {
     const titleError = isFieldTouched('userName') && getFieldError('userName');
     const excerptError = isFieldTouched('password') && getFieldError('password');
 
-    const { title, excerpt, coverUrl } = this.props;
+    const { title, excerpt, tags, coverUrl } = this.props;
 
     return (
       <div>
@@ -132,6 +132,25 @@ class ArticleInfoForm extends Component {
                 rows={8}
                 autosize={true}
                 placeholder='Please input your article excerpt.'
+              />
+            )}
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            label='Tags'
+          >
+            {getFieldDecorator('tags', {
+              initialValue: tags,
+              rules: [{
+                max: 5,
+                type: 'array',
+                message: 'The number of tags is up to 5.'
+              }]
+            })(
+              <Select
+                mode='tags'
+                maxTagCount={5}
+                placeholder="Please type some keywords for the article. "
               />
             )}
           </Form.Item>
@@ -186,7 +205,7 @@ class ArticleInfoForm extends Component {
               <pre className={styles.coverSettingTip}>
               Choose an approach to set your cover:
               <br/>
-              1. Search photo from Unsplash by keyword and click on the photo you selected. The url of the photo will be filled in automatically.
+              1. Search photo by keyword in Unsplash and click on the photo you selected. The url of the photo will be filled in automatically.
               <br/>
               2. Upload the cover to image hosting service, and paste the valid image url to the cover field.
               <br/>
