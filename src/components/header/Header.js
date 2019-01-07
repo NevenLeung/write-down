@@ -11,7 +11,7 @@ import { ArticleEditSaveContainer } from '../../containers/ArticleEditSaveContai
 
 import { MoreButton } from "./MoreButton";
 import { EditorSettingButton } from "./EditorSetting";
-import { UserButton } from "./UserButton";
+import { UserNavButton } from "./UserNavButton";
 
 import styles from './Header.module.css';
 
@@ -42,7 +42,7 @@ class EditPageHeader extends Component {
           />
         </Col>
         <Col span={1}>
-          <UserButton/>
+          <UserNavButton/>
         </Col>
       </Row>
     );
@@ -67,38 +67,38 @@ class GeneralHeader extends Component {
         {/*<NavButton/>*/}
         {/*</Col>*/}
         <Col span={1}>
-          <UserButton/>
+          <UserNavButton/>
         </Col>
       </Row>
     );
   }
 }
 
-class Header3 extends Component {
-  render() {
-    return (
-      <Row className={styles.header + ' ' + styles.home} type="flex" justify="start" align="middle">
-        <Col span={4} offset={4}>
-          <button className={styles.button}>
-            Write Down
-          </button>
-        </Col>
-        <Col span={1} offset={9}>
-          <MoreButton/>
-        </Col>
-        <Col span={1}>
-          <EditorSettingButton
-            toggleDisplayMode={this.props.toggleDisplayMode}
-            toggleScrollSync={this.props.toggleScrollSync}
-          />
-        </Col>
-        <Col span={1}>
-          <UserButton/>
-        </Col>
-      </Row>
-    );
-  }
-}
+// class Header3 extends Component {
+//   render() {
+//     return (
+//       <Row className={styles.header + ' ' + styles.home} type="flex" justify="start" align="middle">
+//         <Col span={4} offset={4}>
+//           <button className={styles.button}>
+//             Write Down
+//           </button>
+//         </Col>
+//         <Col span={1} offset={9}>
+//           <MoreButton/>
+//         </Col>
+//         <Col span={1}>
+//           <EditorSettingButton
+//             toggleDisplayMode={this.props.toggleDisplayMode}
+//             toggleScrollSync={this.props.toggleScrollSync}
+//           />
+//         </Col>
+//         <Col span={1}>
+//           <UserButton/>
+//         </Col>
+//       </Row>
+//     );
+//   }
+// }
 
 // const NavMenu = (
 //   <Menu>

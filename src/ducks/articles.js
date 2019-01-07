@@ -86,7 +86,6 @@ const removeArticle = (list, action) => {
 
 export {
   articles,
-  createArticle,
   publishArticle,
   deleteArticle,
 }

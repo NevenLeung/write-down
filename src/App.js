@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import 'normalize.css/normalize.css';
@@ -49,6 +49,7 @@ const AppRouter = () => (
     {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
     <Route exact path={'/'} component={ArticleListPage}/>
     <Route exact path={'/articles'} component={ArticleListPage}/>
+    <Route path={'/articles/new/'} component={ArticleEditPage}/>
     <Route path={'/articles/:id/edit/'} component={ArticleEditPage}/>
     <Route exact path={'/draft'} component={ArticleDraftListPage}/>
     <Route path={'/draft/:id/edit/'} component={ArticleEditPage}/>
@@ -56,10 +57,10 @@ const AppRouter = () => (
   </div>
 );
 
-const DraftPage = () => (
+const NewArticlePage = () => (
   <div>
     <Header/>
-    <h1>Draft Page</h1>
+    <h1>New Article Page</h1>
   </div>
 );
 

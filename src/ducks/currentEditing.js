@@ -1,8 +1,18 @@
+import uuid from 'uuid';
+
+const CREATE_NEW_ARTICLE = 'write-down/currentEditing/CREATE_NEW_ARTICLE';
+
 const EDIT_DRAFT = 'write-down/currentEditing/EDIT_DRAFT';
 const EDIT_ARTICLE = 'write-down/currentEditing/EDIT_ARTICLE';
 
 const SAVE_ARTICLE_INFO_TO_CURRENT_EDIT = 'write-down/currentEditing/SAVE_ARTICLE_INFO_TO_CURRENT_EDIT';
 const SAVE_ARTICLE_CONTENT_TO_CURRENT_EDIT = 'write-down/currentEditing/SAVE_ARTICLE_CONTENT_TO_CURRENT_EDIT';
+
+const createNewArticle = () => (
+  {
+    type: CREATE_NEW_ARTICLE
+  }
+);
 
 const editDraft = (id) => (
   {
@@ -37,6 +47,14 @@ const saveArticleContentToCurrentEdit = (markdown) => (
 
 const currentEditing = (state = {}, action) => {
   switch (action.type) {
+    case CREATE_NEW_ARTICLE:
+      return {
+        id: uuid.v4(),
+        title: 'Title',
+        excerpt: 'Here is the excerpt',
+        tags: [],
+        author: 'Author'
+      };
     case EDIT_ARTICLE:
       return {
         ...getArticle(state.articles, action)
@@ -72,6 +90,7 @@ const getArticle= (list, action) => {
 
 export {
   currentEditing,
+  createNewArticle,
   editDraft,
   editArticle,
   saveArticleInfoToCurrentEdit,
