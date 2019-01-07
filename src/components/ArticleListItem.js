@@ -77,7 +77,7 @@ class ArticleItem extends Component{
                 </span>
                 ) : (
                 <span>
-                  {excerpt + ' '} <a href="#">Read More</a>
+                  {excerpt + ' '} &nbsp; <a href="#">Read More</a>
                 </span>
                 )
             }
@@ -100,8 +100,9 @@ class ArticleItem extends Component{
                       <Icon type="delete" />
                     </button>
                     <Link to={`/articles/${id}/edit`}>
-                      <button className={styles.editOption} title='Jump to the edit page.'
-                              onClick={this.handleEdit}
+                      <button
+                        className={styles.editOption} title='Jump to the edit page.'
+                        onClick={this.handleEdit}
                       >
                         <Icon type="edit" />
                       </button>

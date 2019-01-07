@@ -7,6 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 
 import styles from "./ArticleList.module.css";
 import { checkImageUrlIsValid } from "../utils";
+import { deleteArticleFromDraft } from "../ducks/draft";
 
 dayjs.extend(relativeTime);
 
@@ -33,11 +34,11 @@ class ArticleItem extends Component{
   }
 
   handleEdit = () => {
-    this.props.editArticle();
+    this.props.editDraft();
   };
 
   handleDelete = () => {
-    this.props.deleteArticle();
+    this.props.deleteArticleFromDraft();
   };
 
   render() {
@@ -77,7 +78,7 @@ class ArticleItem extends Component{
                 </span>
                 ) : (
                   <span>
-                  {excerpt + ' '} <a href="#">Read More</a>
+                  {excerpt + ' '} &nbsp; <a href="#">Read More</a>
                 </span>
                 )
             }

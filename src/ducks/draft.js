@@ -1,15 +1,5 @@
-import uuid from 'uuid';
-
-const CREATE_ARTICLE_IN_DRAFT = 'write-down/draft/CREATE_ARTICLE_IN_DRAFT';
 const DELETE_ARTICLE_FROM_DRAFT = 'write-down/draft/DELETE_ARTICLE_FROM_DRAFT';
-
 const SAVE_ARTICLE_AS_DRAFT = 'write-down/draft/SAVE_ARTICLE_AS_DRAFT';
-
-const createArticleInDraft = () => (
-  {
-    type: CREATE_ARTICLE_IN_DRAFT
-  }
-);
 
 const saveArticleAsDraft = (id) => (
   {
@@ -27,16 +17,6 @@ const deleteArticleFromDraft = (id) => (
 
 const draft = (state={draft: []}, action) => {
   switch (action.type) {
-    case CREATE_ARTICLE_IN_DRAFT:
-      return [
-        ...state.draft,
-        {
-          id: uuid.v4(),
-          title: 'Title',
-          excerpt: 'Here is the excerpt',
-          author: 'Author'
-        }
-      ];
     case SAVE_ARTICLE_AS_DRAFT:
       return updateArticle(state, action);
     case DELETE_ARTICLE_FROM_DRAFT:
@@ -76,7 +56,6 @@ const removeArticle = (list, action) => {
 
 export {
   draft,
-  createArticleInDraft,
   saveArticleAsDraft,
   deleteArticleFromDraft,
 }
