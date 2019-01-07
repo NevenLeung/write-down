@@ -45,16 +45,19 @@ const saveArticleContentToCurrentEdit = (markdown) => (
   }
 );
 
+const newArticle = {
+  id: uuid.v4(),
+  title: 'Title',
+  excerpt: 'Here is the excerpt.',
+  tags: [],
+  coverUrl: '',
+  author: 'Author'
+};
+
 const currentEditing = (state = {}, action) => {
   switch (action.type) {
     case CREATE_NEW_ARTICLE:
-      return {
-        id: uuid.v4(),
-        title: 'Title',
-        excerpt: 'Here is the excerpt',
-        tags: [],
-        author: 'Author'
-      };
+      return newArticle;
     case EDIT_ARTICLE:
       return {
         ...getArticle(state.articles, action)

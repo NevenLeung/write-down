@@ -1,6 +1,20 @@
+import markdownFeatureSrc from '../assets/markdown-test-file';
+
 let data = [
   {
     id: 0,
+    title: 'Full Feature Example',
+    author: 'Neven',
+    excerpt: 'This is the full feature example. You can see all markdown feature supported and experience all features in Write-Down with this example. Have fun!!',
+    coverUrl: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjQxMzU5fQ',
+    createdAt: '2019-01-07',
+    updatedAt: '2019-01-07',
+    tags: ['example', "all feature", 'have fun'],
+    markdown: markdownFeatureSrc,
+    htmlOutput: ''
+  },
+  {
+    id: 1,
     title: 'Title No.1',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -12,7 +26,7 @@ let data = [
     htmlOutput: ''
   },
   {
-    id: 1,
+    id: 2,
     title: 'This is a very long long long long long long long long long title No.2',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -23,7 +37,7 @@ let data = [
     markdown: '# Title No.2'
   },
   {
-    id: 2,
+    id: 3,
     title: 'Title No.3',
     author: 'Author',
     excerpt: 'Here is an example of a post without a cover image. You don\'t always have to have a cover image. In fact, leaving them out from time to time and disrupt the predictive flow and make the overall design more interesting. Something to think about.',
@@ -34,7 +48,7 @@ let data = [
     markdown: '# Title No.3'
   },
   {
-    id: 3,
+    id: 4,
     title: 'Title No.4',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',

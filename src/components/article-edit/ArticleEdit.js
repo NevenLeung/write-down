@@ -15,7 +15,7 @@ import 'prism-themes/themes/prism-darcula.css';
 import styles from './ArticleEdit.module.css';
 
 import {EditPageHeader as Header} from '../header/Header';
-import markdownFeatureSrc from '../../assets/markdown-test-file';
+// import markdownFeatureSrc from '../../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
 
 class ArticleEdit extends Component {
@@ -23,10 +23,9 @@ class ArticleEdit extends Component {
     super(props);
     this.state = {
       id: '',
-      title: 'Featured Test',
-      markdown: markdownFeatureSrc,
+      markdown: '',
       // markdown: '',
-      htmlOutput: MarkdownParser.render(markdownFeatureSrc),
+      htmlOutput: '',
       // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
       displayMode: 'Editor & Preview',
       scrollSync: true
@@ -61,12 +60,11 @@ class ArticleEdit extends Component {
     const id = this.props.match.params.id;
 
     if (id) {
-      const { id, title, markdown } = this.props;
+      const { id, markdown } = this.props;
 
       this.setState({
         id: id,
         markdown: markdown,
-        title: title,
         htmlOutput: MarkdownParser.render(markdown)
       });
     }

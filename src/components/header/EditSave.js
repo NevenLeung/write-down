@@ -43,7 +43,6 @@ class EditPageSaveOption extends Component {
         onVisibleChange={this.handleVisibleChange}
       >
         <Button
-          type="primary"
           htmlType="button"
           title="Just save the markdown and can be exported. It will not be abandoned unless there is another click on the option in the content of popover."
           onClick={this.handleSave}
@@ -57,7 +56,7 @@ class EditPageSaveOption extends Component {
 
 class EditPageSaveOptionContent extends Component {
   state = {
-    isRedirected: false
+    isRedirected: true
   };
 
   toggleCheckbox = () => {
@@ -146,7 +145,7 @@ class EditPageSaveOptionContent extends Component {
         </Row>
         <Row type="flex" justify="center" align="middle">
           <Col>
-            <Checkbox value={this.state.isRedirected} onChange={this.toggleCheckbox}>
+            <Checkbox defaultChecked={true} value={this.state.isRedirected} onChange={this.toggleCheckbox}>
               Redirect to the relevant page later
             </Checkbox>
           </Col>

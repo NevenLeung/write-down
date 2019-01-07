@@ -58,23 +58,11 @@
 .publishButton {
   composes: saveButton;
   color: #fff;
-  background-color: #51e898;
-}
-
-.publishButton:hover {
-  color: #51e898;
-  background-color: #fff;
-  border-color: #ccc;
+  background-color: deepskyblue;
 }
 
 .draftButton {
   composes: saveButton;
   color: #fff;
   background-color: salmon;
-}
-
-.draftButton:hover {
-  color: salmon;
-  background-color: #fff;
-  border-color: #ccc;
 }
