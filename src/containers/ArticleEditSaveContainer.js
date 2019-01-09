@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 
 import { saveArticleContentToCurrentEdit } from "../ducks/currentEditing";
 import { publishArticle, deleteArticle  } from "../ducks/articles";
-import { saveArticleAsDraft, deleteArticleFromDraft  } from "../ducks/draft";
+import { saveArticleAsDraft, deleteArticleFromDraft  } from "../ducks/drafts";
 
 import { EditPageSaveOption } from '../components/header/EditSave';
 

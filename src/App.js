@@ -51,8 +51,8 @@ const AppRouter = () => (
     <Route exact path={'/articles'} component={ArticleListPage}/>
     <Route path={'/articles/new/'} component={ArticleEditPage}/>
     <Route path={'/articles/:id/edit/'} component={ArticleEditPage}/>
-    <Route exact path={'/draft'} component={ArticleDraftListPage}/>
-    <Route path={'/draft/:id/edit/'} component={ArticleEditPage}/>
+    <Route exact path={'/drafts'} component={ArticleDraftListPage}/>
+    <Route path={'/drafts/:id/edit/'} component={ArticleEditPage}/>
     <Route path={'/user'} component={UserPage}/>
   </div>
 );

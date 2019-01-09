@@ -19,7 +19,7 @@ const UserNavMenu = (props) => {
         </Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link to={'/draft'}>My Draft</Link>
+        <Link to={'/drafts'}>My Draft</Link>
       </Menu.Item>
       <Menu.Item key="3">
         <Link to={'/articles'}>My Articles</Link>

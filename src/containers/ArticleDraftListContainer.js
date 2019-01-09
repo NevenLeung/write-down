@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { deleteArticleFromDraft } from '../ducks/draft';
+import { deleteArticleFromDraft } from '../ducks/drafts';
 import { editDraft } from "../ducks/currentEditing";
 
 import DraftList from '../components/ArticleDraftList';

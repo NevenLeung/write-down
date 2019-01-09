@@ -15,7 +15,7 @@ const deleteArticleFromDraft = (id) => (
   }
 );
 
-const draft = (state={draft: []}, action) => {
+const drafts = (state={draft: []}, action) => {
   switch (action.type) {
     case SAVE_ARTICLE_AS_DRAFT:
       return updateArticle(state, action);
@@ -55,7 +55,7 @@ const removeArticle = (list, action) => {
 };
 
 export {
-  draft,
+  drafts,
   saveArticleAsDraft,
   deleteArticleFromDraft,
 }

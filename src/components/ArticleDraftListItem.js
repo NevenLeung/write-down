@@ -7,7 +7,6 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 
 import styles from "./ArticleList.module.css";
 import { checkImageUrlIsValid } from "../utils";
-import { deleteArticleFromDraft } from "../ducks/draft";
 
 dayjs.extend(relativeTime);
 
@@ -100,7 +99,7 @@ class ArticleItem extends Component{
                       title='Notice! It will delete the article from Database.'>
                       <Icon type="delete" />
                     </button>
-                    <Link to={`/draft/${id}/edit`}>
+                    <Link to={`/drafts${id}/edit`}>
                       <button className={styles.editOption} title='Jump to the edit page.'
                               onClick={this.handleEdit}
                       >

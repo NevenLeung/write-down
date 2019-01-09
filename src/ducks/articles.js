@@ -1,15 +1,6 @@
-import uuid from 'uuid';
-
-const CREATE_ARTICLE = 'write-down/articles/CREATE_ARTICLE';
 const DELETE_ARTICLE = 'write-down/articles/DELETE_ARTICLE';
 
 const PUBLISH_ARTICLE = 'write-down/articles/PUBLISH_ARTICLE';
-
-const createArticle = () => (
-  {
-    type: CREATE_ARTICLE
-  }
-);
 
 const publishArticle = (id) => (
   {
@@ -27,32 +18,12 @@ const deleteArticle = (id) => (
 
 const articles = (state={articles: []}, action) => {
   switch (action.type) {
-    case CREATE_ARTICLE:
-      return [
-        ...state.articles,
-        article(undefined, action)
-      ];
     case PUBLISH_ARTICLE:
       return updateArticle(state, action);
     case DELETE_ARTICLE:
       return removeArticle(state.articles, action);
     default:
       return state.articles
-  }
-};
-
-const article = (state={}, action) => {
-  switch (action.type) {
-    case CREATE_ARTICLE:
-      return {
-        id: uuid.v4(),
-        title: 'Title',
-        excerpt: 'Here is the excerpt',
-        tags: [],
-        author: 'Author'
-      };
-    default:
-      return state;
   }
 };
 

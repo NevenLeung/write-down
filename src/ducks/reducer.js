@@ -1,11 +1,11 @@
 import { articles } from './articles';
-import { draft } from "./draft";
+import { drafts } from "./drafts";
 import { currentEditing } from "./currentEditing";
 
 const rootReducer = (state, action) => (
   {
     articles: articles(state, action),
-    draft: draft(state, action),
+    drafts: drafts(state, action),
     currentEditing: currentEditing(state, action)
   }
 );
