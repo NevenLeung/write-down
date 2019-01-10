@@ -4,15 +4,15 @@ import { Col, Row, Divider } from "antd";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-import { GeneralHeader as Header } from './header/Header';
-import ArticleDraftItem from './ArticleDraftListItem';
+import { GeneralHeader as Header } from '../header/Header';
+import ArticleItem from './ArticleListItem';
 // import mockData from './data';
 
 import styles from "./ArticleList.module.css";
 
 dayjs.extend(relativeTime);
 
-class ArticleDraftListPage extends Component {
+class ArticlesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,16 +29,16 @@ class ArticleDraftListPage extends Component {
 
 
   render() {
-    let DraftList = undefined;
+    let ArticleList = undefined;
 
-    if (Array.isArray(this.props.drafts)) {
-      DraftList = this.props.drafts.map(data => (
-        <ArticleDraftItem
+    if (Array.isArray(this.props.articles)) {
+      ArticleList = this.props.articles.map(data => (
+        <ArticleItem
           metaData={data}
           key={data.id}
           isLoggedIn={this.state.isLoggedIn}
-          editDraft={() => this.props.editDraft(data.id)}
-          deleteArticleFromDraft={() => this.props.deleteArticleFromDraft(data.id)}
+          editArticle={() => this.props.editArticle(data.id)}
+          deleteArticle={() => this.props.deleteArticle(data.id)}
         />
       ));
     }
@@ -51,8 +51,8 @@ class ArticleDraftListPage extends Component {
 
           </Col>
           <Col className={styles.list} md={16} sm={20} xs={24}>
-            <Divider className={styles.pageIndicator}>Draft list</Divider>
-            {DraftList? DraftList: null}
+            <Divider className={styles.pageIndicator}>Article list</Divider>
+            {ArticleList? ArticleList: null}
           </Col>
           <Col md={4} sm={2} xs={0}>
 
@@ -64,4 +64,4 @@ class ArticleDraftListPage extends Component {
   }
 }
 
-export default ArticleDraftListPage;
+export default ArticlesPage;

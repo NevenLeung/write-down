@@ -34,12 +34,12 @@
 }
 
 .imageWrapper {
-  composes: infoPreviewImageWrapper from './article-edit/ArticleInfoSetting.module.css';
+  composes: infoPreviewImageWrapper from '../article-edit/ArticleInfoSetting.module.css';
   margin-right: 30px;
 }
 
 .image {
-  composes: infoPreviewImage from './article-edit/ArticleInfoSetting.module.css';
+  composes: infoPreviewImage from '../article-edit/ArticleInfoSetting.module.css';
   height: 210px;
   width: 210px;
   box-shadow: none;
@@ -59,7 +59,7 @@
 }
 
 .title {
-  composes: infoPreviewTitle from './article-edit/ArticleInfoSetting.module.css';
+  composes: infoPreviewTitle from '../article-edit/ArticleInfoSetting.module.css';
   max-height: none;
   line-height: 1.4;
   font-weight: 600;
@@ -83,7 +83,7 @@
 }
 
 .excerpt {
-  composes: infoPreviewExcerpt from './article-edit/ArticleInfoSetting.module.css';
+  composes: infoPreviewExcerpt from '../article-edit/ArticleInfoSetting.module.css';
   flex: 1;
   margin: 4px 0 8px;
   font-weight: 600;
@@ -95,7 +95,7 @@
 }
 
 .editOption {
-  composes: button from './header/Header.module.css';
+  composes: button from '../header/Header.module.css';
   font-size: 1.2rem;
   border: none;
   line-height: 24px;

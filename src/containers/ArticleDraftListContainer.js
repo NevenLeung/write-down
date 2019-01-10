@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { deleteArticleFromDraft } from '../ducks/drafts';
 import { editDraft } from "../ducks/currentEditing";
 
-import DraftList from '../components/ArticleDraftList';
+import DraftList from '../components/articles/ArticleDraftList';
 
 const mapState = (state) => (
   {
