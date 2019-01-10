@@ -8,7 +8,7 @@ import DraftList from '../components/ArticleDraftList';
 
 const mapState = (state) => (
   {
-    draft: state.draft
+    drafts: state.drafts
   }
 );
 

@@ -31,8 +31,8 @@ class ArticleDraftListPage extends Component {
   render() {
     let DraftList = undefined;
 
-    if (Array.isArray(this.props.draft)) {
-      DraftList = this.props.draft.map(data => (
+    if (Array.isArray(this.props.drafts)) {
+      DraftList = this.props.drafts.map(data => (
         <ArticleDraftItem
           metaData={data}
           key={data.id}

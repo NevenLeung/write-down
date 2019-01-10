@@ -24,7 +24,7 @@ import fakeData from './components/data';
 
 const preloadedState = {
   articles: fakeData,
-  draft: []
+  drafts: []
 };
 
 const store = configureStore(preloadedState);
@@ -49,10 +49,10 @@ const AppRouter = () => (
     {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
     <Route exact path={'/'} component={ArticleListPage}/>
     <Route exact path={'/articles'} component={ArticleListPage}/>
-    <Route path={'/articles/new/'} component={ArticleEditPage}/>
-    <Route path={'/articles/:id/edit/'} component={ArticleEditPage}/>
+    <Route path={'/article/new/'} component={ArticleEditPage}/>
+    <Route path={'/article/:id/edit/'} component={ArticleEditPage}/>
     <Route exact path={'/drafts'} component={ArticleDraftListPage}/>
-    <Route path={'/drafts/:id/edit/'} component={ArticleEditPage}/>
+    <Route path={'/draft/:id/edit/'} component={ArticleEditPage}/>
     <Route path={'/user'} component={UserPage}/>
   </div>
 );

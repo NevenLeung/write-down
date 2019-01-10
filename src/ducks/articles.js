@@ -50,7 +50,7 @@ const updateArticle = (state, action) => {
   }
 };
 
-const removeArticle = (list, action) => {
+const removeArticle = (list = [], action) => {
   // 从articles中删除相应id的article item
   return list.filter(article => article.id !== action.id);
 };
