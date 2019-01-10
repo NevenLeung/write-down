@@ -5,14 +5,16 @@ import { Menu } from "antd";
 import styles from "./Header.module.css";
 
 const UserNavMenu = (props) => {
+  const {createNewArticle, ...rest} = props;
+
   const handleClickOnNewArticle = () => {
-    props.createNewArticle();
+    createNewArticle();
   };
 
   return (
-    <Menu {...props}>
+    <Menu {...rest}>
       <Menu.Item key="1">
-        <Link to={'/articles/new'}>
+        <Link to={'/article/new'}>
           <button className={styles.navMenuOption} onClick={handleClickOnNewArticle}>
             New Article
           </button>
