@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Row, Col, Button, Form, Input, Select, Collapse, Tabs } from "antd";
 
-import PhotoSearch from "../PhotoSearch";
+import PhotoSearch from "../photo-search/PhotoSearch";
 
 import { checkImageUrlIsValid } from "../../utils";
 
@@ -17,7 +17,11 @@ class ArticleInfoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      coverUrl: '',
+      cover: {
+        url: '',
+        authorName: '',
+        authorLink: ''
+      },
       isUrlChanged: false,
       isCoverUrlValid: false,
       coverPreviewMsg: 'The preview of cover will be here.'
@@ -31,10 +35,19 @@ class ArticleInfoForm extends Component {
     this.props.form.validateFields();
   }
 
+  selectCover = (photoData) => {
+    const coverUrl = photoData.photoUrl;
+    const cover = this.state.cover;
 
-  selectCover = (coverUrl) => {
+    this.setState({
+      cover: {
+        ...cover,
+        authorName: photoData.photoAuthorName,
+        authorLink: photoData.photoAuthorLink
+      }
+    });
+
     const form = this.props.form;
-
     form.setFieldsValue({ coverUrl });
 
     this.checkCoverUrl(undefined, coverUrl, () => {});
@@ -44,9 +57,13 @@ class ArticleInfoForm extends Component {
     if (url) {
       try {
         const coverUrl = await checkImageUrlIsValid(url);
+        const cover = this.state.cover;
 
         this.setState({
-          coverUrl: coverUrl,
+          cover: {
+            ...cover,
+            url: coverUrl
+          },
           isUrlChanged: true,
           isCoverUrlValid: true
         });
@@ -57,6 +74,17 @@ class ArticleInfoForm extends Component {
           isCoverUrlValid: false
         });
       }
+    } else {
+      // 将cover相关的数据重置
+      this.setState({
+        cover: {
+          url: '',
+          authorName: '',
+          authorLink: ''
+        },
+        isUrlChanged: false,
+        isCoverUrlValid: false
+      });
     }
 
     cb();
@@ -66,12 +94,18 @@ class ArticleInfoForm extends Component {
     e.preventDefault();
     const data = this.props.form.getFieldsValue();
     // 这里只需要使用data提交表单的数据即可
-    console.log(data);
+    // console.log(data);
 
     const { title, excerpt, tags, coverUrl } = data;
     const saveData = this.props.saveArticleInfoToCurrentEdit;
 
-    saveData(title, excerpt, tags, coverUrl);
+    // 将authorName，authorLink都保存起来
+    const cover = {
+      ...this.state.cover,
+      url: coverUrl
+    };
+
+    saveData(title, excerpt, tags, cover);
 
     this.props.afterSubmit();
     // console.log(metaData);
@@ -184,7 +218,7 @@ class ArticleInfoForm extends Component {
               <div className={styles.coverPreviewArea}>
                 {
                   this.state.isCoverUrlValid
-                    ? <img className={styles.coverPreviewImage} src={this.state.coverUrl} alt=" loading..."/>
+                    ? <img className={styles.coverPreviewImage} src={this.state.cover.url} alt=" loading..."/>
                     : (
                       <div className={styles.coverPreviewAreaTipWrapper}>
                         {

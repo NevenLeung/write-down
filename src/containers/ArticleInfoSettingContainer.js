@@ -14,7 +14,7 @@ const mapState = (state) => {
       title: articleData.title,
       excerpt: articleData.excerpt,
       tags: articleData.tags,
-      coverUrl: articleData.coverUrl
+      coverUrl: articleData.cover.url
     };
   }
 

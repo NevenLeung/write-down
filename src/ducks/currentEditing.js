@@ -28,13 +28,13 @@ const editArticle = (id) => (
   }
 );
 
-const saveArticleInfoToCurrentEdit = (title, excerpt, tags, coverUrl) => (
+const saveArticleInfoToCurrentEdit = (title, excerpt, tags, cover) => (
   {
     type: SAVE_ARTICLE_INFO_TO_CURRENT_EDIT,
     title,
     excerpt,
     tags,
-    coverUrl
+    cover
   }
 );
 
@@ -50,7 +50,7 @@ const newArticle = {
   title: 'Title',
   excerpt: 'Here is the excerpt.',
   tags: [],
-  coverUrl: '',
+  cover: {},
   author: 'Author'
 };
 
@@ -64,7 +64,7 @@ const currentEditing = (state = {}, action) => {
       };
     case EDIT_DRAFT:
       return {
-        ...getArticle(state.draft, action)
+        ...getArticle(state.drafts, action)
       };
     case SAVE_ARTICLE_INFO_TO_CURRENT_EDIT:
       return {
@@ -72,7 +72,7 @@ const currentEditing = (state = {}, action) => {
         title: action.title,
         excerpt: action.excerpt,
         tags: action.tags,
-        coverUrl: action.coverUrl,
+        cover: action.cover,
         author: 'Author'
       };
     case SAVE_ARTICLE_CONTENT_TO_CURRENT_EDIT:
@@ -85,7 +85,7 @@ const currentEditing = (state = {}, action) => {
   }
 };
 
-const getArticle= (list, action) => {
+const getArticle= (list = [], action) => {
   const result = list.filter(article => article.id === action.id);
 
   return result.length? result[0]: {};

@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 import styles from "./ArticleList.module.css";
-import { checkImageUrlIsValid } from "../utils";
+import { checkImageUrlIsValid } from "../../utils/index";
 
 dayjs.extend(relativeTime);
 
@@ -21,7 +21,7 @@ class ArticleItem extends Component{
 
   async componentDidMount() {
     try {
-      const coverUrl = await checkImageUrlIsValid(this.props.metaData.coverUrl);
+      const coverUrl = await checkImageUrlIsValid(this.props.metaData.cover.url);
 
       this.setState({
         coverUrl: coverUrl,
@@ -33,11 +33,11 @@ class ArticleItem extends Component{
   }
 
   handleEdit = () => {
-    this.props.editArticle();
+    this.props.editDraft();
   };
 
   handleDelete = () => {
-    this.props.deleteArticle();
+    this.props.deleteArticleFromDraft();
   };
 
   render() {
@@ -72,11 +72,11 @@ class ArticleItem extends Component{
             {
               excerpt.length > 300
                 ? (
-                <span>
+                  <span>
                   {excerpt.slice(0, 300) + ' ... '}<a href = "#" >Read More</a>
                 </span>
                 ) : (
-                <span>
+                  <span>
                   {excerpt + ' '} &nbsp; <a href="#">Read More</a>
                 </span>
                 )
@@ -99,10 +99,9 @@ class ArticleItem extends Component{
                       title='Notice! It will delete the article from Database.'>
                       <Icon type="delete" />
                     </button>
-                    <Link to={`/articles/${id}/edit`}>
-                      <button
-                        className={styles.editOption} title='Jump to the edit page.'
-                        onClick={this.handleEdit}
+                    <Link to={`/draft/${id}/edit`}>
+                      <button className={styles.editOption} title='Jump to the edit page.'
+                              onClick={this.handleEdit}
                       >
                         <Icon type="edit" />
                       </button>
@@ -134,7 +133,7 @@ const TagGroup = ({ tags }) => (
   </div>
 );
 
-TagGroup.PropTypes = {
+TagGroup.propTypes = {
   tags: PropTypes.array.isRequired,
 };
 

@@ -115,7 +115,7 @@ class EditPageSaveOptionContent extends Component {
 
     const DraftOption = this.state.isRedirected ? (
       <Col>
-        <Link to="/draft">
+        <Link to="/drafts">
           <button
             className={styles.draftButton}
             onClick={this.clickOnDraft}
