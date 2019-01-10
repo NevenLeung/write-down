@@ -1,19 +1,10 @@
 import React, { Component } from "react";
 import { Row, Col } from 'antd';
 
-import Unsplash, { toJson } from 'unsplash-js';
-
 import PhotoSearchBar from './PhotoSearchBar';
 import PhotoSearchResult from './PhotoSearchResult';
 
-
-
-const unsplash = new Unsplash({
-  applicationId: "{APP_ACCESS_KEY}",
-  secret: "{APP_SECRET}",
-  callbackUrl: "{CALLBACK_URL}"
-});
-
+import { unsplash, toJson } from '../../utils/unsplash-service';
 
 class PhotoSearch extends Component {
   constructor(props) {
@@ -54,9 +45,8 @@ class PhotoSearch extends Component {
       });
   };
 
-  SelectPhoto = (photoLink) => {
-    // photoID
-    this.props.selectCover(photoLink);
+  SelectPhoto = (photoData) => {
+    this.props.selectCover(photoData);
   };
 
   render() {

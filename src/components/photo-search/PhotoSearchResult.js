@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Icon, Pagination } from "antd";
 import StackGrid from "react-stack-grid";
 
+import { unsplash } from "../../utils/unsplash-service";
+
 import styles from './PhotoSearch.module.css';
 
 class PhotoSearchResult extends Component {
-  selectPhoto = (photoLink) => {
-    this.props.onSelect(photoLink);
+  selectPhoto = (photoData) => {
+    this.props.onSelect(photoData);
   };
 
   onPageChange = (newPage) => {
@@ -30,14 +32,10 @@ class PhotoSearchResult extends Component {
     } else {
       if (results && results.length > 0) {
 
-        PhotoItems = results.map(img =>
+        PhotoItems = results.map(photo =>
           <Photo
-            thumbUrl={img.urls.thumb}
-            regularUrl={img.urls.regular}
-            user={img.user.links.html}
-            name={img.user.name}
-            link={img.links.html}
-            key={img.id}
+            key={photo.id}
+            photo={photo}
             onPhotoSelect={this.selectPhoto}
           />
         );
@@ -79,8 +77,37 @@ class PhotoSearchResult extends Component {
 }
 
 class Photo extends Component {
+  state = {
+    photoLink: '',
+    thumbUrl: '',
+    regularUrl: '',
+    username: '',
+    userLink: ''
+  };
+
+  componentDidMount() {
+    const photoData = this.props.photo;
+
+    this.setState({
+      photoLink: photoData.links.html,
+      thumbUrl: photoData.urls.thumb,
+      regularUrl: photoData.urls.regular,
+      username: photoData.user.name,
+      userLink: photoData.user.links.html,
+    });
+  }
+
   onClick = () => {
-    this.props.onPhotoSelect(this.props.regularUrl);
+    const photoData = {
+      photoUrl: this.state.regularUrl,
+      photoAuthorName: this.state.username,
+      photoAuthorLink: this.state.userLink
+    };
+
+    this.props.onPhotoSelect(photoData);
+
+    // To trigger a download in unsplash statics.
+    unsplash.photos.downloadPhoto(this.props.photo);
   };
 
   render() {
@@ -88,7 +115,7 @@ class Photo extends Component {
       <div className={styles.photoItemWrapper}>
         <img
           className={styles.photo + ' photo'}
-          src={this.props.thumbUrl}
+          src={this.state.thumbUrl}
           alt=" loading..."
           onClick={this.onClick}
         />
@@ -98,16 +125,16 @@ class Photo extends Component {
         <span className={styles.photoAuthor}>
           @
           <a
-            href={this.props.user}
+            href={this.state.userLink}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {this.props.name}
+            {this.state.username}
           </a>
         </span>
 
         <a className={styles.photoLink}
-           href={this.props.link}
+           href={this.state.photoLink}
            target="_blank"
            rel="noopener noreferrer"
         >
