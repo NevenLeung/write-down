@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 import { saveArticleInfoToCurrentEdit } from "../ducks/currentEditing";
 
@@ -21,11 +20,9 @@ const mapState = (state) => {
   return {};
 };
 
-const mapDispatch = (dispatch) => (
-  bindActionCreators({
-    saveArticleInfoToCurrentEdit
-  }, dispatch)
-);
+const mapDispatch = {
+  saveArticleInfoToCurrentEdit
+};
 
 const InfoSettingFormContainer = connect(
   mapState,

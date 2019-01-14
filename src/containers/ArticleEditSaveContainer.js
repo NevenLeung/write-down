@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 import { saveArticleContentToCurrentEdit } from "../ducks/currentEditing";
 import { publishArticle, deleteArticle  } from "../ducks/articles";
@@ -14,15 +13,13 @@ const mapState = (state, ownProps) => (
   }
 );
 
-const mapDispatch = (dispatch) => (
-  bindActionCreators({
-    saveArticleContentToCurrentEdit,
-    publishArticle,
-    deleteArticle,
-    saveArticleAsDraft,
-    deleteArticleFromDraft
-  }, dispatch)
-);
+const mapDispatch = {
+  saveArticleContentToCurrentEdit,
+  publishArticle,
+  deleteArticle,
+  saveArticleAsDraft,
+  deleteArticleFromDraft
+};
 
 const ArticleEditSaveContainer = connect(
   mapState,

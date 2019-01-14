@@ -1,5 +1,4 @@
 import {connect} from "react-redux";
-import { bindActionCreators } from "redux";
 
 import { deleteArticleFromDraft } from '../ducks/drafts';
 import { editDraft } from "../ducks/currentEditing";
@@ -12,12 +11,10 @@ const mapState = (state) => (
   }
 );
 
-const mapDispatch = (dispatch) => (
-  bindActionCreators({
-    editDraft,
-    deleteArticleFromDraft
-  }, dispatch)
-);
+const mapDispatch = {
+  editDraft,
+  deleteArticleFromDraft
+};
 
 
 export default connect(
