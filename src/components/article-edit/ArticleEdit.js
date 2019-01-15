@@ -57,7 +57,7 @@ class ArticleEdit extends Component {
     this.$preview = document.querySelector('.preview');
 
     // get the parameter from the url
-    const id = this.props.match.params.id;
+    const id = this.props.match.params.articleID;
 
     if (id) {
       const { id, markdown } = this.props;

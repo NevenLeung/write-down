@@ -13,6 +13,7 @@ import { GeneralHeader as Header } from './components/header/Header';
 // import ArticleEdit from './components/ArticleEdit';
 // import ArticlesPage from './components/ArticleList';
 import ArticleListPage from './containers/ArticleListContainer';
+import ArticleReadPage from './containers/ArticleReadContainer';
 import ArticleDraftListPage from './containers/ArticleDraftListContainer';
 import { ArticleEditContainer as ArticleEditPage } from './containers/ArticleEditContainer';
 
@@ -39,7 +40,6 @@ class App extends Component {
           <AppRouter/>
         </Router>
       </Provider>
-
     );
   }
 }
@@ -49,27 +49,14 @@ const AppRouter = () => (
     {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
     <Route exact path={'/'} component={ArticleListPage}/>
     <Route exact path={'/articles'} component={ArticleListPage}/>
+    <Route path={'/article/:articleID/read/'} component={ArticleReadPage}/>
     <Route path={'/article/new/'} component={ArticleEditPage}/>
-    <Route path={'/article/:id/edit/'} component={ArticleEditPage}/>
+    <Route path={'/article/:articleID/edit/'} component={ArticleEditPage}/>
     <Route exact path={'/drafts'} component={ArticleDraftListPage}/>
-    <Route path={'/draft/:id/edit/'} component={ArticleEditPage}/>
+    <Route path={'/draft/:articleID/edit/'} component={ArticleEditPage}/>
     <Route path={'/user'} component={UserPage}/>
   </div>
 );
-
-const NewArticlePage = () => (
-  <div>
-    <Header/>
-    <h1>New Article Page</h1>
-  </div>
-);
-
-// const ArticlePage = () => (
-//   <div>
-//     <Header/>
-//     <ArticleList/>
-//   </div>
-// );
 
 const UserPage = () => (
   <div>

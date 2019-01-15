@@ -10,7 +10,10 @@ const ArticleRead = (props) => {
   return (
     <Row type="flex" justify="center" align="middle">
       <Col className={styles.container}>
-
+        <Title/>
+        <HeaderPhoto/>
+        <Excerpt/>
+        <Content/>
       </Col>
     </Row>
   )
@@ -34,9 +37,10 @@ const Excerpt = () => (
   </div>
 );
 
-const content = () => (
+const Content = () => (
   <div>
     content
   </div>
 );
 
+export default ArticleRead;

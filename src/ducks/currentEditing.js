@@ -86,9 +86,11 @@ const currentEditing = (state = {}, action) => {
 };
 
 const getArticle= (list = [], action) => {
-  const result = list.filter(article => article.id === action.id);
+  return list.find(article => article.id === action.id);
 
-  return result.length? result[0]: {};
+  // const result = list.find(article => article.id === action.id);
+
+  // return result.length? result: {};
 };
 
 export {
