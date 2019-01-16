@@ -89,6 +89,10 @@
   font-weight: 600;
 }
 
+.readMoreLink {
+  display: inline-block;
+}
+
 .bottomBar {
   /* 配合flex box，direction：column作sticky bottom bar */
   flex-shrink: 0;

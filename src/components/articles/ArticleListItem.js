@@ -45,21 +45,32 @@ class ArticleItem extends Component{
 
     const { isLoggedIn } = this.props;
 
+    const toReadPage = {
+      pathname: `/article/${id}/read`,
+      state: {
+        isFrom: 'articles'
+      }
+    };
+
     return (
       <div className={styles.itemWrapper}>
         {
           this.state.isCoverUrlValid
-            ?
-            <div className={styles.imageWrapper}>
-              <div
-                className={styles.image}
-                style={{backgroundImage: `url(${this.state.coverUrl})`}}
-              />
-            </div>
-            : null
+            ? (
+              <div className={styles.imageWrapper}>
+                <div
+                  className={styles.image}
+                  style={{backgroundImage: `url(${this.state.coverUrl})`}}
+                />
+              </div>
+            ) : (
+              null
+            )
         }
         <div className={styles.contentWrapper}>
-          <h2 className={styles.title}>{title}</h2>
+          <h2 className={styles.title}>
+            <Link to={toReadPage}>{title}</Link>
+          </h2>
           <Row className={styles.infoWrapper} type='flex' justify='space-between'>
             <Col>
               Posted by <span className={styles.author}>{author}</span>
@@ -72,13 +83,23 @@ class ArticleItem extends Component{
             {
               excerpt.length > 300
                 ? (
-                <span>
-                  {excerpt.slice(0, 300) + ' ... '}<a href = "#" >Read More</a>
-                </span>
+                  <span>
+                    {excerpt.slice(0, 300) + ' ... '}
+                    <span className={styles.readMoreLink}>
+                      <Link to={toReadPage}>
+                        Read More
+                      </Link>
+                    </span>
+                  </span>
                 ) : (
-                <span>
-                  {excerpt + ' '} &nbsp; <a href="#">Read More</a>
-                </span>
+                  <span>
+                    {excerpt + ' '} &nbsp;
+                    <span className={styles.readMoreLink}>
+                      <Link to={toReadPage}>
+                        Read More
+                      </Link>
+                    </span>
+                  </span>
                 )
             }
           </p>
@@ -91,24 +112,26 @@ class ArticleItem extends Component{
             <Col>
               {
                 isLoggedIn
-                  ?
-                  <div>
-                    <button
-                      className={styles.editOption}
-                      onClick={this.handleDelete}
-                      title='Notice! It will delete the article from Database.'>
-                      <Icon type="delete" />
-                    </button>
-                    <Link to={`/article/${id}/edit`}>
+                  ? (
+                    <div>
                       <button
-                        className={styles.editOption} title='Jump to the edit page.'
-                        onClick={this.handleEdit}
-                      >
-                        <Icon type="edit" />
+                        className={styles.editOption}
+                        onClick={this.handleDelete}
+                        title='Notice! It will delete the article.'>
+                        <Icon type="delete" />
                       </button>
-                    </Link>
-                  </div>
-                  : null
+                      <Link to={`/article/${id}/edit`}>
+                        <button
+                          className={styles.editOption} title='Jump to the edit page.'
+                          onClick={this.handleEdit}
+                        >
+                          <Icon type="edit" />
+                        </button>
+                      </Link>
+                    </div>
+                  ) : (
+                    null
+                  )
               }
             </Col>
           </Row>
