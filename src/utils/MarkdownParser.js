@@ -4,7 +4,7 @@ import abbr from 'markdown-it-abbr';
 import anchor from "markdown-it-anchor";
 import deflist from 'markdown-it-deflist';
 import emoji from "markdown-it-emoji";
-import footnote from 'markdown-it-footnote';
+// import footnote from 'markdown-it-footnote';
 import imsize from 'markdown-it-imsize';
 import mark from 'markdown-it-mark';
 import prism from 'markdown-it-prism';
@@ -44,7 +44,7 @@ md.use(abbr)
   .use(anchor, anchorOption)
   .use(deflist)
   .use(emoji)
-  .use(footnote)
+  // .use(footnote)
   .use(prism)
   .use(imsize, imsizeOption)
   .use(mark)
