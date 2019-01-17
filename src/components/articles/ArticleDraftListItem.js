@@ -41,7 +41,7 @@ class ArticleItem extends Component{
   };
 
   render() {
-    const { id, title, author, tags, excerpt, updatedAt } = this.props.metaData;
+    const { id, title, author, tags, excerpt, updatedAt, publishedAt } = this.props.metaData;
 
     const { isLoggedIn } = this.props;
 
@@ -51,6 +51,10 @@ class ArticleItem extends Component{
         isFrom: 'drafts'
       }
     };
+
+    const DisplayUpdatedTime = (
+      <span>Updated on {dayjs(updatedAt).format('MMM. D, YYYY')}</span>
+    );
 
     return (
       <div className={styles.itemWrapper}>
@@ -76,7 +80,20 @@ class ArticleItem extends Component{
               Posted by <span className={styles.author}>{author}</span>
             </Col>
             <Col>
-              <span className={styles.postedTime}>{dayjs(updatedAt).fromNow()}</span>
+              {
+                publishedAt === updatedAt
+                  ? (
+                    <span>
+                      {dayjs(publishedAt).fromNow()}
+                    </span>
+                  ) : (
+                    <Tooltip title={DisplayUpdatedTime}>
+                      <div className={styles.postedTimeWithUpdated}>
+                        {dayjs(publishedAt).fromNow()}
+                      </div>
+                    </Tooltip>
+                  )
+              }
             </Col>
           </Row>
           <p className={styles.excerpt}>

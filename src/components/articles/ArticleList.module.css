@@ -3,8 +3,8 @@
 }
 
 .pageIndicator {
+  composes: font;
   padding: 4px 0 0 !important;
-  font-family: 'Lora', serif;
   font-size: 24px !important;
   color: #ccc !important;
 }
@@ -19,18 +19,19 @@
 .itemWrapper {
   composes: font;
   display: flex;
-  padding: 16px;
-  border-top: 1px solid transparent;
-  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  margin: 20px 0;
+  padding: 26px 16px;
+  /*border-top: 1px solid transparent;*/
+  /*box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);*/
+  border-bottom: 1px solid #eee;
+  /*border-radius: 16px;*/
+  /*margin: 20px 0;*/
   overflow: hidden;
-  transition: all ease-in 300ms;
+  /*transition: all ease-in 300ms;*/
 }
 
 .itemWrapper:hover {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .3);
+  /*border-top: 1px solid rgba(0, 0, 0, 0.1);*/
+  /*box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .3);*/
 }
 
 .imageWrapper {
@@ -60,10 +61,15 @@
 
 .title {
   composes: infoPreviewTitle from '../article-edit/ArticleInfoSetting.module.css';
+  composes: font;
   max-height: none;
   line-height: 1.4;
   font-weight: 600;
   white-space: pre-wrap;
+}
+
+.title a {
+  color: rgba(0, 0, 0, 0.7);;
 }
 
 .infoWrapper {
@@ -78,8 +84,8 @@
   color: salmon;
 }
 
-.postedTime {
-  /*color: salmon;*/
+.postedTimeWithUpdated {
+  border-bottom: 1px dashed #ccc;
 }
 
 .excerpt {
