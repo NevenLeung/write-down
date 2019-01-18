@@ -1,46 +1,167 @@
-import React from 'react';
+import React from "react";
 
-import { Row, Col } from 'antd';
+import { Row, Col, Tooltip, BackTop } from 'antd';
 
-import styles from './ArticleRead.modules.css';
+import { GeneralHeader as Header } from "../header/Header";
+import MarkdownParser from '../../utils/MarkdownParser';
+// ScrollToTop is used to reset the scroll bar to top, due to react-router doesn't handle it.
+import ScrollToTop from '../../utils/ScrollToTop';
+
+import styles from './ArticleRead.module.css';
+import dayjs from "dayjs";
 
 const ArticleRead = (props) => {
+  const { title, author, cover, excerpt, markdown, publishedAt, updatedAt } = props;
 
+  const articleInfo = {
+    author,
+    publishedAt,
+    updatedAt
+  };
 
   return (
-    <Row type="flex" justify="center" align="middle">
-      <Col className={styles.container}>
-        <Title/>
-        <HeaderPhoto/>
-        <Excerpt/>
-        <Content/>
-      </Col>
-    </Row>
+    <>
+      <ScrollToTop/>
+      <Header/>
+      <Row
+        className={styles.readPageBackground}
+        type="flex"
+        justify="center"
+        align="middle"
+      >
+        <Col className={styles.readPageContainer}>
+          <Title title={title}/>
+          <ArticleInfo {...articleInfo}/>
+          <Excerpt excerpt={excerpt}/>
+          <HeaderPhoto cover={cover} />
+          <Content markdown={markdown}/>
+          <BackTop/>
+        </Col>
+      </Row>
+    </>
+
   )
 };
 
-const Title = () => (
-  <div>
-    Title
-  </div>
+const Title = ({ title }) => (
+  <h1 className={styles.title}>
+    {title}
+  </h1>
 );
 
-const HeaderPhoto = () => (
-  <div>
-    Header Photo
-  </div>
+const HeaderPhoto = ({ cover }) => {
+  const { url, ...coverInfo } = cover;
+
+  return (
+    <div>
+      {
+        url
+          ? (
+            <div>
+              <img className={styles.coverImage} src={url} alt="cover"/>
+              <IsPhotoFromUnsplash coverInfo={coverInfo}/>
+            </div>
+          ) : (
+            null
+          )
+      }
+    </div>
+  );
+};
+
+const IsPhotoFromUnsplash = ({ coverInfo }) => {
+  const { authorName, authorLink } = coverInfo;
+
+  return (
+    <>
+      {
+        authorName
+          ? (
+            <div className={styles.coverInfo}>
+              Photo by &nbsp;
+              <a
+                className={styles.coverInfoLink}
+                href={authorLink + '?utm_source=write-down&utm_medium=referral'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {authorName}
+              </a>
+              &nbsp; on &nbsp;
+              <a
+                className={styles.coverInfoLink}
+                href={'https://unsplash.com?utm_source=write-down&utm_medium=referral'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                unsplash
+              </a>
+            </div>
+          ) : (
+            null
+          )
+      }
+    </>
+  );
+};
+
+const ArticleInfo = ({ author, publishedAt, updatedAt }) => {
+  const DisplayUpdatedTime = (
+    <span>Updated on {dayjs(updatedAt).format('MMM. D, YYYY')}</span>
+  );
+
+  return (
+    <Row className={styles.infoWrapper} type='flex' justify='space-between'>
+      <Col>
+        Posted by <span className={styles.author}>{author}</span>
+      </Col>
+      <Col>
+        {
+          publishedAt === updatedAt
+            ? (
+              <span>
+                {dayjs(publishedAt).format('MMM. D, YYYY')}
+              </span>
+            ) : (
+              <Tooltip title={DisplayUpdatedTime}>
+                <div className={styles.postedTimeWithUpdated}>
+                  {dayjs(publishedAt).format('MMM. D, YYYY')}
+                </div>
+              </Tooltip>
+            )
+        }
+      </Col>
+    </Row>
+  );
+};
+
+const Excerpt = ({ excerpt }) => (
+  <p className={styles.excerptContainer}>
+    <span className={styles.excerpt}>
+      {excerpt}
+    </span>
+  </p>
 );
 
-const Excerpt = () => (
-  <div>
-    Excerpt
-  </div>
-);
+const Content = ({ markdown }) => {
+  const htmlOutput = MarkdownParser.render(markdown);
 
-const Content = () => (
-  <div>
-    content
-  </div>
-);
+  const renderResult = {
+    __html: htmlOutput
+  };
+
+  // The content styling setting mostly comes from
+  // globally import styling in src/components/article-edit/ArticleEdit.js,
+  // and some global setting in src/components/article-edit/ArticleEdit.module.css.
+
+  return (
+    <div className={styles.content}>
+      <div
+        className={'markdown-body'}
+        dangerouslySetInnerHTML={renderResult}
+      />
+    </div>
+  );
+};
 
 export default ArticleRead;

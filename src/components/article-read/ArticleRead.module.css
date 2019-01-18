@@ -1,0 +1,81 @@
+.textSize {
+  font-size: 18px;
+}
+
+.textAlignCenter {
+  text-align: center;
+}
+
+.textCapitalize {
+  text-transform: capitalize;
+}
+
+.readPageBackground{
+  margin: 20px 0 100px 0;
+}
+
+.readPageContainer {
+  composes: textSize;
+  width: 700px;
+  background-color: #fff;
+}
+
+.title {
+
+}
+
+.infoWrapper {
+  margin: -12px 0 10px;
+  /*padding-bottom: 2px;*/
+  /*border-bottom: 2px solid #ddd;*/
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.author {
+  color: salmon;
+}
+
+.postedTimeWithUpdated {
+  border-bottom: 1px dashed #ccc;
+}
+
+.excerptContainer {
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid #eee;
+}
+
+.excerpt {
+  composes: textSize;
+  color: rgba(0, 0, 0, 0.65);;
+}
+
+.coverImage {
+  display: block;
+  max-width: 100%;
+}
+
+.coverInfo {
+  composes: textAlignCenter;
+  margin: 4px 0 0;
+  font-size: 16px;
+}
+
+.coverInfoLink {
+  composes: textCapitalize;
+  color: #000;
+  border-bottom: 1px solid #ccc;
+}
+
+.coverInfoLink:hover {
+  color: #000;
+}
+
+.content {
+  margin: 18px 0 0;
+}
+
+.content :global .markdown-body {
+  font-size: 18px;
+}

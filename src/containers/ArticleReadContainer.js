@@ -3,20 +3,25 @@ import { connect } from 'react-redux';
 import ArticleRead from '../components/article-read/ArticleRead';
 
 const mapState = (state, ownProps) => {
-  const articleID = ownProps.props.match.params.articleID;
+  const articleID = ownProps.match.params.articleID;
+  const isFrom = ownProps.location.state.isFrom;
 
-  const selectedArticle = state.articles.find(article => article.id === articleID);
+  const src = isFrom === 'articles'? state.articles: state.drafts;
 
-  const { title, author, excerpt, cover } = selectedArticle;
+  const selectedArticle = src.find(article => article.id.toString() === articleID);
+
+  const { title, author, excerpt, cover, markdown, publishedAt, updatedAt } = selectedArticle;
 
   return {
     title,
     author,
     excerpt,
-    cover
+    cover,
+    markdown,
+    publishedAt,
+    updatedAt
   }
 };
-
 
 export default connect(
   mapState,
