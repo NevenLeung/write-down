@@ -76,73 +76,57 @@ class PhotoSearchResult extends Component {
   }
 }
 
-class Photo extends Component {
-  state = {
-    photoLink: '',
-    thumbUrl: '',
-    regularUrl: '',
-    username: '',
-    userLink: ''
-  };
+const Photo = ({ photo, onPhotoSelect }) => {
+  const photoLink = photo.links.html;
+  const thumbUrl = photo.urls.thumb;
+  const regularUrl = photo.urls.regular;
+  const username = photo.user.name;
+  const userLink = photo.user.links.html;
 
-  componentDidMount() {
-    const photoData = this.props.photo;
-
-    this.setState({
-      photoLink: photoData.links.html,
-      thumbUrl: photoData.urls.thumb,
-      regularUrl: photoData.urls.regular,
-      username: photoData.user.name,
-      userLink: photoData.user.links.html,
-    });
-  }
-
-  onClick = () => {
-    const photoData = {
-      photoUrl: this.state.regularUrl,
-      photoAuthorName: this.state.username,
-      photoAuthorLink: this.state.userLink
+  const onClick = () => {
+    const photoInfoForStorage = {
+      photoUrl: regularUrl,
+      photoAuthorName: username,
+      photoAuthorLink: userLink
     };
 
-    this.props.onPhotoSelect(photoData);
+    onPhotoSelect(photoInfoForStorage);
 
     // To trigger a download in unsplash statics.
-    unsplash.photos.downloadPhoto(this.props.photo);
+    unsplash.photos.downloadPhoto(photo);
   };
 
-  render() {
-    return (
-      <div className={styles.photoItemWrapper}>
-        <img
-          className={styles.photo + ' photo'}
-          src={this.state.thumbUrl}
-          alt=" loading..."
-          onClick={this.onClick}
-        />
+  return (
+    <div className={styles.photoItemWrapper}>
+      <img
+        className={styles.photo + ' photo'}
+        src={thumbUrl}
+        alt=" loading..."
+        onClick={onClick}
+      />
 
-        <div className={styles.photoMask}/>
+      <div className={styles.photoMask}/>
 
-        <span className={styles.photoAuthor}>
-          @
-          <a
-            href={this.state.userLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {this.state.username}
-          </a>
-        </span>
-
-        <a className={styles.photoLink}
-           href={this.state.photoLink}
-           target="_blank"
-           rel="noopener noreferrer"
+      <span className={styles.photoAuthor}>
+        @
+        <a
+          href={userLink}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <Icon type="link" theme="outlined"/>
+          {username}
         </a>
-      </div>
-    );
-  }
-}
+      </span>
+
+      <a className={styles.photoLink}
+         href={photoLink}
+         target="_blank"
+         rel="noopener noreferrer"
+      >
+        <Icon type="link" theme="outlined"/>
+      </a>
+    </div>
+  );
+};
 
 export default PhotoSearchResult;
