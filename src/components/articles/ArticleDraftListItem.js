@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import { Col, Icon, Row, Tag, Tooltip } from "antd";
+import { Col, Icon, message, Popconfirm, Row, Tag, Tooltip } from "antd";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime'
 
@@ -38,6 +38,7 @@ class ArticleItem extends Component{
 
   handleDelete = () => {
     this.props.deleteArticleFromDraft();
+    message.info('The article has been deleted.');
   };
 
   render() {
@@ -131,12 +132,17 @@ class ArticleItem extends Component{
                 isLoggedIn
                   ? (
                     <div>
-                      <button
-                        className={styles.editOption}
-                        onClick={this.handleDelete}
-                        title='Notice! It will delete the article.'>
-                        <Icon type="delete" />
-                      </button>
+                      <Popconfirm
+                        title={'Are you sure to delete this article?'}
+                        okText={'Yes'}
+                        onConfirm={this.handleDelete}
+                      >
+                        <button
+                          className={styles.editOption}
+                        >
+                          <Icon type="delete" />
+                        </button>
+                      </Popconfirm>
                       <Link to={`/draft/${id}/edit`}>
                         <button
                           className={styles.editOption} title='Jump to the edit page.'
