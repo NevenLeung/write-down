@@ -13,6 +13,7 @@ const mapState = (state) => {
       title: articleData.title,
       excerpt: articleData.excerpt,
       tags: articleData.tags,
+      author: articleData.author,
       coverUrl: articleData.cover.url
     };
   }

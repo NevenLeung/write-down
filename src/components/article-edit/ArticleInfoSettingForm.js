@@ -96,7 +96,7 @@ class ArticleInfoForm extends Component {
     // 这里只需要使用data提交表单的数据即可
     // console.log(data);
 
-    const { title, excerpt, tags, coverUrl } = data;
+    const { title, excerpt, tags, author, coverUrl } = data;
     const saveData = this.props.saveArticleInfoToCurrentEdit;
 
     // 将authorName，authorLink都保存起来
@@ -105,7 +105,7 @@ class ArticleInfoForm extends Component {
       url: coverUrl
     };
 
-    saveData(title, excerpt, tags, cover);
+    saveData(title, excerpt, tags, author, cover);
 
     this.props.afterSubmit();
     // console.log(metaData);
@@ -117,7 +117,7 @@ class ArticleInfoForm extends Component {
     const titleError = isFieldTouched('userName') && getFieldError('userName');
     const excerptError = isFieldTouched('password') && getFieldError('password');
 
-    const { title, excerpt, tags, coverUrl } = this.props;
+    const { title, excerpt, tags, author, coverUrl } = this.props;
 
     return (
       <div>
@@ -186,6 +186,26 @@ class ArticleInfoForm extends Component {
                 maxTagCount={5}
                 placeholder="Please type some keywords for the article. "
               />
+            )}
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            label={'Author Name'}
+          >
+            {getFieldDecorator('author', {
+              initialValue: author,
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input the author name. ',
+                },
+                {
+                  max: 30,
+                  message: 'The maximum letters of title is 30. '
+                }
+              ]
+            })(
+              <Input placeholder="Please input the author name." />
             )}
           </Form.Item>
           <Form.Item
