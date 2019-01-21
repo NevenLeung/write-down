@@ -10,7 +10,7 @@ const mapState = (state, ownProps) => {
 
   const selectedArticle = src.find(article => article.id.toString() === articleID);
 
-  const { title, author, excerpt, cover, markdown, publishedAt, updatedAt } = selectedArticle;
+  const { title, author, excerpt, cover, markdown, postedAt, updatedAt } = selectedArticle;
 
   return {
     title,
@@ -18,7 +18,7 @@ const mapState = (state, ownProps) => {
     excerpt,
     cover,
     markdown,
-    publishedAt,
+    postedAt,
     updatedAt
   }
 };

@@ -11,11 +11,11 @@ import styles from './ArticleRead.module.css';
 import dayjs from "dayjs";
 
 const ArticleRead = (props) => {
-  const { title, author, cover, excerpt, markdown, publishedAt, updatedAt } = props;
+  const { title, author, cover, excerpt, markdown, postedAt, updatedAt } = props;
 
   const articleInfo = {
     author,
-    publishedAt,
+    postedAt,
     updatedAt
   };
 
@@ -105,7 +105,7 @@ const IsPhotoFromUnsplash = ({ coverInfo }) => {
   );
 };
 
-const ArticleInfo = ({ author, publishedAt, updatedAt }) => {
+const ArticleInfo = ({ author, postedAt, updatedAt }) => {
   const DisplayUpdatedTime = (
     <span>Updated on {dayjs(updatedAt).format('MMM. D, YYYY')}</span>
   );
@@ -117,15 +117,15 @@ const ArticleInfo = ({ author, publishedAt, updatedAt }) => {
       </Col>
       <Col>
         {
-          publishedAt === updatedAt
+          dayjs(postedAt).isSame(dayjs(updatedAt), 'day')
             ? (
               <span>
-                {dayjs(publishedAt).format('MMM. D, YYYY')}
+                {dayjs(postedAt).format('MMM. D, YYYY')}
               </span>
             ) : (
               <Tooltip title={DisplayUpdatedTime}>
                 <div className={styles.postedTimeWithUpdated}>
-                  {dayjs(publishedAt).format('MMM. D, YYYY')}
+                  {dayjs(postedAt).format('MMM. D, YYYY')}
                 </div>
               </Tooltip>
             )

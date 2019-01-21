@@ -11,11 +11,12 @@ let data = [
       authorName: 'jonathan riley',
       authorLink: 'https://unsplash.com/@jonathan_christian_photography'
     },
-    publishedAt: '2019-01-07',
-    updatedAt: '2019-01-16',
     tags: ['example', "all feature", 'have fun'],
     markdown: markdownFeatureSrc,
-    htmlOutput: ''
+    htmlOutput: '',
+    isPublished: true,
+    postedAt: '2019-01-07',
+    updatedAt: '2019-01-16',
   },
   {
     id: 1,
@@ -27,11 +28,12 @@ let data = [
       authorName: 'Jeremy Bishop',
       authorLink: 'https://unsplash.com/@jeremybishop'
     },
-    publishedAt: '2018-11-15',
-    updatedAt: '2018-11-16',
     tags: ['story', 'daily', "gathering"],
-    markdown: '## Title No.1',
-    htmlOutput: ''
+    markdown: '## This is content No.1',
+    htmlOutput: '',
+    isPublished: true,
+    postedAt: '2018-11-15',
+    updatedAt: '2018-11-16',
   },
   {
     id: 2,
@@ -43,10 +45,11 @@ let data = [
       authorName: 'Scott Webb',
       authorLink: 'https://unsplash.com/@scottwebb'
     },
-    publishedAt: '2018-10-16',
-    updatedAt: '2018-10-16',
     tags: ['121212121212', '23232323232323', '343434343434343', '4545454545454554', '5656565656565656'],
-    markdown: '## Title No.2'
+    markdown: '## This is content No.2',
+    isPublished: false,
+    postedAt: '2018-10-16',
+    updatedAt: '2018-10-16',
   },
   {
     id: 3,
@@ -58,10 +61,11 @@ let data = [
       authorName: '',
       authorLink: ''
     },
-    publishedAt: '2018-09-16',
-    updatedAt: '2018-09-16',
     tags: ['story', 'daily', "food"],
-    markdown: '## Title No.3'
+    markdown: '## This is content No.3',
+    isPublished: true,
+    postedAt: '2018-09-16',
+    updatedAt: '2018-09-16',
   },
   {
     id: 4,
@@ -73,10 +77,11 @@ let data = [
       authorName: 'Rye Jessen',
       authorLink: 'https://unsplash.com/@ryejessen'
     },
-    publishedAt: '2018-08-15',
-    updatedAt: '2018-08-20',
     tags: ['story', 'daily', "sport", "movie"],
-    markdown: '## Title No.4'
+    markdown: '## This is content No.4',
+    isPublished: true,
+    postedAt: '2018-08-15',
+    updatedAt: '2018-08-20',
   }
 
 ];

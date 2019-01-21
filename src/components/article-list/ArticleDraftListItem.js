@@ -42,7 +42,7 @@ class ArticleItem extends Component{
   };
 
   render() {
-    const { id, title, author, tags, excerpt, updatedAt, publishedAt } = this.props.metaData;
+    const { id, title, author, tags, excerpt, updatedAt, postedAt } = this.props.metaData;
 
     const { isLoggedIn } = this.props;
 
@@ -82,15 +82,15 @@ class ArticleItem extends Component{
             </Col>
             <Col>
               {
-                publishedAt === updatedAt
+                postedAt === updatedAt
                   ? (
                     <span>
-                      {dayjs(publishedAt).fromNow()}
+                      {dayjs(postedAt).fromNow()}
                     </span>
                   ) : (
                     <Tooltip title={DisplayUpdatedTime}>
                       <div className={styles.postedTimeWithUpdated}>
-                        {dayjs(publishedAt).fromNow()}
+                        {dayjs(postedAt).fromNow()}
                       </div>
                     </Tooltip>
                   )
