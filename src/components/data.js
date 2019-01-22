@@ -2,7 +2,7 @@ import markdownFeatureSrc from '../assets/markdown-test-file';
 
 let data = [
   {
-    id: 0,
+    id: '0',
     title: 'Full Feature Example',
     author: 'Neven',
     excerpt: 'This is the full feature example. You can see all markdown feature supported and experience all features in Write-Down with this example. Have fun!!',
@@ -19,7 +19,7 @@ let data = [
     updatedAt: '2019-01-16',
   },
   {
-    id: 1,
+    id: '1',
     title: 'Title No.1',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -36,7 +36,7 @@ let data = [
     updatedAt: '2018-11-16',
   },
   {
-    id: 2,
+    id: '2',
     title: 'This is a very long long long long long long long long long title No.2',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -52,7 +52,7 @@ let data = [
     updatedAt: '2018-10-16',
   },
   {
-    id: 3,
+    id: '3',
     title: 'Title No.3',
     author: 'Author',
     excerpt: 'Here is an example of a post without a cover image. You don\'t always have to have a cover image. In fact, leaving them out from time to time and disrupt the predictive flow and make the overall design more interesting. Something to think about.',
@@ -68,7 +68,7 @@ let data = [
     updatedAt: '2018-09-16',
   },
   {
-    id: 4,
+    id: '4',
     title: 'Title No.4',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
