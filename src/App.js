@@ -13,9 +13,9 @@ import { GeneralHeader as Header } from './components/header/Header';
 // import ArticleEdit from './components/ArticleEdit';
 // import ArticlesPage from './components/ArticleList';
 import ArticleListPage from './containers/ArticleListContainer';
-import ArticleReadPage from './containers/ArticleReadContainer';
 import ArticleDraftListPage from './containers/ArticleDraftListContainer';
-import { ArticleEditContainer as ArticleEditPage } from './containers/ArticleEditContainer';
+import ArticleEditPage from './containers/ArticleEditContainer';
+import ArticleReadPage from './containers/ArticleReadContainer';
 
 
 import configureStore from './ducks/configureStore';
@@ -25,7 +25,6 @@ import fakeData from './components/data';
 
 const preloadedState = {
   articles: fakeData,
-  drafts: []
 };
 
 const store = configureStore(preloadedState);
