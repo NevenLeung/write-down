@@ -20,6 +20,8 @@ const createNewArticle = () => (
     tags: [],
     cover: {},
     author: 'Author',
+    markdown: '',
+    htmlOutput: '',
     isPublished: false,
     postedAt: Date.now(),
     updatedAt: Date.now()
@@ -52,6 +54,7 @@ const publishArticle = (id) => (
   {
     type: PUBLISH_ARTICLE,
     id,
+    updatedAt: Date.now(),
     postedAt: Date.now()
   }
 );
@@ -104,7 +107,7 @@ const articles = (state=[], action) => {
 const article = (state, action) => {
   switch (action.type) {
     case CREATE_NEW_ARTICLE: {
-      const { id, title, excerpt, tags, author, cover, isPublished, updatedAt, postedAt } = action;
+      const { id, title, excerpt, tags, author, cover, markdown, htmlOutput, isPublished, updatedAt, postedAt } = action;
 
       return [
         {
@@ -114,6 +117,8 @@ const article = (state, action) => {
           tags,
           cover,
           author,
+          markdown,
+          htmlOutput,
           isPublished,
           postedAt,
           updatedAt
@@ -179,7 +184,7 @@ const article = (state, action) => {
             ...article,
             isPublished: true,
             postedAt: action.postedAt,
-            updatedAt: action.postedAt
+            updatedAt: action.updatedAt
           };
         }
 
