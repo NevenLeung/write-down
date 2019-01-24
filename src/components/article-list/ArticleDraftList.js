@@ -37,8 +37,7 @@ class ArticleDraftListPage extends Component {
           metaData={data}
           key={data.id}
           isLoggedIn={this.state.isLoggedIn}
-          editDraft={() => this.props.editDraft(data.id)}
-          deleteArticleFromDraft={() => this.props.deleteArticleFromDraft(data.id)}
+          deleteArticle={() => this.props.deleteArticle(data.id)}
         />
       ));
     }

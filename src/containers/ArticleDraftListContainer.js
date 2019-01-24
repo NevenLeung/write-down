@@ -1,19 +1,22 @@
 import {connect} from "react-redux";
 
-import { deleteArticleFromDraft } from '../ducks/drafts';
-import { editDraft } from "../ducks/currentEditing";
+import { deleteArticle } from '../ducks/articles';
 
 import DraftList from '../components/article-list/ArticleDraftList';
 
+const selectTheDraftArticles = (list = []) => {
+  return list.filter((article) => article.isPublished === false);
+};
+
+
 const mapState = (state) => (
   {
-    drafts: state.drafts
+    drafts: selectTheDraftArticles(state.articles)
   }
 );
 
 const mapDispatch = {
-  editDraft,
-  deleteArticleFromDraft
+  deleteArticle
 };
 
 

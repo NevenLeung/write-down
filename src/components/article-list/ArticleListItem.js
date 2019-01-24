@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { Col, Icon, message, Popconfirm, Row, Tag, Tooltip } from "antd";
 import dayjs from "dayjs";
-import relativeTime from 'dayjs/plugin/relativeTime'
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import styles from "./ArticleList.module.css";
 import { checkImageUrlIsValid } from "../../utils/index";
@@ -33,7 +33,7 @@ class ArticleItem extends Component{
   }
 
   handleEdit = () => {
-    this.props.editArticle();
+    // this.props.editArticle();
   };
 
   handleDelete = () => {
@@ -82,7 +82,7 @@ class ArticleItem extends Component{
             </Col>
             <Col>
               {
-                postedAt === updatedAt
+                dayjs(updatedAt).format('M. D, YYYY') === dayjs(postedAt).format('M. D, YYYY')
                   ? (
                     <span>
                       {dayjs(postedAt).fromNow()}
@@ -147,7 +147,6 @@ class ArticleItem extends Component{
                       <Link to={`/article/${id}/edit`}>
                         <button
                           className={styles.editOption} title='Jump to the edit page.'
-                          onClick={this.handleEdit}
                         >
                           <Icon type="edit" />
                         </button>

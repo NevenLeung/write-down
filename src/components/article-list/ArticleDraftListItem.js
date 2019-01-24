@@ -33,11 +33,11 @@ class ArticleItem extends Component{
   }
 
   handleEdit = () => {
-    this.props.editDraft();
+    // this.props.editDraft();
   };
 
   handleDelete = () => {
-    this.props.deleteArticleFromDraft();
+    this.props.deleteArticle();
     message.info('The article has been deleted.');
   };
 
@@ -45,13 +45,6 @@ class ArticleItem extends Component{
     const { id, title, author, tags, excerpt, updatedAt, postedAt } = this.props.metaData;
 
     const { isLoggedIn } = this.props;
-
-    const toReadPage = {
-      pathname: `/article/${id}/read`,
-      state: {
-        isFrom: 'drafts'
-      }
-    };
 
     const DisplayUpdatedTime = (
       <span>Updated on {dayjs(updatedAt).format('MMM. D, YYYY')}</span>
@@ -74,7 +67,7 @@ class ArticleItem extends Component{
         }
         <div className={styles.contentWrapper}>
           <h2 className={styles.title}>
-            <Link to={toReadPage}>{title}</Link>
+            <Link to={`/article/${id}/read`}>{title}</Link>
           </h2>
           <Row className={styles.infoWrapper} type='flex' justify='space-between'>
             <Col>
@@ -82,7 +75,7 @@ class ArticleItem extends Component{
             </Col>
             <Col>
               {
-                postedAt === updatedAt
+                dayjs(updatedAt).format('M. D, YYYY') === dayjs(postedAt).format('M. D, YYYY')
                   ? (
                     <span>
                       {dayjs(postedAt).fromNow()}
@@ -104,7 +97,7 @@ class ArticleItem extends Component{
                   <span>
                     {excerpt.slice(0, 300) + ' ... '}
                     <span className={styles.readMoreLink}>
-                      <Link to={toReadPage}>
+                      <Link to={`/article/${id}/read`}>
                         Read More
                       </Link>
                     </span>
@@ -113,7 +106,7 @@ class ArticleItem extends Component{
                   <span>
                     {excerpt + ' '} &nbsp;
                     <span className={styles.readMoreLink}>
-                      <Link to={toReadPage}>
+                      <Link to={`/article/${id}/read`}>
                         Read More
                       </Link>
                     </span>
@@ -146,7 +139,6 @@ class ArticleItem extends Component{
                       <Link to={`/draft/${id}/edit`}>
                         <button
                           className={styles.editOption} title='Jump to the edit page.'
-                          onClick={this.handleEdit}
                         >
                           <Icon type="edit" />
                         </button>

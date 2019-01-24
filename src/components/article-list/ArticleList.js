@@ -37,7 +37,6 @@ class ArticlesPage extends Component {
           metaData={data}
           key={data.id}
           isLoggedIn={this.state.isLoggedIn}
-          editArticle={() => this.props.editArticle(data.id)}
           deleteArticle={() => this.props.deleteArticle(data.id)}
         />
       ));
