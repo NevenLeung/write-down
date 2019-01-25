@@ -117,7 +117,7 @@ const ArticleInfo = ({ author, postedAt, updatedAt }) => {
       </Col>
       <Col>
         {
-          dayjs(postedAt).isSame(dayjs(updatedAt), 'day')
+          dayjs(updatedAt).format('M. D, YYYY') === dayjs(postedAt).format('M. D, YYYY')
             ? (
               <span>
                 {dayjs(postedAt).format('MMM. D, YYYY')}

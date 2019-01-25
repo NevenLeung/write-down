@@ -4,11 +4,9 @@ import ArticleRead from '../components/article-read/ArticleRead';
 
 const mapState = (state, ownProps) => {
   const articleID = ownProps.match.params.articleID;
-  const isFrom = ownProps.location.state.isFrom;
+  // const isFrom = ownProps.location.state.isFrom;
 
-  const src = isFrom === 'articles'? state.articles: state.drafts;
-
-  const selectedArticle = src.find(article => article.id.toString() === articleID);
+  const selectedArticle = state.articles.find(article => article.id === articleID);
 
   const { title, author, excerpt, cover, markdown, postedAt, updatedAt } = selectedArticle;
 
