@@ -96,8 +96,8 @@ class ArticleInfoForm extends Component {
     // 这里只需要使用data提交表单的数据即可
     // console.log(data);
 
+    const { id, saveArticleInfo } = this.props;
     const { title, excerpt, tags, author, coverUrl } = data;
-    const saveData = this.props.saveArticleInfoToCurrentEdit;
 
     // 将authorName，authorLink都保存起来
     const cover = {
@@ -105,7 +105,7 @@ class ArticleInfoForm extends Component {
       url: coverUrl
     };
 
-    saveData(title, excerpt, tags, author, cover);
+    saveArticleInfo(id, title, excerpt, tags, author, cover);
 
     this.props.afterSubmit();
     // console.log(metaData);

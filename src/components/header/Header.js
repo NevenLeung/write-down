@@ -15,39 +15,43 @@ import { UserNavButton } from "./UserNavButton";
 
 import styles from './Header.module.css';
 
-class EditPageHeader extends Component {
-  render() {
-    return (
-      <Row className={styles.header} type="flex" justify="start" align="middle">
-        <Col span={4} offset={4}>
-          <Link to={'/'}>
-            <button className={styles.button}>
-              Write Down
-            </button>
-          </Link>
-        </Col>
-        <Col span={2} offset={6}>
-          <ArticleEditSaveContainer markdown={this.props.markdown}/>
-        </Col>
-        <Col span={1}>
-          <ArticleExportContainer/>
-        </Col>
-        <Col span={1}>
-          <ArticleInfoSetting/>
-        </Col>
-        <Col span={1}>
-          <EditorSettingButton
-            toggleDisplayMode={this.props.toggleDisplayMode}
-            toggleScrollSync={this.props.toggleScrollSync}
-          />
-        </Col>
-        <Col span={1}>
-          <UserNavButton/>
-        </Col>
-      </Row>
-    );
-  }
-}
+const EditPageHeader = ({
+  id,
+  markdown,
+  toggleDisplayMode,
+  toggleScrollSync
+}) => (
+  <Row className={styles.header} type="flex" justify="start" align="middle">
+    <Col span={4} offset={4}>
+      <Link to={'/'}>
+        <button className={styles.button}>
+          Write Down
+        </button>
+      </Link>
+    </Col>
+    <Col span={2} offset={6}>
+      <ArticleEditSaveContainer
+        id={id}
+        markdown={markdown}
+      />
+    </Col>
+    <Col span={1}>
+      <ArticleExportContainer id={id} />
+    </Col>
+    <Col span={1}>
+      <ArticleInfoSetting id={id} />
+    </Col>
+    <Col span={1}>
+      <EditorSettingButton
+        toggleDisplayMode={toggleDisplayMode}
+        toggleScrollSync={toggleScrollSync}
+      />
+    </Col>
+    <Col span={1}>
+      <UserNavButton/>
+    </Col>
+  </Row>
+);
 
 class GeneralHeader extends Component {
   render() {

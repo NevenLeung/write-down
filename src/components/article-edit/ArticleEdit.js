@@ -22,7 +22,7 @@ class ArticleEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
+      // id: '',
       markdown: '',
       // markdown: '',
       htmlOutput: '',
@@ -57,17 +57,17 @@ class ArticleEdit extends Component {
     this.$preview = document.querySelector('.preview');
 
     // get the parameter from the url
-    const id = this.props.match.params.articleID;
+    // const id = this.props.match.params.articleID;
 
-    if (id) {
-      const { id, markdown } = this.props;
+    // if (id) {
+      const { markdown } = this.props;
 
       this.setState({
-        id: id,
+        // id: id,
         markdown: markdown,
         htmlOutput: MarkdownParser.render(markdown)
       });
-    }
+    // }
   }
 
   handleSourceUpdate = (editor, data, value) => {
@@ -204,6 +204,7 @@ class ArticleEdit extends Component {
     return (
       <div>
         <Header
+          id={this.props.id}
           markdown={this.state.markdown}
           toggleDisplayMode={this.handleDisplayModeChange}
           toggleScrollSync={this.handleScrollSyncToggle}

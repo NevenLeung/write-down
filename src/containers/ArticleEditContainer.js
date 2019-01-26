@@ -2,25 +2,25 @@ import { connect } from "react-redux";
 
 import ArticleEdit from '../components/article-edit/ArticleEdit';
 
-const mapState = (state) => {
-  const articleData = state.currentEditing;
+const mapState = (state, ownProps) => {
+  const articleID = ownProps.match.params.articleID;
 
-  if (articleData && Object.keys(articleData).length !== 0) {
+  const selectedArticle = state.articles.find(article => article.id === articleID);
+
+  if (selectedArticle && Object.keys(selectedArticle).length !== 0) {
+    const { id, markdown, htmlOutput } = selectedArticle;
+
     return {
-      id: articleData.id,
-      markdown: articleData.markdown,
-      htmlOutput: articleData.htmlOutput
+      id,
+      markdown,
+      htmlOutput
     };
   }
 
   return {};
 };
 
-const ArticleEditContainer = connect(
+export default connect(
   mapState,
   null
 )(ArticleEdit);
-
-export {
-  ArticleEditContainer,
-};

@@ -9,7 +9,7 @@ import styles from "./ArticleInfoSetting.module.css";
 const InfoSettingButton = props => {
   return (
     <Popover
-      content={<InfoSettingPreviewContainer/>}
+      content={<InfoSettingPreviewContainer id={props.id}/>}
       title="Article Info Preview"
       trigger={['hover']}
       mouseEnterDelay={0.8}
@@ -51,7 +51,10 @@ class ArticleInfoSettingModal extends React.Component {
   render() {
     return (
       <div>
-        <InfoSettingButton onClick={this.showModal}/>
+        <InfoSettingButton
+          id={this.props.id}
+          onClick={this.showModal}
+        />
         <Modal
           style={{top: 20}}
           width={880}
@@ -61,7 +64,10 @@ class ArticleInfoSettingModal extends React.Component {
           footer={null}
           destroyOnClose={true}
         >
-          <InfoSettingFormContainer afterSubmit={this.handleCancel}/>
+          <InfoSettingFormContainer
+            id={this.props.id}
+            afterSubmit={this.handleCancel}
+          />
         </Modal>
       </div>
     );

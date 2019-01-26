@@ -1,20 +1,25 @@
 import { connect } from "react-redux";
 
-import { saveArticleInfoToCurrentEdit } from "../ducks/currentEditing";
+import { saveArticleInfo} from "../ducks/articles";
 
 import { InfoSettingPreview } from '../components/article-edit/ArticleInfoSettingPreview';
-import { WrappedFormInModal } from "../components/article-edit/ArticleInfoSettingForm";
+import { WrappedFormInModal as InfoSettingForm } from "../components/article-edit/ArticleInfoSettingForm";
 
-const mapState = (state) => {
-  const articleData = state.currentEditing;
+const mapState = (state, ownProps) => {
+  const articleID = ownProps.id;
 
-  if (articleData && Object.keys(articleData).length !== 0) {
+  const selectedArticle = state.articles.find(article => article.id === articleID);
+
+  if (selectedArticle && Object.keys(selectedArticle).length !== 0) {
+    const { id, title, excerpt, tags, author, cover } = selectedArticle;
+
     return {
-      title: articleData.title,
-      excerpt: articleData.excerpt,
-      tags: articleData.tags,
-      author: articleData.author,
-      coverUrl: articleData.cover.url
+      id,
+      title,
+      excerpt,
+      tags,
+      author,
+      coverUrl: cover.url
     };
   }
 
@@ -22,13 +27,13 @@ const mapState = (state) => {
 };
 
 const mapDispatch = {
-  saveArticleInfoToCurrentEdit
+  saveArticleInfo
 };
 
 const InfoSettingFormContainer = connect(
   mapState,
   mapDispatch
-)(WrappedFormInModal);
+)(InfoSettingForm);
 
 const InfoSettingPreviewContainer = connect(
   mapState,

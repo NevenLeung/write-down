@@ -22,10 +22,9 @@ class EditPageSaveOption extends Component {
   };
 
   handleSave = () => {
-    const saveData = this.props.saveArticleContentToCurrentEdit;
-    const data = this.props.markdown;
+    const { id, markdown, saveArticleContent } = this.props;
 
-    saveData(data);
+    saveArticleContent(id, markdown);
   };
 
   render() {
@@ -66,24 +65,17 @@ class EditPageSaveOptionContent extends Component {
   };
 
   clickOnDraft = () => {
-    const { id, hidePopover, deleteArticle, saveArticleAsDraft } = this.props;
+    const { id, saveArticleAsDraft, hidePopover } = this.props;
 
     saveArticleAsDraft(id);
-    deleteArticle(id);
 
     hidePopover();
   };
 
   clickOnPublish = () => {
-    const {
-      id,
-      hidePopover,
-      publishArticle,
-      deleteArticleFromDraft
-    } = this.props;
+    const { id, publishArticle, hidePopover } = this.props;
 
     publishArticle(id);
-    deleteArticleFromDraft(id);
 
     hidePopover();
   };
