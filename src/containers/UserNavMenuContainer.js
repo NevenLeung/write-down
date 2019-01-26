@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import { createNewArticle } from "../ducks/currentEditing";
+import { createNewArticle } from "../ducks/articles";
 
 import { UserNavMenu } from "../components/header/UserNavMenu";
 
