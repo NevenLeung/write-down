@@ -5,7 +5,7 @@ let data = [
     id: '0',
     title: 'Full Feature Example',
     author: 'Neven',
-    excerpt: 'This is the full feature example. You can see all markdown feature supported and experience all features in Write-Down with this example. Have fun!!',
+    excerpt: 'This is the full feature example. You can see all markdown feature supported and experience all features in Write Down with this example. Have fun!!',
     cover: {
       url: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjQxMzU5fQ',
       authorName: 'jonathan riley',
@@ -55,7 +55,7 @@ let data = [
     id: '3',
     title: 'Title No.3',
     author: 'Author',
-    excerpt: 'Here is an example of a post without a cover image. You don\'t always have to have a cover image. In fact, leaving them out from time to time and disrupt the predictive flow and make the overall design more interesting. Something to think about.',
+    excerpt: 'Here is an example of a post without a cover image. You don\'t always have to have a cover image. In fact, leaving them out from time to time and disrupt the predictive flow and make the overall design more interesting. You can leave something for readers to think about.',
     cover:{
       url: '',
       authorName: '',

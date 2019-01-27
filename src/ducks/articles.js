@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import shortid from 'shortid';
 
 const CREATE_NEW_ARTICLE = 'write-down/articles/CREATE_NEW_ARTICLE';
 
@@ -10,21 +10,24 @@ const DELETE_ARTICLE = 'write-down/articles/DELETE_ARTICLE';
 const PUBLISH_ARTICLE = 'write-down/articles/PUBLISH_ARTICLE';
 const SAVE_ARTICLE_AS_DRAFT = 'write-down/articles/SAVE_ARTICLE_AS_DRAFT';
 
+const newArticle = {
+  id: shortid.generate(),
+  title: 'Title',
+  excerpt: 'Here is the excerpt.',
+  tags: [],
+  cover: {},
+  author: 'Author',
+  markdown: '',
+  htmlOutput: '',
+  isPublished: false,
+  postedAt: Date.now(),
+  updatedAt: Date.now()
+};
 
 const createNewArticle = () => (
   {
     type: CREATE_NEW_ARTICLE,
-    id: uuid.v4(),
-    title: 'Title',
-    excerpt: 'Here is the excerpt.',
-    tags: [],
-    cover: {},
-    author: 'Author',
-    markdown: '',
-    htmlOutput: '',
-    isPublished: false,
-    postedAt: Date.now(),
-    updatedAt: Date.now()
+    ...newArticle
   }
 );
 
@@ -72,18 +75,6 @@ const deleteArticle = (id) => (
     id
   }
 );
-
-const newArticle = {
-  id: uuid.v4(),
-  title: 'Title',
-  excerpt: 'Here is the excerpt.',
-  tags: [],
-  cover: {},
-  author: 'Author',
-  isPublished: false,
-  postedAt: Date.now(),
-  updatedAt: Date.now()
-};
 
 const articles = (state=[], action) => {
   switch (action.type) {
