@@ -27,9 +27,9 @@ const UserNavMenu = (props) => {
         <Link to={'/articles'}>My Articles</Link>
       </Menu.Item>
       <Menu.Divider/>
-      <Menu.Item key="4">
-        <Link to={'/user'}>User Profile</Link>
-      </Menu.Item>
+      {/*<Menu.Item key="4">*/}
+        {/*<Link to={'/user'}>User Profile</Link>*/}
+      {/*</Menu.Item>*/}
       <Menu.Item key="5">Log out</Menu.Item>
     </Menu>
   );

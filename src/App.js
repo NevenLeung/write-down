@@ -15,6 +15,7 @@ import { GeneralHeader as Header } from './components/header/Header';
 import ArticleListPage from './containers/ArticleListContainer';
 import ArticleDraftListPage from './containers/ArticleDraftListContainer';
 import ArticleEditPage from './containers/ArticleEditContainer';
+import NewArticleEditPage from './containers/NewArticleContainer';
 import ArticleReadPage from './containers/ArticleReadContainer';
 
 
@@ -49,11 +50,11 @@ const AppRouter = () => (
     <Route exact path={'/'} component={ArticleListPage}/>
     <Route exact path={'/articles'} component={ArticleListPage}/>
     <Route path={'/article/:articleID/read/'} component={ArticleReadPage}/>
-    <Route path={'/article/new/'} component={ArticleEditPage}/>
+    <Route path={'/article/new/'} component={NewArticleEditPage}/>
     <Route path={'/article/:articleID/edit/'} component={ArticleEditPage}/>
     <Route exact path={'/drafts'} component={ArticleDraftListPage}/>
     <Route path={'/draft/:articleID/edit/'} component={ArticleEditPage}/>
-    <Route path={'/user'} component={UserPage}/>
+    {/*<Route path={'/user'} component={UserPage}/>*/}
   </div>
 );
 

@@ -1,12 +1,5 @@
 /* global setting */
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lora', serif;
-}
-p, ul, li, a, table {
-  font-family: 'Open Sans', sans-serif;
-}
-
 /* code mirror setting */
 :global .CodeMirror {
   height: auto;

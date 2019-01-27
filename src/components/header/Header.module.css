@@ -1,8 +1,8 @@
-:global .ant-popover-title {
+:global(.ant-popover-title) {
   text-align: center;
 }
 
-:global .ant-modal-title {
+:global(.ant-modal-title) {
   text-align: center;
 }
 
@@ -25,6 +25,11 @@
   border: 1px solid transparent;
   padding: 1px 6px;
   cursor: pointer;
+}
+
+.logo {
+  composes: button;
+  font-family: 'Lora', serif;
 }
 
 .navMenuOption {

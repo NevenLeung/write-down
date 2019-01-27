@@ -21,13 +21,12 @@
 }
 
 .title {
-
+  font-family: 'Lora', serif;
 }
 
 .infoWrapper {
   margin: -12px 0 10px;
-  /*padding-bottom: 2px;*/
-  /*border-bottom: 2px solid #ddd;*/
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 600;
 }
@@ -47,8 +46,11 @@
 }
 
 .excerpt {
-  composes: textSize;
-  color: rgba(0, 0, 0, 0.65);;
+  color: rgba(0, 0, 0, 0.65);
+  font-family: 'medium-content-serif-font', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .02em;
 }
 
 .coverImage {
@@ -65,17 +67,50 @@
 .coverInfoLink {
   composes: textCapitalize;
   color: #000;
-  border-bottom: 1px solid #ccc;
+  text-decoration: underline;
+  font-family: 'Open Sans', sans-serif;
+  transition: all 0.3s ease;
 }
 
 .coverInfoLink:hover {
-  color: #000;
+  color: gray;
 }
 
 .content {
   margin: 18px 0 0;
 }
 
-.content :global .markdown-body {
-  font-size: 18px;
+.content :global(.markdown-body) h1,
+.content :global(.markdown-body) h2,
+.content :global(.markdown-body) h3,
+.content :global(.markdown-body) h4,
+.content :global(.markdown-body) h5,
+.content :global(.markdown-body) h6 {
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.content :global(.markdown-body) p,
+.content :global(.markdown-body) ul,
+.content :global(.markdown-body) li,
+.content :global(.markdown-body) a,
+.content :global(.markdown-body) table {
+  /*color: rgba(0, 0, 0, 0.8);*/
+  line-height: 1.58;
+  font-family: 'medium-content-serif-font', serif;
+  font-size: 21px;
+  letter-spacing: -.003em;
+}
+
+.content a {
+  color: #000;
+  /*text-decoration: underline;*/
+  border-bottom: 1px solid #ccc;
+  transition: all 0.1s ease;
+}
+
+.content a:hover {
+  color: gray;
+  text-decoration: none;
+  border-bottom: none;
 }

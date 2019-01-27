@@ -9,7 +9,7 @@
   ],
   "homepage": "https://nevenleung.github.io/write-down/",
   "dependencies": {
-    "antd": "^3.10.7",
+    "antd": "^3.13.0",
     "code-mirror-themes": "^1.0.0",
     "codemirror": "^5.40.2",
     "dayjs": "^1.7.7",

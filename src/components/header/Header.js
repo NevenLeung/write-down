@@ -24,7 +24,7 @@ const EditPageHeader = ({
   <Row className={styles.header} type="flex" justify="start" align="middle">
     <Col span={4} offset={4}>
       <Link to={'/'}>
-        <button className={styles.button}>
+        <button className={styles.logo}>
           Write Down
         </button>
       </Link>
@@ -59,7 +59,7 @@ class GeneralHeader extends Component {
       <Row className={styles.header} type="flex" justify="start" align="middle">
         <Col span={4} offset={4}>
           <Link to={'/'}>
-            <button className={styles.button}>
+            <button className={styles.logo}>
               Write Down
             </button>
           </Link>

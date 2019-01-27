@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Row, Col, Tooltip, BackTop } from 'antd';
+import dayjs from "dayjs";
 
 import { GeneralHeader as Header } from "../header/Header";
 import MarkdownParser from '../../utils/MarkdownParser';
@@ -8,7 +9,6 @@ import MarkdownParser from '../../utils/MarkdownParser';
 import ScrollToTop from '../../utils/ScrollToTop';
 
 import styles from './ArticleRead.module.css';
-import dayjs from "dayjs";
 
 const ArticleRead = (props) => {
   const { title, author, cover, excerpt, markdown, postedAt, updatedAt } = props;
