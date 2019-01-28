@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Row, Col, Button, Form, Input, Select, Collapse, Tabs } from "antd";
+import { Row, Col, Button, Form, Input, Select, Collapse, Tabs, message } from "antd";
 
 import PhotoSearch from "../photo-search/PhotoSearch";
 
@@ -106,16 +106,19 @@ class ArticleInfoForm extends Component {
     };
 
     saveArticleInfo(id, title, excerpt, tags, author, cover);
+    message.success('The info setting of article has been saved successfully.');
 
     this.props.afterSubmit();
     // console.log(metaData);
   };
 
   render() {
-    const { getFieldDecorator, getFieldsError, isFieldTouched, getFieldError } = this.props.form;
+    // const { getFieldDecorator, getFieldsError, isFieldTouched, getFieldError } = this.props.form;
 
-    const titleError = isFieldTouched('userName') && getFieldError('userName');
-    const excerptError = isFieldTouched('password') && getFieldError('password');
+    // const titleError = isFieldTouched('userName') && getFieldError('userName');
+    // const excerptError = isFieldTouched('password') && getFieldError('password');
+
+    const { getFieldDecorator, getFieldsError } = this.props.form;
 
     const { title, excerpt, tags, author, coverUrl } = this.props;
 
@@ -125,8 +128,6 @@ class ArticleInfoForm extends Component {
           <Form.Item
             {...formItemLayout}
             label={'Title'}
-            // validateStatus={titleError ? 'error' : ''}
-            // help={titleError || ''}
           >
             {getFieldDecorator('title', {
               initialValue: title,
@@ -147,7 +148,6 @@ class ArticleInfoForm extends Component {
           <Form.Item
             {...formItemLayout}
             label={'Excerpt'}
-            // validateStatus={excerptError ? 'error' : ''}
           >
             {getFieldDecorator('excerpt', {
               initialValue: excerpt,
@@ -253,42 +253,50 @@ class ArticleInfoForm extends Component {
             </Col>
           </Row>
         </Form>
-        <div>
-          <Collapse bordered={false}>
-            <Collapse.Panel header={"Tips for setting cover"} key={"tips"}>
-              <pre className={styles.coverSettingTip}>
-              Choose an approach to set your cover:
-              <br/>
-              1. Search photo by keyword in Unsplash and click on the photo you selected. The url of the photo will be filled in automatically.
-              <br/>
-              2. Upload the cover to image hosting service, and paste the valid image url to the cover field.
-              <br/>
-              <br/>
-              Important: Image in landscape mode is recommended.
-              </pre>
-            </Collapse.Panel>
-          </Collapse>
 
-          <Tabs defaultActiveKey="1">
-            <Tabs.TabPane tab="Choose a photo from Unsplash" key="1">
-              <PhotoSearch selectCover={this.selectCover}/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab="Upload your photo" key="2">
-              <div style={{marginTop: 12}}>
-                <pre className={styles.coverSettingTip}>
-                  You can use any image hosting service to store your cover, like <a href="http://imgur.com/" target="_blank" rel="noopener noreferrer">Imgur</a>, <a href="https://www.dropbox.com/" target="_blank" rel="noopener noreferrer">Dropbox</a>, <a href="https://imageshack.us/" target="_blank" rel="noopener noreferrer">Imageshack</a>, and other free image hosting service.
-                  <br/>
-                  <br/>
-                  Remember to paste url back to the cover field.
-                </pre>
-              </div>
-            </Tabs.TabPane>
-          </Tabs>
+        <div>
+          <CoverSettingTips/>
+          <CoverSetting selectCover={this.selectCover}/>
         </div>
       </div>
     );
   }
 }
+
+const CoverSettingTips = () => (
+  <Collapse bordered={false}>
+    <Collapse.Panel header={"Tips for setting cover"} key={"tips"}>
+      <pre className={styles.coverSettingTip}>
+      Choose an approach to set your cover:
+      <br/>
+      1. Search photo by keyword in Unsplash and click on the photo you selected. The url of the photo will be filled in automatically.
+      <br/>
+      2. Upload the cover to image hosting service, and paste the valid image url to the cover field.
+      <br/>
+      <br/>
+      Important: Image in landscape mode is recommended.
+      </pre>
+    </Collapse.Panel>
+  </Collapse>
+);
+
+const CoverSetting = ({ selectCover }) => (
+  <Tabs defaultActiveKey="1">
+    <Tabs.TabPane tab="Choose a photo from Unsplash" key="1">
+      <PhotoSearch selectCover={selectCover}/>
+    </Tabs.TabPane>
+    <Tabs.TabPane tab="Upload your photo" key="2">
+      <div style={{marginTop: 12}}>
+        <pre className={styles.coverSettingTip}>
+          You can use any image hosting service to store your cover, like <a href="http://imgur.com/" target="_blank" rel="noopener noreferrer">Imgur</a>, <a href="https://www.dropbox.com/" target="_blank" rel="noopener noreferrer">Dropbox</a>, <a href="https://imageshack.us/" target="_blank" rel="noopener noreferrer">Imageshack</a>, and other free image hosting service.
+          <br/>
+          <br/>
+          Remember to paste url back to the cover field.
+        </pre>
+      </div>
+    </Tabs.TabPane>
+  </Tabs>
+);
 
 const WrappedFormInModal = Form.create()(ArticleInfoForm);
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { Button, Col, Popover, Row, Checkbox } from "antd";
+import { Button, Col, Popover, Row, Checkbox, message } from "antd";
 
 import styles from './Header.module.css';
 
@@ -25,6 +25,12 @@ class EditPageSaveOption extends Component {
     const { id, markdown, saveArticleContent } = this.props;
 
     saveArticleContent(id, markdown);
+
+    message.config({
+      duration: 1.3
+    });
+
+    message.success('The content of article has been saved successfully.');
   };
 
   render() {
