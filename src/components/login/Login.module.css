@@ -1,0 +1,7 @@
+.inputPrefix {
+  color: rgba(0, 0, 0, .25);
+}
+
+.loginButton {
+  composes: navMenuOption from '../header/Header.module.css';
+}

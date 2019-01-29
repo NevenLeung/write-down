@@ -33,9 +33,12 @@
 }
 
 .navMenuOption {
-  background-color: transparent;
-  border: none;
+  width: 100%;
   padding: 0;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  cursor: pointer;
 }
 
 .editorSettingContainer {
