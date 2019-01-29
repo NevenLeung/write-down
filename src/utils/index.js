@@ -1,12 +1,12 @@
 // internal
-import checkImageUrlIsValid from "./internal/checkImageUrlIsValid";
+import checkImageUrlIsValid from "./internal/check-image-url-is-valid";
 import delay from "./internal/delay";
-import exportFile from "./internal/exportFile";
-import generateStyledHTML from "./internal/generateStyledHTML";
+import exportFile from "./internal/export-file";
+import generateStyledHTML from "./internal/generate-styled-html";
 import ScrollToTop from './internal/ScrollToTop';
 
 // external
-import MarkdownParser from './external/MarkdownParser';
+import MarkdownParser from './external/markdown-parser';
 import { unsplash, toJson } from "./external/unsplash-service";
 
 /**
