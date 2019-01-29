@@ -74,6 +74,7 @@
 
 .coverInfoLink:hover {
   color: gray;
+  text-decoration: none;
 }
 
 .content {

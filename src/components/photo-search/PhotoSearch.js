@@ -4,7 +4,7 @@ import { Row, Col } from 'antd';
 import PhotoSearchBar from './PhotoSearchBar';
 import PhotoSearchResult from './PhotoSearchResult';
 
-import { unsplash, toJson } from '../../utils/unsplash-service';
+import { unsplash, toJson } from '../../utils';
 
 class PhotoSearch extends Component {
   constructor(props) {

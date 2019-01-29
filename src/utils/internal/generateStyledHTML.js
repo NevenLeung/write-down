@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 
 import dayjs from "dayjs";
 
-import MarkdownParser from "./MarkdownParser";
+import MarkdownParser from "../external/MarkdownParser";
 
 // 移除了antd相关的代码，不使用css-modules
 const ArticleRead = (props) => {

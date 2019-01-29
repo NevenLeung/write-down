@@ -6,7 +6,7 @@ import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import {Row, Col } from 'antd';
 
 import { delay } from "../../utils/index";
-import MarkdownParser from '../../utils/MarkdownParser';
+import { MarkdownParser } from '../../utils';
 import Editor from './Editor';
 
 import 'github-markdown-css';
@@ -22,11 +22,9 @@ class ArticleEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // id: '',
       markdown: '',
-      // markdown: '',
       htmlOutput: '',
-      // 由于displayMode和scrollSync需要用到前一次的状态，需要放在state中
+      // 由于displayMode和scrollSync需要用到前一次的状态，需要存放在state中
       displayMode: 'Editor & Preview',
       scrollSync: true
     };
@@ -56,18 +54,12 @@ class ArticleEdit extends Component {
     this.$editor = document.querySelector('.editor');
     this.$preview = document.querySelector('.preview');
 
-    // get the parameter from the url
-    // const id = this.props.match.params.articleID;
+    const { markdown } = this.props;
 
-    // if (id) {
-      const { markdown } = this.props;
-
-      this.setState({
-        // id: id,
-        markdown: markdown,
-        htmlOutput: MarkdownParser.render(markdown)
-      });
-    // }
+    this.setState({
+      markdown: markdown,
+      htmlOutput: MarkdownParser.render(markdown)
+    });
   }
 
   handleSourceUpdate = (editor, data, value) => {

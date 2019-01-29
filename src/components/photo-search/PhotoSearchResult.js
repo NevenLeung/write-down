@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Icon, Pagination } from "antd";
 import StackGrid from "react-stack-grid";
 
-import { unsplash } from "../../utils/unsplash-service";
+import { unsplash } from "../../utils";
 
 import styles from './PhotoSearch.module.css';
 
