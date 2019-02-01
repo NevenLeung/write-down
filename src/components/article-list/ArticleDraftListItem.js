@@ -33,12 +33,12 @@ class ArticleItem extends Component{
   }
 
   handleEdit = () => {
-    // this.props.editDraft();
+    this.props.editArticle();
   };
 
   handleDelete = () => {
     this.props.deleteArticle();
-    message.info('The article has been deleted.');
+    message.success('The article has been deleted.');
   };
 
   render() {
@@ -138,7 +138,9 @@ class ArticleItem extends Component{
                       </Popconfirm>
                       <Link to={`/draft/${id}/edit`}>
                         <button
-                          className={styles.editOption} title='Jump to the edit page.'
+                          className={styles.editOption}
+                          onClick={this.handleEdit}
+                          title='Jump to the edit page.'
                         >
                           <Icon type="edit" />
                         </button>

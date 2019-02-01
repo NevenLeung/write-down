@@ -1,10 +1,12 @@
 import { articles as articlesReducer } from './articles';
 import { user as userReducer } from './user';
+import { currentEdit as currentEditReducer } from "./currentEdit";
 
 const rootReducer = (state, action) => (
   {
     articles: articlesReducer(state.articles, action),
-    user: userReducer(state.user, action)
+    currentEdit: currentEditReducer(state.currentEdit, action),
+    user: userReducer(state.user, action),
   }
 );
 

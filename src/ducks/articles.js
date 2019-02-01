@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 
 const CREATE_NEW_ARTICLE = 'write-down/articles/CREATE_NEW_ARTICLE';
+const EDIT_ARTICLE = 'write-down/articles/EDIT_ARTICLE';
 
 const SAVE_ARTICLE_INFO = 'write-down/articles/SAVE_ARTICLE_INFO';
 const SAVE_ARTICLE_CONTENT = 'write-down/articles/SAVE_ARTICLE_CONTENT';
@@ -28,6 +29,14 @@ const createNewArticle = () => (
   {
     type: CREATE_NEW_ARTICLE,
     ...newArticle
+  }
+);
+
+// For the use of saving current editing article id to 'state.currentEdit'
+const editArticle = (id) => (
+  {
+    type: EDIT_ARTICLE,
+    id
   }
 );
 
@@ -193,9 +202,12 @@ const article = (state, action) => {
 export {
   articles,
   createNewArticle,
+  editArticle,
   saveArticleInfo,
   saveArticleContent,
   publishArticle,
   saveArticleAsDraft,
   deleteArticle,
+  CREATE_NEW_ARTICLE,
+  EDIT_ARTICLE
 }

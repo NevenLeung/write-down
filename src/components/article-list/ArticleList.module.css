@@ -95,13 +95,12 @@
 
 .readMoreLink a {
   display: inline-block;
-  border-bottom: 1px solid #ccc;
+  text-decoration: underline;
   color: rgba(0, 0, 0, 0.8);
   transition: all 0.1s ease;
 }
 
 .readMoreLink a:hover {
-  border-bottom: none;
   color: rgba(0, 0, 0, 0.65);
   text-decoration: none;
 }
