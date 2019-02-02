@@ -2,13 +2,13 @@ import { connect } from "react-redux";
 
 import { MoreButtonInEditPage } from '../components/header/MoreButtonInEditPage';
 
-const articleExportMapState = (state, ownProps) => {
-  const articleID = ownProps.id;
+const articleExportMapState = (state) => {
+  const articleID = state.currentEdit;
 
   const selectedArticle = state.articles.find(article => article.id.toString() === articleID);
 
   if (selectedArticle && Object.keys(selectedArticle).length !== 0) {
-    const { title, author, excerpt, cover, markdown, htmlOutput } = selectedArticle;
+    const { title, author, excerpt, cover, markdown, postedAt } = selectedArticle;
 
     return {
       title,
@@ -16,7 +16,7 @@ const articleExportMapState = (state, ownProps) => {
       excerpt,
       cover,
       markdown,
-      htmlOutput
+      postedAt
     };
   }
 

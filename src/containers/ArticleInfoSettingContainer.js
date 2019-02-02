@@ -5,8 +5,8 @@ import { saveArticleInfo} from "../ducks/articles";
 import { InfoSettingPreview } from '../components/article-edit/ArticleInfoSettingPreview';
 import { WrappedFormInModal as InfoSettingForm } from "../components/article-edit/ArticleInfoSettingForm";
 
-const mapState = (state, ownProps) => {
-  const articleID = ownProps.id;
+const mapState = (state) => {
+  const articleID = state.currentEdit;
 
   const selectedArticle = state.articles.find(article => article.id === articleID);
 

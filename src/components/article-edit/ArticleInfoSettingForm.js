@@ -230,7 +230,7 @@ class ArticleInfoForm extends Component {
                   disabled={hasErrors(getFieldsError())}
                   onClick={this.onSubmit}
                 >
-                  Submit
+                  Save
                 </Button>
               </Form.Item>
             </Col>
