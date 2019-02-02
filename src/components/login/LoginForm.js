@@ -24,6 +24,22 @@ class LoginForm extends React.Component {
 
         closeModal();
         message.success('Login successfully.');
+      } else if (username === 'test') {
+        form.setFields({
+          password: {
+            value: values.password,
+            errors: [new Error('Please make sure the password is correct.')]
+          }
+        });
+        message.warn('Login failed. Please make sure the password is correct.');
+      } else if (password === '123456') {
+        form.setFields({
+          username: {
+            value: values.username,
+            errors: [new Error('Please make sure the username is correct.')]
+          }
+        });
+        message.warn('Login failed. Please make sure the username is correct.');
       } else {
         form.setFields({
           username: {
@@ -35,7 +51,7 @@ class LoginForm extends React.Component {
             errors: [new Error('Please make sure the password is correct.')]
           }
         });
-        message.warn('Login failed. Please make sure the username or password both correct.');
+        message.warn('Login failed. Please make sure the username or password are both correct.');
       }
     });
   };
