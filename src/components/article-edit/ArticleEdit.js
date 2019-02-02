@@ -14,7 +14,7 @@ import 'prism-themes/themes/prism-darcula.css';
 
 import styles from './ArticleEdit.module.css';
 
-import {EditPageHeader as Header} from '../header/Header';
+import {EditPageHeader as Header} from '../header/TheHeader';
 // import markdownFeatureSrc from '../../assets/markdown-test-file';
 // import markdownCheatSheet from '../assets/markdown-cheatsheet';
 

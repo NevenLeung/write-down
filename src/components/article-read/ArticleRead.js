@@ -3,10 +3,10 @@ import React from "react";
 import { Row, Col, Tooltip, BackTop } from 'antd';
 import dayjs from "dayjs";
 
-import { GeneralHeader as Header } from "../header/Header";
-import { MarkdownParser } from '../../utils';
+import { GeneralHeader as Header } from "../header/TheHeader";
+
 // ScrollToTop is used to reset the scroll bar to top, due to react-router doesn't handle it.
-import { ScrollToTop } from '../../utils/';
+import { MarkdownParser, ScrollToTop } from '../../utils';
 
 import styles from './ArticleRead.module.css';
 

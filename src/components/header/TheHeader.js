@@ -36,10 +36,10 @@ const EditPageHeader = ({
       />
     </Col>
     <Col span={1}>
-      <ArticleExportContainer id={id} />
+      <ArticleExportContainer />
     </Col>
     <Col span={1}>
-      <ArticleInfoSetting id={id} />
+      <ArticleInfoSetting />
     </Col>
     <Col span={1}>
       <EditorSettingButton
