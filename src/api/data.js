@@ -3,6 +3,7 @@ import markdownFeatureSrc from '../assets/markdown-test-file';
 let data = [
   {
     id: '0',
+    type: 'article',
     title: 'Full Feature Example',
     author: 'Neven',
     excerpt: 'This is the full feature example. You can see all markdown feature supported and experience all features in Write Down with this example. Have fun!!',
@@ -15,11 +16,12 @@ let data = [
     markdown: markdownFeatureSrc,
     htmlOutput: '',
     isPublished: true,
-    postedAt: '2019-01-07',
-    updatedAt: '2019-01-16',
+    postedAt: '2019-01-17T08:16:01.296Z',
+    updatedAt: '2019-01-06T18:16:01.296Z',
   },
   {
     id: '1',
+    type: 'article',
     title: 'Title No.1',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -32,11 +34,12 @@ let data = [
     markdown: '## This is content No.1',
     htmlOutput: '',
     isPublished: true,
-    postedAt: '2018-11-15',
-    updatedAt: '2018-11-16',
+    postedAt: '2018-11-15T18:16:01.296Z',
+    updatedAt: '2018-11-16T19:53:01.296Z',
   },
   {
     id: '2',
+    type: 'article',
     title: 'This is a very long long long long long long long long long title No.2',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -48,11 +51,12 @@ let data = [
     tags: ['121212121212', '23232323232323', '343434343434343', '4545454545454554', '5656565656565656'],
     markdown: '## This is content No.2',
     isPublished: false,
-    postedAt: '2018-10-16',
-    updatedAt: '2018-10-16',
+    postedAt: '2018-10-16T18:16:01.296Z',
+    updatedAt: '2018-10-17T18:16:01.296Z',
   },
   {
     id: '3',
+    type: 'article',
     title: 'Title No.3',
     author: 'Author',
     excerpt: 'Here is an example of a post without a cover image. You don\'t always have to have a cover image. In fact, leaving them out from time to time and disrupt the predictive flow and make the overall design more interesting. You can leave something for readers to think about.',
@@ -64,11 +68,12 @@ let data = [
     tags: ['story', 'daily', "food"],
     markdown: '## This is content No.3',
     isPublished: true,
-    postedAt: '2018-09-16',
-    updatedAt: '2018-09-16',
+    postedAt: '2018-09-15T18:16:01.296Z',
+    updatedAt: '2018-09-15T18:16:01.296Z',
   },
   {
     id: '4',
+    type: 'article',
     title: 'Title No.4',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -80,10 +85,9 @@ let data = [
     tags: ['story', 'daily', "sport", "movie"],
     markdown: '## This is content No.4',
     isPublished: true,
-    postedAt: '2018-08-15',
-    updatedAt: '2018-08-20',
+    postedAt: '2018-08-15T18:16:01.296Z',
+    updatedAt: '2018-08-21T18:16:01.296Z',
   }
-
 ];
 
 export default data;
