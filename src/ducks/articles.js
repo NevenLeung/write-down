@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 
 const CREATE_NEW_ARTICLE = 'write-down/articles/CREATE_NEW_ARTICLE';
-const EDIT_ARTICLE = 'write-down/articles/EDIT_ARTICLE';
+const SELECT_ARTICLE = 'write-down/articles/SELECT_ARTICLE';
 
 const SAVE_ARTICLE_INFO = 'write-down/articles/SAVE_ARTICLE_INFO';
 const SAVE_ARTICLE_CONTENT = 'write-down/articles/SAVE_ARTICLE_CONTENT';
@@ -11,8 +11,13 @@ const DELETE_ARTICLE = 'write-down/articles/DELETE_ARTICLE';
 const PUBLISH_ARTICLE = 'write-down/articles/PUBLISH_ARTICLE';
 const SAVE_ARTICLE_AS_DRAFT = 'write-down/articles/SAVE_ARTICLE_AS_DRAFT';
 
+const UPDATE_ARTICLE_REQUEST = 'write-down/articles/UPDATE_ARTICLE_REQUEST';
+const UPDATE_ARTICLE_SUCCESS = 'write-down/articles/UPDATE_ARTICLE_SUCCESS';
+const UPDATE_ARTICLE_FAILURE = 'write-down/articles/UPDATE_ARTICLE_FAILURE';
+
 const newArticle = {
   id: shortid.generate(),
+  type: 'article',
   title: 'Title',
   excerpt: 'Here is the excerpt.',
   tags: [],
@@ -21,8 +26,8 @@ const newArticle = {
   markdown: '',
   htmlOutput: '',
   isPublished: false,
-  postedAt: Date.now(),
-  updatedAt: Date.now()
+  postedAt: new Date().toJSON(),
+  updatedAt: new Date().toJSON()
 };
 
 const createNewArticle = () => (
@@ -33,9 +38,9 @@ const createNewArticle = () => (
 );
 
 // For the use of saving current editing article id to 'state.currentEdit'
-const editArticle = (id) => (
+const selectArticle = (id) => (
   {
-    type: EDIT_ARTICLE,
+    type: SELECT_ARTICLE,
     id
   }
 );
@@ -49,7 +54,7 @@ const saveArticleInfo = (id, title, excerpt, tags, author, cover) => (
     author,
     tags,
     cover,
-    updatedAt: Date.now()
+    updatedAt: new Date().toJSON()
   }
 );
 
@@ -58,7 +63,7 @@ const saveArticleContent = (id, markdown) => (
     type: SAVE_ARTICLE_CONTENT,
     id,
     markdown,
-    updatedAt: Date.now()
+    updatedAt: (new Date()).toJSON()
   }
 );
 
@@ -66,8 +71,8 @@ const publishArticle = (id) => (
   {
     type: PUBLISH_ARTICLE,
     id,
-    updatedAt: Date.now(),
-    postedAt: Date.now()
+    updatedAt: new Date().toJSON(),
+    postedAt: new Date().toJSON()
   }
 );
 
@@ -202,12 +207,12 @@ const article = (state, action) => {
 export {
   articles,
   createNewArticle,
-  editArticle,
+  selectArticle,
   saveArticleInfo,
   saveArticleContent,
   publishArticle,
   saveArticleAsDraft,
   deleteArticle,
   CREATE_NEW_ARTICLE,
-  EDIT_ARTICLE
+  SELECT_ARTICLE
 }

@@ -11,7 +11,7 @@ import styles from "./ArticleList.module.css";
 
 dayjs.extend(relativeTime);
 
-const ArticlesPage = ({ articles, isLoggedIn, editArticle, deleteArticle }) => {
+const ArticlesPage = ({ articles, isLoggedIn, selectArticle, deleteArticle }) => {
   let ArticleList = undefined;
 
   if (Array.isArray(articles)) {
@@ -20,7 +20,7 @@ const ArticlesPage = ({ articles, isLoggedIn, editArticle, deleteArticle }) => {
         metaData={data}
         key={data.id}
         isLoggedIn={isLoggedIn}
-        editArticle={() => editArticle(data.id)}
+        selectArticle={() => selectArticle(data.id)}
         deleteArticle={() => deleteArticle(data.id)}
       />
     ));

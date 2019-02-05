@@ -33,7 +33,7 @@ class ArticleItem extends Component{
   }
 
   handleEdit = () => {
-    this.props.editArticle();
+    this.props.selectArticle();
   };
 
   handleDelete = () => {

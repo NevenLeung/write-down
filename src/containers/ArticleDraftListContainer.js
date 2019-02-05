@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import { editArticle, deleteArticle } from '../ducks/articles';
+import { selectArticle, deleteArticle } from '../ducks/articles';
 
 import DraftList from '../components/article-list/ArticleDraftList';
 
@@ -17,7 +17,7 @@ const mapState = (state) => (
 );
 
 const mapDispatch = {
-  editArticle,
+  selectArticle,
   deleteArticle
 };
 
