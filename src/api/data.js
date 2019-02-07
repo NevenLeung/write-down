@@ -3,7 +3,6 @@ import markdownFeatureSrc from '../assets/markdown-test-file';
 let data = [
   {
     id: '0',
-    type: 'article',
     title: 'Full Feature Example',
     author: 'Neven',
     excerpt: 'This is the full feature example. You can see all markdown feature supported and experience all features in Write Down with this example. Have fun!!',
@@ -21,7 +20,6 @@ let data = [
   },
   {
     id: '1',
-    type: 'article',
     title: 'Title No.1',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -39,7 +37,6 @@ let data = [
   },
   {
     id: '2',
-    type: 'article',
     title: 'This is a very long long long long long long long long long title No.2',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
@@ -56,7 +53,6 @@ let data = [
   },
   {
     id: '3',
-    type: 'article',
     title: 'Title No.3',
     author: 'Author',
     excerpt: 'Here is an example of a post without a cover image. You don\'t always have to have a cover image. In fact, leaving them out from time to time and disrupt the predictive flow and make the overall design more interesting. You can leave something for readers to think about.',
@@ -73,7 +69,6 @@ let data = [
   },
   {
     id: '4',
-    type: 'article',
     title: 'Title No.4',
     author: 'Author',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus molestie nunc non blandit massa enim nec dui. At tellus at urna condimentum mattis pellentesque. Volutpat est velit egestas dui id ornare arcu odio ut. Purus viverra accumsan in nisl nisi.',
