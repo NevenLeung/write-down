@@ -1,13 +1,13 @@
-import { articles as articlesReducer } from './articles';
-import { user as userReducer } from './user';
-import { currentEdit as currentEditReducer } from "./currentEdit";
+import { articles } from './articles';
+import { user } from './user';
+import { currentEdit } from "./currentEdit";
 
-const rootReducer = (state, action) => (
-  {
-    articles: articlesReducer(state.articles, action),
-    currentEdit: currentEditReducer(state.currentEdit, action),
-    user: userReducer(state.user, action),
-  }
-);
+import { combineReducers } from 'redux';
 
-export default rootReducer;
+const reducer = combineReducers({
+  articles,
+  currentEdit,
+  user
+});
+
+export default reducer;
