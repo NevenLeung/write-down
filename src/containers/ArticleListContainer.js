@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import { selectArticle, deleteArticle } from '../ducks/articles';
+import { selectArticle, removeArticle } from '../ducks/articles';
 
 import ArticleList from '../components/article-list/ArticleList';
 
@@ -10,14 +10,15 @@ const selectThePublishedArticles = (list = []) => {
 
 const mapState = (state) => (
   {
-    articles: selectThePublishedArticles(state.articles),
+    articles: selectThePublishedArticles(state.articles.data),
+    isFetching: state.articles.isFetching,
     isLoggedIn: state.user.isLoggedIn
   }
 );
 
 const mapDispatch = {
   selectArticle,
-  deleteArticle
+  removeArticle
 };
 
 

@@ -2,6 +2,24 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.pageContainer {
+  position: relative;
+}
+
+.spinContainer {
+  display: flex;
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .pageIndicator {
   composes: sans-serif-font;
   padding: 4px 0 0 !important;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Divider, BackTop } from "antd";
+import { Col, Row, Divider, BackTop, Spin } from "antd";
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -11,7 +11,7 @@ import styles from "./ArticleList.module.css";
 
 dayjs.extend(relativeTime);
 
-const ArticlesPage = ({ articles, isLoggedIn, selectArticle, deleteArticle }) => {
+const ArticlesPage = ({ articles, isFetching, isLoggedIn, selectArticle, removeArticle }) => {
   let ArticleList = undefined;
 
   if (Array.isArray(articles)) {
@@ -21,28 +21,38 @@ const ArticlesPage = ({ articles, isLoggedIn, selectArticle, deleteArticle }) =>
         key={data.id}
         isLoggedIn={isLoggedIn}
         selectArticle={() => selectArticle(data.id)}
-        deleteArticle={() => deleteArticle(data.id)}
+        deteleArticle={() => removeArticle(data.id)}
       />
     ));
   }
 
   return (
-    <>
-      <Header/>
-      <Row>
-        <Col md={4} sm={2} xs={0}>
+    <div className={styles.pageContainer}>
+      {
+        isFetching?
+          (
+            <div className={styles.spinContainer}>
+              <Spin tip={'Loading...'}/>
+            </div>
+          ) :  null
+      }
+      <>
+        <Header/>
+        <Row>
+          <Col md={4} sm={2} xs={0}>
 
-        </Col>
-        <Col className={styles.list} md={16} sm={20} xs={24}>
-          <Divider className={styles.pageIndicator}>Article list</Divider>
-          {ArticleList? ArticleList: null}
-          <BackTop/>
-        </Col>
-        <Col md={4} sm={2} xs={0}>
+          </Col>
+          <Col className={styles.list} md={16} sm={20} xs={24}>
+            <Divider className={styles.pageIndicator}>Article list</Divider>
+            {ArticleList? ArticleList: null}
+            <BackTop/>
+          </Col>
+          <Col md={4} sm={2} xs={0}>
 
-        </Col>
-      </Row>
-    </>
+          </Col>
+        </Row>
+      </>
+    </div>
   );
 };
 

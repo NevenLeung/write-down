@@ -10,7 +10,7 @@ import { checkImageUrlIsValid } from "../../utils/index";
 
 dayjs.extend(relativeTime);
 
-class ArticleItem extends Component{
+class ArticleDraftListItem extends Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -178,4 +178,4 @@ TagGroup.propTypes = {
   tags: PropTypes.array.isRequired,
 };
 
-export default ArticleItem;
+export default ArticleDraftListItem;
