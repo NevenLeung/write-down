@@ -8,33 +8,38 @@ import 'antd/dist/antd.css';
 
 import './App.css';
 
-import { GeneralHeader as Header } from './components/header/TheHeader';
+// import { GeneralHeader as Header } from './components/header/TheHeader';
 
 import ArticleListPage from './containers/ArticleListContainer';
 import ArticleDraftListPage from './containers/ArticleDraftListContainer';
 import ArticleEditPage from './containers/ArticleEditContainer';
 import ArticleReadPage from './containers/ArticleReadContainer';
 
+// For app init.
+import { fetchArticles } from "./ducks/articles";
+import { fetchLoginData } from "./ducks/user";
 
-import configureStore from './ducks/configureStore';
+import configureStore from './ducks/store';
 
-import fakeData from './components/data';
+const store = configureStore();
 
-const preloadedState = {
-  articles: fakeData,
-};
+class App extends React.Component {
+  componentDidMount() {
+    // App init.
+    store.dispatch(fetchArticles());
+    store.dispatch(fetchLoginData());
+  }
 
-const store = configureStore(preloadedState);
-
-// console.log(store.getState());
-
-const App = () => (
-  <Provider store={store}>
-    <Router>
-      <AppRouter/>
-    </Router>
-  </Provider>
-);
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <AppRouter/>
+        </Router>
+      </Provider>
+    );
+  }
+}
 
 const AppRouter = () => (
   <div className="App">

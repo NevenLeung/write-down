@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { userLogin } from "../ducks/user";
+import { userLogin, saveLoginData } from "../ducks/user";
 
 import { WrappedLoginForm as LoginForm } from "../components/login/LoginForm";
 
@@ -11,7 +11,8 @@ const mapState = (state) => (
 );
 
 const mapDispatch = {
-  userLogin
+  userLogin,
+  saveLoginData
 };
 
 export default connect(

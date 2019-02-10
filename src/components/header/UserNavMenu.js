@@ -7,10 +7,10 @@ import { LoginModal } from '../login/Login';
 import styles from "./Header.module.css";
 
 const UserNavMenu = (props) => {
-  const { createNewArticle, userLogout, isLoggedIn, ...rest } = props;
+  const { createArticle, userLogout, isLoggedIn, ...rest } = props;
 
   const handleClickOnNewArticle = () => {
-    createNewArticle();
+    createArticle();
   };
 
   const handleLogout = () => {

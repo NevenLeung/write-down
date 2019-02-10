@@ -9,7 +9,7 @@ import ArticleInfoSetting from '../article-edit/ArticleInfoSetting';
 import { ArticleExportContainer } from "../../containers/ArticleExportContainer";
 import { ArticleEditSaveContainer } from '../../containers/ArticleEditSaveContainer';
 
-import { MoreButton } from "./MoreButton";
+// import { MoreButton } from "./MoreButton";
 import { EditorSettingButton } from "./EditorSetting";
 import { UserNavButton } from "./UserNavButton";
 
@@ -24,9 +24,7 @@ const EditPageHeader = ({
   <Row className={styles.header} type="flex" justify="start" align="middle">
     <Col span={4} offset={4}>
       <Link to={'/'}>
-        <button className={styles.logo}>
-          Write Down
-        </button>
+        <LogoButton/>
       </Link>
     </Col>
     <Col span={2} offset={6}>
@@ -59,18 +57,16 @@ class GeneralHeader extends Component {
       <Row className={styles.header} type="flex" justify="start" align="middle">
         <Col span={4} offset={4}>
           <Link to={'/'}>
-            <button className={styles.logo}>
-              Write Down
-            </button>
+            <LogoButton/>
           </Link>
         </Col>
-        <Col span={1} offset={10}>
-          <MoreButton/>
-        </Col>
+        {/*<Col span={1} offset={10}>*/}
+          {/*<MoreButton/>*/}
+        {/*</Col>*/}
         {/*<Col span={1}>*/}
         {/*<NavButton/>*/}
         {/*</Col>*/}
-        <Col span={1}>
+        <Col span={1} offset={11}>
           <UserNavButton/>
         </Col>
       </Row>
@@ -78,48 +74,11 @@ class GeneralHeader extends Component {
   }
 }
 
-// class Header3 extends Component {
-//   render() {
-//     return (
-//       <Row className={styles.header + ' ' + styles.home} type="flex" justify="start" align="middle">
-//         <Col span={4} offset={4}>
-//           <button className={styles.button}>
-//             Write Down
-//           </button>
-//         </Col>
-//         <Col span={1} offset={9}>
-//           <MoreButton/>
-//         </Col>
-//         <Col span={1}>
-//           <EditorSettingButton
-//             toggleDisplayMode={this.props.toggleDisplayMode}
-//             toggleScrollSync={this.props.toggleScrollSync}
-//           />
-//         </Col>
-//         <Col span={1}>
-//           <UserButton/>
-//         </Col>
-//       </Row>
-//     );
-//   }
-// }
-
-// const NavMenu = (
-//   <Menu>
-//     <Menu.Item key="1">Get</Menu.Item>
-//     <Menu.Item key="2">Some</Menu.Item>
-//     <Menu.Item key="3">Help</Menu.Item>
-//   </Menu>
-// );
-//
-//
-// const NavButton = props => {
-//   return (
-//     <Dropdown className={styles.button} overlay={NavMenu} trigger={['click']} placement='bottomCenter'>
-//       <Icon type="bars" theme="outlined" />
-//     </Dropdown>
-//   );
-// };
+const LogoButton = () => (
+  <button className={styles.logo}>
+    Write Down
+  </button>
+);
 
 EditPageHeader.propTypes = {
   toggleScrollSync: PropTypes.func.isRequired,

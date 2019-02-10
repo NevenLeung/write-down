@@ -1,6 +1,6 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
-import { createNewArticle } from "../ducks/articles";
+import { createArticle } from "../ducks/articles";
 import { userLogout } from "../ducks/user";
 
 import { UserNavMenu } from "../components/header/UserNavMenu";
@@ -12,7 +12,7 @@ const mapState = (state) => (
 );
 
 const mapDispatch = {
-  createNewArticle,
+  createArticle,
   userLogout
 };
 

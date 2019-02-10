@@ -6,7 +6,7 @@ const mapState = (state, ownProps) => {
   const articleID = ownProps.match.params.articleID;
   // const isFrom = ownProps.location.state.isFrom;
 
-  const selectedArticle = state.articles.find(article => article.id === articleID);
+  const selectedArticle = state.articles.data.find(article => article.id === articleID);
 
   const { title, author, excerpt, cover, markdown, postedAt, updatedAt } = selectedArticle;
 

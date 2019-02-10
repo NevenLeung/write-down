@@ -8,21 +8,23 @@ class LoginForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { form, userLogin, closeModal } = this.props;
+    const { form, userLogin, saveLoginData, closeModal } = this.props;
     const { username, password, rememberMe } = form.getFieldsValue();
 
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
       }
 
       if (username === 'test' && password === '123456') {
         // It saves login data depending on 'rememberMe'.
-        rememberMe
-          ? userLogin(username, password)
-          : userLogin('', '');
+        if (rememberMe) {
+          saveLoginData({ username, password });
+        }
 
+        userLogin();
         closeModal();
+
         message.success('Login successfully.');
       } else if (username === 'test') {
         form.setFields({
