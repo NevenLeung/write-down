@@ -5,7 +5,7 @@ import ArticleEdit from '../components/article-edit/ArticleEdit';
 const mapState = (state) => {
   const articleID = state.currentEdit;
 
-  const selectedArticle = state.articles.find(article => article.id === articleID);
+  const selectedArticle = state.articles.data.find(article => article.id === articleID);
 
   if (selectedArticle && Object.keys(selectedArticle).length !== 0) {
     const { id, markdown, htmlOutput } = selectedArticle;

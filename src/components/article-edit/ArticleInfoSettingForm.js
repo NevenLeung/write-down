@@ -4,7 +4,7 @@ import { Row, Col, Button, Form, Input, Select, Collapse, Tabs, message } from "
 
 import PhotoSearch from "../photo-search/PhotoSearch";
 
-import { checkImageUrlIsValid } from "../../utils";
+import { checkImageUrlIsValid, generateTimeString } from "../../utils";
 
 import styles from "./ArticleInfoSetting.module.css";
 
@@ -96,7 +96,7 @@ class ArticleInfoForm extends Component {
     // 这里只需要使用data提交表单的数据即可
     // console.log(data);
 
-    const { id, saveArticleInfo } = this.props;
+    const { id, updateArticle } = this.props;
     const { title, excerpt, tags, author, coverUrl } = data;
 
     // 将authorName，authorLink都保存起来
@@ -105,7 +105,7 @@ class ArticleInfoForm extends Component {
       url: coverUrl
     };
 
-    saveArticleInfo(id, title, excerpt, tags, author, cover);
+    updateArticle(id, { title, excerpt, tags, author, cover, updatedAt: generateTimeString() });
     message.success('The info setting of article has been saved successfully.');
 
     this.props.afterSubmit();

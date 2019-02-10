@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { saveArticleInfo} from "../ducks/articles";
+import { updateArticle} from "../ducks/articles";
 
 import { InfoSettingPreview } from '../components/article-edit/ArticleInfoSettingPreview';
 import { WrappedFormInModal as InfoSettingForm } from "../components/article-edit/ArticleInfoSettingForm";
@@ -8,7 +8,7 @@ import { WrappedFormInModal as InfoSettingForm } from "../components/article-edi
 const mapState = (state) => {
   const articleID = state.currentEdit;
 
-  const selectedArticle = state.articles.find(article => article.id === articleID);
+  const selectedArticle = state.articles.data.find(article => article.id === articleID);
 
   if (selectedArticle && Object.keys(selectedArticle).length !== 0) {
     const { id, title, excerpt, tags, author, cover } = selectedArticle;
@@ -27,7 +27,7 @@ const mapState = (state) => {
 };
 
 const mapDispatch = {
-  saveArticleInfo
+  updateArticle
 };
 
 const InfoSettingFormContainer = connect(

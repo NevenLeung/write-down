@@ -24,7 +24,7 @@ class EditPageSaveOption extends Component {
   handleSave = () => {
     const { id, markdown, saveArticleContent } = this.props;
 
-    saveArticleContent(id, markdown);
+    saveArticleContent(id, { markdown });
 
     message.config({
       duration: 1.3

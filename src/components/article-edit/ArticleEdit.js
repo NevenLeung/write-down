@@ -54,12 +54,14 @@ class ArticleEdit extends Component {
     this.$editor = document.querySelector('.editor');
     this.$preview = document.querySelector('.preview');
 
-    const { markdown } = this.props;
+    if (this.props.match.params.articleID) {
+      const { markdown } = this.props;
 
-    this.setState({
-      markdown: markdown,
-      htmlOutput: MarkdownParser.render(markdown)
-    });
+      this.setState({
+        markdown: markdown,
+        htmlOutput: MarkdownParser.render(markdown)
+      });
+    }
   }
 
   handleSourceUpdate = (editor, data, value) => {
