@@ -1,43 +1,129 @@
 import shortid from 'shortid';
+import { db, createDoc, removeDoc, updateDoc, getDocsByType, loadArticles } from "../api/pouchdb";
 
-const CREATE_NEW_ARTICLE = 'write-down/articles/CREATE_NEW_ARTICLE';
-const SELECT_ARTICLE = 'write-down/articles/SELECT_ARTICLE';
+const FETCH_ARTICLES_REQUEST = 'write-down/articles/FETCH_ARTICLES_REQUEST';
 
-const SAVE_ARTICLE_INFO = 'write-down/articles/SAVE_ARTICLE_INFO';
-const SAVE_ARTICLE_CONTENT = 'write-down/articles/SAVE_ARTICLE_CONTENT';
-
-const DELETE_ARTICLE = 'write-down/articles/DELETE_ARTICLE';
-
-const PUBLISH_ARTICLE = 'write-down/articles/PUBLISH_ARTICLE';
-const SAVE_ARTICLE_AS_DRAFT = 'write-down/articles/SAVE_ARTICLE_AS_DRAFT';
-
-const UPDATE_ARTICLE_REQUEST = 'write-down/articles/UPDATE_ARTICLE_REQUEST';
-const UPDATE_ARTICLE_SUCCESS = 'write-down/articles/UPDATE_ARTICLE_SUCCESS';
-const UPDATE_ARTICLE_FAILURE = 'write-down/articles/UPDATE_ARTICLE_FAILURE';
-
-const newArticle = {
-  id: shortid.generate(),
-  type: 'article',
-  title: 'Title',
-  excerpt: 'Here is the excerpt.',
-  tags: [],
-  cover: {},
-  author: 'Author',
-  markdown: '',
-  htmlOutput: '',
-  isPublished: false,
-  postedAt: new Date().toJSON(),
-  updatedAt: new Date().toJSON()
-};
-
-const createNewArticle = () => (
+const fetchArticlesRequest = () => (
   {
-    type: CREATE_NEW_ARTICLE,
-    ...newArticle
+    type: FETCH_ARTICLES_REQUEST
   }
 );
 
-// For the use of saving current editing article id to 'state.currentEdit'
+const FETCH_ARTICLES_SUCCESS = 'write-down/articles/FETCH_ARTICLES_SUCCESS';
+
+const fetchArticlesSuccess = (articles) => (
+  {
+    type: FETCH_ARTICLES_SUCCESS,
+    articles
+  }
+);
+
+const FETCH_ARTICLES_FAILURE = 'write-down/articles/FETCH_ARTICLES_FAILURE';
+
+const fetchArticlesFailure = (error) => (
+  {
+    type: FETCH_ARTICLES_FAILURE,
+    error
+  }
+);
+
+const fetchArticles = () => async (dispatch) => {
+  dispatch(fetchArticlesRequest());
+
+  let res = undefined;
+
+  try {
+    res = await loadArticles();
+
+    if (typeof res === "object" && 'docs' in res && res.docs.length !== 0) {
+      dispatch(fetchArticlesSuccess(res.docs));
+    } else {
+      dispatch(fetchArticlesFailure('No articles in database.'));
+    }
+  } catch (error) {
+    dispatch(fetchArticlesFailure(error));
+  }
+
+  return res;
+};
+
+const generateNewArticle = () => (
+  {
+    id: shortid.generate(),
+    title: 'Title',
+    excerpt: 'Here is the excerpt.',
+    tags: [],
+    cover: {},
+    author: 'Author',
+    markdown: '',
+    htmlOutput: '',
+    isPublished: false,
+    postedAt: new Date().toJSON(),
+    updatedAt: new Date().toJSON()
+  }
+);
+
+const CREATE_ARTICLE_REQUEST = 'write-down/articles/CREATE_ARTICLE_REQUEST';
+
+const createArticleRequest = () => (
+  {
+    type: CREATE_ARTICLE_REQUEST
+  }
+);
+
+const CREATE_ARTICLE_SUCCESS = 'write-down/articles/CREATE_ARTICLE_SUCCESS';
+
+const createArticleSuccess = (id, articles) => (
+  {
+    type: CREATE_ARTICLE_SUCCESS,
+    id,
+    articles
+  }
+);
+
+const CREATE_ARTICLE_FAILURE = 'write-down/articles/CREATE_ARTICLE_FAILURE';
+
+const createArticleFailure = (error) => (
+  {
+    type: CREATE_ARTICLE_FAILURE,
+    error
+  }
+);
+
+const createArticle = () => async (dispatch) => {
+  dispatch(createArticleRequest());
+
+  let doc = undefined;
+
+  try {
+    const newArticle = generateNewArticle();
+
+    doc = await createDoc(db, {
+      ...newArticle,
+      _id: 'article_' + newArticle.id
+    });
+
+    if (typeof doc !== 'undefined') {
+      const data = await getDocsByType(db, 'article');
+
+      if (typeof data === "object" && 'docs' in data && data.docs.length !== 0) {
+        // Store all the articles after creating a new article.
+        // Store the article id for the state.currentEdit to use.
+        dispatch(createArticleSuccess(doc.id, data.docs));
+      }
+    } else {
+      dispatch(createArticleFailure('It is failed to create article.'))
+    }
+  } catch (error) {
+    dispatch(createArticleFailure(error));
+  }
+
+  return doc;
+};
+
+const SELECT_ARTICLE = 'write-down/articles/SELECT_ARTICLE';
+
+// For the use of saving the id of current editing article to 'state.currentEdit'
 const selectArticle = (id) => (
   {
     type: SELECT_ARTICLE,
@@ -45,160 +131,181 @@ const selectArticle = (id) => (
   }
 );
 
-const saveArticleInfo = (id, title, excerpt, tags, author, cover) => (
+const UPDATE_ARTICLE_REQUEST = 'write-down/articles/UPDATE_ARTICLE_REQUEST';
+
+const updateArticleRequest = () => (
   {
-    type: SAVE_ARTICLE_INFO,
-    id,
-    title,
-    excerpt,
-    author,
-    tags,
-    cover,
-    updatedAt: new Date().toJSON()
+    type: UPDATE_ARTICLE_REQUEST
   }
 );
 
-const saveArticleContent = (id, markdown) => (
+const UPDATE_ARTICLE_SUCCESS = 'write-down/articles/UPDATE_ARTICLE_SUCCESS';
+
+const updateArticleSuccess = (articles) => (
   {
-    type: SAVE_ARTICLE_CONTENT,
-    id,
-    markdown,
-    updatedAt: (new Date()).toJSON()
+    type: UPDATE_ARTICLE_SUCCESS,
+    articles
   }
 );
 
-const publishArticle = (id) => (
+const UPDATE_ARTICLE_FAILURE = 'write-down/articles/UPDATE_ARTICLE_FAILURE';
+
+const updateArticleFailure = (error) => (
   {
-    type: PUBLISH_ARTICLE,
-    id,
-    updatedAt: new Date().toJSON(),
-    postedAt: new Date().toJSON()
+    type: UPDATE_ARTICLE_FAILURE,
+    error
   }
 );
 
-const saveArticleAsDraft = (id) => (
-  {
-    type: SAVE_ARTICLE_AS_DRAFT,
-    id
-  }
-);
+const updateArticle = (id, updatedData) => async (dispatch) => {
+  dispatch(updateArticleRequest());
 
-const deleteArticle = (id) => (
-  {
-    type: DELETE_ARTICLE,
-    id
-  }
-);
+  let res = undefined;
 
-const articles = (state=[], action) => {
-  switch (action.type) {
-    case CREATE_NEW_ARTICLE:
-      return article(state, action);
-    case SAVE_ARTICLE_INFO:
-      return article(state, action);
-    case SAVE_ARTICLE_CONTENT:
-      return article(state, action);
-    case PUBLISH_ARTICLE:
-      return article(state, action);
-    case SAVE_ARTICLE_AS_DRAFT:
-      return article(state, action);
-    case DELETE_ARTICLE:
-      return article(state, action);
-    default:
-      return state;
+  try {
+    await updateDoc(db, 'article_' + id, updatedData);
+    res = await getDocsByType(db, 'article');
+
+    if (typeof res === "object" && 'docs' in res && res.docs.length !== 0) {
+      dispatch(updateArticleSuccess(res.docs));
+    } else {
+      dispatch(updateArticleFailure('It is failed to update article_' + id));
+    }
+  } catch (error) {
+    dispatch(updateArticleFailure(error));
   }
+
+  return res;
 };
 
-const article = (state, action) => {
+const REMOVE_ARTICLE_REQUEST = 'write-down/articles/REMOVE_ARTICLE_REQUEST';
+
+const removeArticleRequest = () => (
+  {
+    type: REMOVE_ARTICLE_REQUEST
+  }
+);
+
+const REMOVE_ARTICLE_SUCCESS = 'write-down/articles/REMOVE_ARTICLE_SUCCESS';
+
+const removeArticleSuccess = (articles) => (
+  {
+    type: REMOVE_ARTICLE_SUCCESS,
+    articles
+  }
+);
+
+const REMOVE_ARTICLE_FAILURE = 'write-down/articles/REMOVE_ARTICLE_FAILURE';
+
+const removeArticleFailure = (error) => (
+  {
+    type: REMOVE_ARTICLE_FAILURE,
+    error
+  }
+);
+
+const removeArticle = (id) => async (dispatch) => {
+  dispatch(removeArticleRequest());
+
+  let res = undefined;
+
+  try {
+    await removeDoc(db, 'article_' + id);
+    res = await getDocsByType(db, 'article');
+
+    if (typeof res === "object" && 'docs' in res && res.docs.length !== 0) {
+      dispatch(removeArticleSuccess(res.docs));
+    } else {
+      dispatch(removeArticleFailure('It is failed to remove article_' + id));
+    }
+  } catch (error) {
+    dispatch(removeArticleFailure(error));
+  }
+
+  return res;
+};
+
+const articles = (
+  state={
+    isCreating: false,
+    isFetching: false,
+    isInserting: false,
+    isUpdating: false,
+    isRemoving: false,
+    data: [],
+    error: ''
+  },
+  action
+) => {
   switch (action.type) {
-    case CREATE_NEW_ARTICLE: {
-      const { id, title, excerpt, tags, author, cover, markdown, htmlOutput, isPublished, updatedAt, postedAt } = action;
-
-      return [
-        {
-          id,
-          title,
-          excerpt,
-          tags,
-          cover,
-          author,
-          markdown,
-          htmlOutput,
-          isPublished,
-          postedAt,
-          updatedAt
-        },
-        ...state
-      ];
-    }
-
-    case SAVE_ARTICLE_INFO: {
-      const { id, title, excerpt, tags, author, cover, updatedAt } = action;
-
-      return state.map(article => {
-        if (article.id === id) {
-          return {
-            ...article,
-            title,
-            excerpt,
-            author,
-            tags,
-            cover,
-            updatedAt
-          };
-        }
-
-        return article;
-      });
-    }
-
-    case SAVE_ARTICLE_CONTENT: {
-      const { id, markdown, updatedAt } = action;
-
-      return state.map(article => {
-        if (article.id === id) {
-          return {
-            ...article,
-            markdown,
-            updatedAt
-          };
-        }
-
-        return article;
-      });
-    }
-
-    case SAVE_ARTICLE_AS_DRAFT:
-      return state.map(article => {
-        if (article.id === action.id && article.isPublished === true) {
-          console.log('match draft');
-
-          return {
-            ...article,
-            isPublished: false
-          };
-        }
-
-        return article;
-      });
-
-    case PUBLISH_ARTICLE:
-      return state.map(article => {
-        if (article.id === action.id && article.isPublished === false) {
-          return {
-            ...article,
-            isPublished: true,
-            postedAt: action.postedAt,
-            updatedAt: action.updatedAt
-          };
-        }
-
-        return article;
-      });
-
-    case DELETE_ARTICLE:
-      return state.filter(article => article.id !== action.id);
-
+    case FETCH_ARTICLES_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case FETCH_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        data: action.articles
+      };
+    case FETCH_ARTICLES_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case CREATE_ARTICLE_REQUEST:
+      return {
+        ...state,
+        isCreating: true
+      };
+    case CREATE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        isCreating: false,
+        error: '',
+        data: action.articles
+      };
+    case CREATE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case UPDATE_ARTICLE_REQUEST:
+      return {
+        ...state,
+        isUpdating: true
+      };
+    case UPDATE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        error: '',
+        data: action.articles
+      };
+    case UPDATE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case REMOVE_ARTICLE_REQUEST:
+      return {
+        ...state,
+        isRemoving: true
+      };
+    case REMOVE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        isRemoving: false,
+        error: '',
+        data: action.articles
+      };
+    case REMOVE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
     default:
       return state;
   }
@@ -206,13 +313,11 @@ const article = (state, action) => {
 
 export {
   articles,
-  createNewArticle,
+  createArticle,
+  fetchArticles,
   selectArticle,
-  saveArticleInfo,
-  saveArticleContent,
-  publishArticle,
-  saveArticleAsDraft,
-  deleteArticle,
-  CREATE_NEW_ARTICLE,
+  updateArticle,
+  removeArticle,
+  CREATE_ARTICLE_SUCCESS,
   SELECT_ARTICLE
 }
