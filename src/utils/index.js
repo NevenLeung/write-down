@@ -2,7 +2,7 @@
 import checkImageUrlIsValid from "./internal/check-image-url-is-valid";
 import delay from "./internal/delay";
 import exportFile from "./internal/export-file";
-import generateStyledHTML from "./internal/generate-styled-html";
+import generateStyledHTML from "./internal/styled-html-generator";
 import generateTimeString from './internal/time-string-generator';
 import ScrollToTop from './internal/ScrollToTop';
 
