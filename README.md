@@ -78,6 +78,7 @@ Article Editing Info Setting Photo Search
     - [x] 设置文章标签
     - [x] 设置文章内容摘要
     - [x] 通过关键字搜索与设置题图（及文章列表封面图片）
+    - [x] 文章信息预览（把鼠标悬停在 Info Setting Button 上显示）
 - 文章管理
   - [x] 新建文章
   - [x] 发布文章\存至草稿箱
