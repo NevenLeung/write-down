@@ -19,7 +19,7 @@ const MoreButton = props => {
       trigger={['click']}
       placement='bottomCenter'
     >
-      <Icon type="ellipsis" theme="outlined" />
+      <Icon type="ellipsis" theme="outlined" title="Others" />
     </Dropdown>
   );
 };

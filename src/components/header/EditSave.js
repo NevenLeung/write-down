@@ -49,7 +49,7 @@ class EditPageSaveOption extends Component {
       >
         <Button
           htmlType="button"
-          title="Just save the markdown and can be exported. It will not be abandoned unless there is another click on the option in the content of popover."
+          title="Save the markdown and it can be exported"
           onClick={this.handleSave}
         >
           Save

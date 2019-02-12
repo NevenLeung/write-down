@@ -53,6 +53,7 @@ class ArticleInfoSettingModal extends React.Component {
       <div>
         <InfoSettingButton
           onClick={this.showModal}
+          title="Article Info Setting"
         />
         <Modal
           style={{top: 20}}

@@ -13,7 +13,7 @@ const UserNavButton = () => {
       trigger={['click']}
       placement='bottomCenter'
     >
-      <Icon type="user" theme="outlined" />
+      <Icon type="user" theme="outlined" title='Navigation'/>
     </Dropdown>
   )
 };

@@ -18,7 +18,7 @@ const EditorSettingButton = props => {
       trigger={['click']}
     >
       <button className={styles.button}>
-        <Icon type="setting" theme="outlined" />
+        <Icon type="setting" theme="outlined" title="Editor Setting"/>
       </button>
     </Popover>
   );
