@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Divider, BackTop, Spin } from "antd";
+import { Col, Row, Divider, BackTop, Spin, Icon } from "antd";
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -26,13 +26,17 @@ const ArticlesPage = ({ articles, isFetching, isLoggedIn, selectArticle, removeA
     ));
   }
 
+  const SpinIndicator = (
+    <Icon type='loading' className={styles.spinIndicator}/>
+  );
+
   return (
     <div className={styles.pageContainer}>
       {
         isFetching?
           (
             <div className={styles.spinContainer}>
-              <Spin tip={'Loading...'}/>
+              <Spin tip={'Loading...'} indicator={SpinIndicator}/>
             </div>
           ) :  null
       }

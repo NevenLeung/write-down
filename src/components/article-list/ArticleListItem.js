@@ -139,6 +139,7 @@ class ArticleItem extends Component{
                       >
                         <button
                           className={styles.editOption}
+                          title='Delete the article'
                         >
                           <Icon type="delete" />
                         </button>
@@ -148,7 +149,7 @@ class ArticleItem extends Component{
                         <button
                           className={styles.editOption}
                           onClick={this.handleEdit}
-                          title='Jump to the edit page.'
+                          title='Jump to the edit page'
                         >
                           <Icon type="edit" />
                         </button>

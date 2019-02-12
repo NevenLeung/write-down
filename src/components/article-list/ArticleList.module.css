@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.spinIndicator {
+  font-size: 24px;
+}
+
 .spinContainer {
   display: flex;
   position: absolute;
