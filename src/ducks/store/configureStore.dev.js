@@ -10,16 +10,11 @@ import reducer from "../reducer";
 
 function configureStore(preLoadedState) {
   // middleware
-  const middleware = [
-    logger,
-    thunk,
-  ];
+  const middleware = [ thunk, logger ];
 
   const middlewareEnhancer = applyMiddleware(...middleware);
 
-  const enhancers = [
-    middlewareEnhancer,
-  ];
+  const enhancers = [ middlewareEnhancer ];
 
   const composedEnhancers = composeWithDevTools(...enhancers);
 
