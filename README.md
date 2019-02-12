@@ -97,21 +97,6 @@ Article Editing Info Setting Photo Search
 ## [Write Down的数据 - ProcessOn](https://www.processon.com/view/link/5c2110f8e4b056243683909e)
 
 
-## Scripts
-
-Run
-
-```
-npm run start
-```
-
-Build
-
-```
-npm run build
-```
-
-
 ## 项目使用的框架、工具与第三方库
 
 框架、状态管理器、前端路由
@@ -141,6 +126,20 @@ UI框架
 日期转换
 
 - [DayJS](https://github.com/iamkun/dayjs)
+
+## Scripts
+
+Run
+
+```
+npm run start
+```
+
+Build
+
+```
+npm run build
+```
 
 
 ## License
