@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
 
@@ -22,6 +23,7 @@ class ArticleEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoggedIn: true,
       markdown: '',
       htmlOutput: '',
       // 由于displayMode和scrollSync需要用到前一次的状态，需要存放在state中
@@ -54,12 +56,22 @@ class ArticleEdit extends Component {
     this.$editor = document.querySelector('.editor');
     this.$preview = document.querySelector('.preview');
 
-    if (this.props.match.params.articleID) {
-      const { markdown } = this.props;
+    try {
+      if (this.props.isLoggedIn && this.props.match.params.articleID) {
+        const { markdown } = this.props;
 
+        this.setState({
+          isLoggedIn: true,
+          markdown: markdown,
+          htmlOutput: MarkdownParser.render(markdown)
+        });
+      }
+    } catch (e) {
+      // console.log(e);
+
+      // Use the isLoggedIn to prevent invalid articleID to <ArticleEdit />
       this.setState({
-        markdown: markdown,
-        htmlOutput: MarkdownParser.render(markdown)
+        isLoggedIn: false
       });
     }
   }
@@ -195,47 +207,58 @@ class ArticleEdit extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Header
-          id={this.props.id}
-          markdown={this.state.markdown}
-          toggleDisplayMode={this.handleDisplayModeChange}
-          toggleScrollSync={this.handleScrollSyncToggle}
-        />
-        <ScrollSync enabled={this.state.scrollSync}>
-          <Row className={styles.articleEditWrapper} type="flex" justify="center">
-            <ScrollSyncPane>
-              <Col
-                className={this.toggleStyleOfEditor(this.state.displayMode) + ' editor'}
-                ref={this.editor}
-                onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
-              >
-                {/*<div className={styles.editorWrapper}>*/}
-                  <Editor
-                    value={this.state.markdown}
-                    options={this.codeMirrorOption}
-                    handleUpdate={this.handleSourceUpdate}
-                  />
-                {/*</div>*/}
-              </Col>
-            </ScrollSyncPane>
+    const { isLoggedIn } = this.state;
 
-            <ScrollSyncPane>
-              <Col
-                className={this.toggleStyleOfPreviewer(this.state.displayMode) + ' preview'}
-                onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
-              >
-                {/*<div className={styles.previewWrapper}>*/}
-                  <Preview renderResult={{
-                    __html: this.state.htmlOutput
-                  }}/>
-                {/*</div>*/}
-              </Col>
-            </ScrollSyncPane>
-          </Row>
-        </ScrollSync>
-      </div>
+    return (
+      <>
+        {
+          isLoggedIn
+            ? (
+              <div>
+                <Header
+                  id={this.props.id}
+                  markdown={this.state.markdown}
+                  toggleDisplayMode={this.handleDisplayModeChange}
+                  toggleScrollSync={this.handleScrollSyncToggle}
+                />
+                <ScrollSync enabled={this.state.scrollSync}>
+                  <Row className={styles.articleEditWrapper} type="flex" justify="center">
+                    <ScrollSyncPane>
+                      <Col
+                        className={this.toggleStyleOfEditor(this.state.displayMode) + ' editor'}
+                        ref={this.editor}
+                        onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
+                      >
+                        {/*<div className={styles.editorWrapper}>*/}
+                        <Editor
+                          value={this.state.markdown}
+                          options={this.codeMirrorOption}
+                          handleUpdate={this.handleSourceUpdate}
+                        />
+                        {/*</div>*/}
+                      </Col>
+                    </ScrollSyncPane>
+
+                    <ScrollSyncPane>
+                      <Col
+                        className={this.toggleStyleOfPreviewer(this.state.displayMode) + ' preview'}
+                        onScroll={throttle(this.saveScrollTop, 200, {trailing: true})}
+                      >
+                        {/*<div className={styles.previewWrapper}>*/}
+                        <Preview renderResult={{
+                          __html: this.state.htmlOutput
+                        }}/>
+                        {/*</div>*/}
+                      </Col>
+                    </ScrollSyncPane>
+                  </Row>
+                </ScrollSync>
+              </div>
+            ) : (
+              <Redirect to='/articles'/>
+            )
+        }
+      </>
     );
   }
 }
@@ -251,5 +274,35 @@ class Preview extends Component {
 Preview.propTypes = {
   renderResult: PropTypes.object
 };
+
+// class ErrorBoundary extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { hasError: false };
+//   }
+//
+//   static getDerivedStateFromError(error) {
+//     return { hasError: true };
+//   }
+//
+//   componentDidCatch(error, info) {
+//     console.log(error, info);
+//   }
+//
+//   render() {
+//     console.log(this.state);
+//     if (this.state.hasError) {
+//       return <h1>Something went wrong.</h1>
+//     }
+//
+//     return this.props.children;
+//   }
+// }
+//
+// const ArticleEditWithErrorBoundary = (props) => (
+//   <ErrorBoundary>
+//     <ArticleEdit {...props}/>
+//   </ErrorBoundary>
+// );
 
 export default ArticleEdit;

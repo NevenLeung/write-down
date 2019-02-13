@@ -2,8 +2,13 @@ import { connect } from "react-redux";
 
 import ArticleEdit from '../components/article-edit/ArticleEdit';
 
-const mapState = (state) => {
-  const articleID = state.currentEdit;
+const mapState = (state, ownProps) => {
+  const isLoggedIn = state.user.isLoggedIn;
+
+  const idFromRedux = state.currentEdit;
+  const idFromParams = ownProps.match.params.articleID;
+
+  const articleID = idFromParams? idFromParams: idFromRedux;
 
   const selectedArticle = state.articles.data.find(article => article.id === articleID);
 
@@ -13,11 +18,12 @@ const mapState = (state) => {
     return {
       id,
       markdown,
-      htmlOutput
+      htmlOutput,
+      isLoggedIn
     };
   }
 
-  return {};
+  return {isLoggedIn};
 };
 
 export default connect(
