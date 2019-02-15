@@ -37,7 +37,7 @@
 }
 
 .cm-s-cherry .CodeMirror-selected {
-  background: #ffebbd;
+  background: #ffd7ad;
 }
 
 /* code, code block */
@@ -47,17 +47,17 @@
 
 /* list level 1 */
 .cm-s-cherry .cm-variable-2 {
-  color: #A94CAF;
+  color: #000;
 }
 
 /* list level 2 */
 .cm-s-cherry .cm-variable-3 {
-  color: #11CD86;
+  color: #0366d6;
 }
 
 /* list level 3 */
 .cm-s-cherry .cm-keyword {
-  color: #fa8e82;
+  color: #F25565;
 }
 
 /* url or image link */
