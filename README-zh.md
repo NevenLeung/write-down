@@ -4,7 +4,7 @@
 
 Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语法标准为 GFM，且额外支持几种功能，如 Emoji 表情、上下标文字等（具体可到 [Demo](https://nevenleung.github.io/write-down/) 里的 full feature example 中进行查看）
 
-[English README](https://github.com/NevenLeung/write-down/blob/master/README.md)
+[README in English](https://github.com/NevenLeung/write-down/blob/master/README.md)
 
 ## Demo
 
@@ -102,7 +102,7 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 
 ## 项目使用的框架、工具与第三方库
 
-框架、状态管理器、前端路由
+JS框架、状态管理器、前端路由
 
 - [React](https://github.com/facebook/react/)
 - [Redux](https://github.com/reactjs/redux/)
@@ -114,7 +114,7 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 - [markdown-it](https://github.com/markdown-it/markdown-it/)
 - [Prism](https://github.com/PrismJS/prism/)
 
-UI框架
+UI组件
 
 - [Ant Design](https://github.com/ant-design/ant-design/)
 

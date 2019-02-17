@@ -4,7 +4,7 @@ A simple markdown blog app built with React.
 
 The article in Write Down are using markdown to write. The markdown here is based on GFM, and it supports some additional features, like emoji, subscript, superscript and etc. (You can see those in the full feature example in [Demo](https://nevenleung.github.io/write-down/).)
 
-[中文README](https://github.com/NevenLeung/write-down/blob/master/README-zh.md)
+[README 中文](https://github.com/NevenLeung/write-down/blob/master/README-zh.md)
 
 ## Demo
 
@@ -114,7 +114,7 @@ Text editor, markdown parser, code highlighting
 - [markdown-it](https://github.com/markdown-it/markdown-it/)
 - [Prism](https://github.com/PrismJS/prism/)
 
-UI framework
+UI components
 
 - [Ant Design](https://github.com/ant-design/ant-design/)
 
