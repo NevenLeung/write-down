@@ -45,19 +45,19 @@
   color: #999;
 }
 
-/* list level 1 */
+/* list item level 1 */
 .cm-s-cherry .cm-variable-2 {
-  color: #000;
+  /*color: #000;*/
 }
 
-/* list level 2 */
+/* list item level 2 */
 .cm-s-cherry .cm-variable-3 {
-  color: #0366d6;
+  /*color: #0366d6;*/
 }
 
-/* list level 3 */
+/* list item level 3 */
 .cm-s-cherry .cm-keyword {
-  color: #F25565;
+  /*color: #F25565;*/
 }
 
 /* url or image link */
