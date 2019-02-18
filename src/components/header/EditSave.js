@@ -7,6 +7,13 @@ import { Button, Col, Popover, Row, Checkbox, message } from "antd";
 import styles from './Header.module.css';
 
 class EditPageSaveOption extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    markdown: PropTypes.string.isRequired,
+    saveArticleContent: PropTypes.func.isRequired,
+    resetContentEditStatus: PropTypes.func.isRequired,
+  };
+
   state = {
     visible: false
   };
@@ -22,8 +29,9 @@ class EditPageSaveOption extends Component {
   };
 
   handleSave = () => {
-    const { id, markdown, saveArticleContent } = this.props;
+    const { id, markdown, saveArticleContent, resetContentEditStatus } = this.props;
 
+    resetContentEditStatus();
     saveArticleContent(id, { markdown });
 
     message.config({
@@ -60,6 +68,13 @@ class EditPageSaveOption extends Component {
 }
 
 class EditPageSaveOptionContent extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    hidePopover: PropTypes.func.isRequired,
+    publishArticle: PropTypes.func.isRequired,
+    saveArticleAsDraft: PropTypes.func.isRequired,
+  };
+
   state = {
     isRedirected: true
   };
@@ -152,9 +167,5 @@ class EditPageSaveOptionContent extends Component {
     );
   }
 }
-
-EditPageSaveOptionContent.propsType = {
-  hidePopover: PropTypes.func.isRequired
-};
 
 export { EditPageSaveOption };

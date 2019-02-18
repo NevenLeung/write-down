@@ -1,11 +1,14 @@
 import { connect } from "react-redux";
 
+import { updateContentEditStatus } from "../ducks/currentEdit";
+
 import ArticleEdit from '../components/article-edit/ArticleEdit';
 
 const mapState = (state, ownProps) => {
   const isLoggedIn = state.user.isLoggedIn;
+  const isMarkdownTouch = state.currentEdit.isTouch;
 
-  const idFromRedux = state.currentEdit;
+  const idFromRedux = state.currentEdit.id;
   const idFromParams = ownProps.match.params.articleID;
 
   const articleID = idFromParams? idFromParams: idFromRedux;
@@ -19,6 +22,7 @@ const mapState = (state, ownProps) => {
       id,
       markdown,
       htmlOutput,
+      isMarkdownTouch,
       isLoggedIn
     };
   }
@@ -26,7 +30,11 @@ const mapState = (state, ownProps) => {
   return {isLoggedIn};
 };
 
+const mapDispatch = {
+  updateContentEditStatus
+};
+
 export default connect(
   mapState,
-  null
+  mapDispatch
 )(ArticleEdit);

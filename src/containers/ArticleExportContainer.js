@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { MoreButtonInEditPage } from '../components/header/MoreButtonInEditPage';
 
 const articleExportMapState = (state) => {
-  const articleID = state.currentEdit;
+  const articleID = state.currentEdit.id;
 
   const selectedArticle = state.articles.data.find(article => article.id.toString() === articleID);
 

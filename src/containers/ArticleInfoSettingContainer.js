@@ -6,7 +6,7 @@ import { InfoSettingPreview } from '../components/article-edit/ArticleInfoSettin
 import { WrappedFormInModal as InfoSettingForm } from "../components/article-edit/ArticleInfoSettingForm";
 
 const mapState = (state) => {
-  const articleID = state.currentEdit;
+  const articleID = state.currentEdit.id;
 
   const selectedArticle = state.articles.data.find(article => article.id === articleID);
 

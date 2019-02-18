@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 
 import { updateArticle } from "../ducks/articles";
+import { resetContentEditStatus } from "../ducks/currentEdit";
 import { EditPageSaveOption } from '../components/header/EditSave';
 
 import { generateTimeString } from "../utils/";
@@ -13,6 +14,8 @@ const mapState = (state, ownProps) => (
 );
 
 const mapDispatch = dispatch => ({
+  resetContentEditStatus: () =>
+    dispatch(resetContentEditStatus()),
   saveArticleContent: (id, updatedData) =>
     dispatch(updateArticle(id, {
       ...updatedData,

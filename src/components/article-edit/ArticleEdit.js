@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
 
@@ -56,20 +56,23 @@ class ArticleEdit extends Component {
     this.$editor = document.querySelector('.editor');
     this.$preview = document.querySelector('.preview');
 
-    try {
-      if (this.props.isLoggedIn && this.props.match.params.articleID) {
-        const { markdown } = this.props;
+    // Prevent the user who isn't logged in to the article editing page.
+    if (this.props.isLoggedIn && typeof this.props.markdown === 'string') {
+      // If user click the edit button to article editing page,
+      // it should fetch the data from the state by the <articleID>.
 
-        this.setState({
-          isLoggedIn: true,
-          markdown: markdown,
-          htmlOutput: MarkdownParser.render(markdown)
-        });
-      }
-    } catch (e) {
-      // console.log(e);
+      // However, if the user jump to the article editing page by input the url
+      // directly with invalid <articleID>, due to the invalid markdown string,
+      // it will throw an error by markdown parser.
+      const { markdown } = this.props;
 
-      // Use the isLoggedIn to prevent invalid articleID to <ArticleEdit />
+      this.setState({
+        isLoggedIn: true,
+        markdown: markdown,
+        htmlOutput: MarkdownParser.render(markdown)
+      });
+    } else {
+      // Set isLoggedIn to false. It will redirect to the article list page.
       this.setState({
         isLoggedIn: false
       });
@@ -81,6 +84,11 @@ class ArticleEdit extends Component {
       markdown: value,
       htmlOutput: MarkdownParser.render(value)
     });
+
+    if (!this.props.isMarkdownTouch) {
+      // Set state.currentEdit.isTouch to true only when isTouch is false.
+      this.props.updateContentEditStatus();
+    }
   };
 
   handleScrollSyncToggle = () => {
@@ -208,6 +216,7 @@ class ArticleEdit extends Component {
 
   render() {
     const { isLoggedIn } = this.state;
+    const { isMarkdownTouch } = this.props;
 
     return (
       <>
@@ -215,6 +224,10 @@ class ArticleEdit extends Component {
           isLoggedIn
             ? (
               <div>
+                <Prompt
+                  when={isMarkdownTouch}
+                  message="You haven't saved the markdown yet. Are you sure to abandon the changes?"
+                />
                 <Header
                   id={this.props.id}
                   markdown={this.state.markdown}
