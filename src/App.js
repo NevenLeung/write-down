@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import 'normalize.css/normalize.css';
@@ -14,6 +14,7 @@ import ArticleListPage from './containers/ArticleListContainer';
 import ArticleDraftListPage from './containers/ArticleDraftListContainer';
 import ArticleEditPage from './containers/ArticleEditContainer';
 import ArticleReadPage from './containers/ArticleReadContainer';
+import NoMatchPage from './components/no-match/NoMatch';
 
 // For app init.
 import { fetchArticles } from "./ducks/articles";
@@ -43,15 +44,18 @@ class App extends React.Component {
 
 const AppRouter = () => (
   <div className="App">
-    {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
-    <Route exact path={'/'} component={ArticleListPage}/>
-    <Route path={'/articles'} component={ArticleListPage}/>
-    <Route path={'/article/:articleID/read/'} component={ArticleReadPage}/>
-    <Route path={'/article/new/'} component={ArticleEditPage}/>
-    <Route path={'/article/:articleID/edit/'} component={ArticleEditPage}/>
-    <Route path={'/drafts'} component={ArticleDraftListPage}/>
-    <Route path={'/draft/:articleID/edit/'} component={ArticleEditPage}/>
-    {/*<Route path={'/user'} component={UserPage}/>*/}
+    <Switch>
+      {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
+      <Route exact path={'/'} component={ArticleListPage}/>
+      <Route path={'/articles'} component={ArticleListPage}/>
+      <Route path={'/article/:articleID/read/'} component={ArticleReadPage}/>
+      <Route path={'/article/new/'} component={ArticleEditPage}/>
+      <Route path={'/article/:articleID/edit/'} component={ArticleEditPage}/>
+      <Route path={'/drafts'} component={ArticleDraftListPage}/>
+      <Route path={'/draft/:articleID/edit/'} component={ArticleEditPage}/>
+      {/*<Route path={'/user'} component={UserPage}/>*/}
+      <Route component={NoMatchPage}/>
+    </Switch>
   </div>
 );
 

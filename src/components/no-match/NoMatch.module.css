@@ -1,0 +1,11 @@
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+}
+
+.message {
+  text-align: center;
+  font-size: 18px;
+}
