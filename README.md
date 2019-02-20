@@ -37,7 +37,8 @@ The article in Write Down are using markdown to write. The markdown here is base
   - Edit markdown
     - [x] Toggle editing and preview mode
     - [x] Sync scrolling of editing and preview panels
-    - [x] Highlight the code of markdown according to its usage (I created the CodeMirror color theme)
+    - [x] Highlight the code of markdown according to its usage (I made the CodeMirror color theme)
+    - [x] Prompt to save markdown after editing
     - [ ] Support some built-in snippets for markdown
   - Edit other elements
     - [x] Set the tags of article
@@ -148,3 +149,8 @@ npm run build
 ## License
 
 [MIT](https://github.com/NevenLeung/write-down/blob/master/LICENSE) © Neven Leung
+
+
+## Acknowledgments
+
+Write Down is inspired by [Medium](https://medium.com/).

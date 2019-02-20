@@ -1,6 +1,6 @@
 # Write Down
 
-一个使用 React 编写的基于 markdown 的博客应用。
+一个使用 React 编写的、基于 markdown 的博客应用。
 
 Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语法标准为 GFM，且额外支持几种功能，如 Emoji 表情、上下标文字等（具体可到 [Demo](https://nevenleung.github.io/write-down/) 里的 full feature example 中进行查看）
 
@@ -37,7 +37,8 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
   - markdown 的编辑
     - [x] 编辑与预览的模式切换
     - [x] 编辑框与预览框的滚动同步
-    - [x] 根据 markdown 语法给出相应的代码高亮（自己写的 CodeMirror 配色主题）
+    - [x] 根据 markdown 语法给出相应的代码高亮（自己做的 CodeMirror 配色主题）
+    - [x] 编辑 markdown 的保存提醒
     - [ ] 支持语法的快捷输入（内置snippet）
   - 其他元素的编辑
     - [x] 设置文章标签
@@ -148,3 +149,8 @@ npm run build
 ## License
 
 [MIT](https://github.com/NevenLeung/write-down/blob/master/LICENSE) © Neven Leung
+
+
+## Acknowledgments
+
+Write Down is inspired by [Medium](https://medium.com/).
