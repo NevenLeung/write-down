@@ -20,16 +20,16 @@ const ArticleRead = (props) => {
   };
 
   return (
-    <>
+    <div>
       <ScrollToTop/>
       <Header/>
       <Row
-        className={styles.readPageBackground}
+        className={styles.readPageContainer}
         type="flex"
         justify="center"
         align="middle"
       >
-        <Col className={styles.readPageContainer}>
+        <Col className={styles.readPageContent}>
           <Title title={title}/>
           <ArticleInfo {...articleInfo}/>
           <Excerpt excerpt={excerpt}/>
@@ -38,7 +38,7 @@ const ArticleRead = (props) => {
           <BackTop/>
         </Col>
       </Row>
-    </>
+    </div>
 
   )
 };

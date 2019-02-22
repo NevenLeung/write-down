@@ -1,6 +1,7 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { AnimatedSwitch } from 'react-router-transition';
 
 import 'normalize.css/normalize.css';
 
@@ -44,7 +45,12 @@ class App extends React.Component {
 
 const AppRouter = () => (
   <div className="App">
-    <Switch>
+    <AnimatedSwitch
+      atEnter={{ opacity: 0 }}
+      atLeave={{ opacity: 0 }}
+      atActive={{ opacity: 1 }}
+      className="switch-wrapper"
+    >
       {/*<Route exact path={'/'} component={ArticleEditPage}/>*/}
       <Route exact path={'/'} component={ArticleListPage}/>
       <Route path={'/articles'} component={ArticleListPage}/>
@@ -55,7 +61,7 @@ const AppRouter = () => (
       <Route path={'/draft/:articleID/edit/'} component={ArticleEditPage}/>
       {/*<Route path={'/user'} component={UserPage}/>*/}
       <Route component={NoMatchPage}/>
-    </Switch>
+    </AnimatedSwitch>
   </div>
 );
 
