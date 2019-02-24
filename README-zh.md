@@ -103,33 +103,17 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 
 ## 项目使用的框架、工具与第三方库
 
-JS框架、状态管理器、前端路由
-
-- [React](https://github.com/facebook/react/)
-- [Redux](https://github.com/reactjs/redux/)
-- [React-Router](https://github.com/ReactTraining/react-router)
-
-文本编辑器、markdown解释器、代码高亮
-
-- [CodeMirror](https://github.com/codemirror/CodeMirror/)
-- [markdown-it](https://github.com/markdown-it/markdown-it/)
-- [Prism](https://github.com/PrismJS/prism/)
-
-UI组件
-
-- [Ant Design](https://github.com/ant-design/ant-design/)
-
-本地存储
-
-- [PouchDB](https://github.com/pouchdb/pouchdb/)
-
-文件导出
-
-- [File Saver](https://github.com/eligrey/FileSaver.js/)
-
-日期转换
-
-- [DayJS](https://github.com/iamkun/dayjs)
+- JS 框架 - [React](https://github.com/facebook/react/)
+- UI 组件 - [Ant Design](https://github.com/ant-design/ant-design/)
+- 状态管理器 - [Redux](https://github.com/reactjs/redux/)
+- 前端路由 - [React-Router](https://github.com/ReactTraining/react-router)
+- 文本编辑器 - [CodeMirror](https://github.com/codemirror/CodeMirror/)
+- markdown 解释器 - [markdown-it](https://github.com/markdown-it/markdown-it/)
+- 代码高亮 - [Prism](https://github.com/PrismJS/prism/)
+- 本地存储 - [PouchDB](https://github.com/pouchdb/pouchdb/)
+- 图片搜索 - [Unsplash](https://github.com/unsplash/unsplash-js)
+- 文件导出 - [File Saver](https://github.com/eligrey/FileSaver.js/)
+- 日期转换 - [DayJS](https://github.com/iamkun/dayjs)
 
 ## Scripts
 
@@ -153,4 +137,5 @@ npm run build
 
 ## Acknowledgments
 
-Write Down is inspired by [Medium](https://medium.com/).
+- 文章编辑页中的滚动同步与显示模式切换的功能参考了 [StackEdit](https://stackedit.io/)。
+- 题图搜索功能与文章阅读页的风格参考了 [Medium](https://medium.com/) 。

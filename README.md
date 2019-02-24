@@ -103,33 +103,17 @@ The article in Write Down are using markdown to write. The markdown here is base
 
 ## Built With
 
-JS framework, state manager, front-end router
-
-- [React](https://github.com/facebook/react/)
-- [Redux](https://github.com/reactjs/redux/)
-- [React-Router](https://github.com/ReactTraining/react-router)
-
-Text editor, markdown parser, code highlighting
-
-- [CodeMirror](https://github.com/codemirror/CodeMirror/)
-- [markdown-it](https://github.com/markdown-it/markdown-it/)
-- [Prism](https://github.com/PrismJS/prism/)
-
-UI components
-
-- [Ant Design](https://github.com/ant-design/ant-design/)
-
-Local storage
-
-- [PouchDB](https://github.com/pouchdb/pouchdb/)
-
-File export
-
-- [File Saver](https://github.com/eligrey/FileSaver.js/)
-
-Time transformation
-
-- [DayJS](https://github.com/iamkun/dayjs)
+- JS framework - [React](https://github.com/facebook/react/)
+- UI components - [Ant Design](https://github.com/ant-design/ant-design/)
+- State manager - [Redux](https://github.com/reactjs/redux/)
+- Front-end router - [React-Router](https://github.com/ReactTraining/react-router)
+- Text editor - [CodeMirror](https://github.com/codemirror/CodeMirror/)
+- markdown parser - [markdown-it](https://github.com/markdown-it/markdown-it/)
+- Code highlighting - [Prism](https://github.com/PrismJS/prism/)
+- Local storage - [PouchDB](https://github.com/pouchdb/pouchdb/)
+- Photo search - [Unsplash](https://github.com/unsplash/unsplash-js)
+- File export - [File Saver](https://github.com/eligrey/FileSaver.js/)
+- Time transformation - [DayJS](https://github.com/iamkun/dayjs)
 
 ## Scripts
 
@@ -153,4 +137,5 @@ npm run build
 
 ## Acknowledgments
 
-Write Down is inspired by [Medium](https://medium.com/).
+- The scroll-sync and toggling display mode features of article editing page is inspired by [StackEdit](https://stackedit.io/).
+- The photo search feature and the style of article reading page are inspired by [Medium](https://medium.com/).
