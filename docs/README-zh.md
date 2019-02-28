@@ -6,7 +6,23 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 
 [README in English](https://github.com/NevenLeung/write-down/blob/master/README.md)
 
-## Demo
+## 目录
+
+- [项目目的](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#项目目的)
+- [项目演示](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#项目演示)
+- [功能列表](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#功能列表)
+- [功能演示](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#功能演示)
+- [其他资料](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#其他资料)
+- [项目使用的框架、工具与第三方库](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#项目使用的框架、工具与第三方库)
+- [Scripts](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#scripts)
+- [License](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#license)
+- [感谢](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#感谢)
+
+## 项目目的
+
+我想做一些以前没做过的东西。同时，我想通过开发 Write Down，来实践从 React 中学习的知识。
+
+## 项目演示
 
 [Demo Link](https://nevenleung.github.io/write-down/)
 
@@ -98,7 +114,11 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 <p align="center">Article Editing Info Setting Photo Search</p>
 
 
-## [Write Down的数据 - ProcessOn](https://www.processon.com/view/link/5c2110f8e4b056243683909e)
+
+## 其他资料
+
+- [你可能会问的问题](https://github.com/NevenLeung/write-down/blob/master/docs/FAQ.md)
+- [Write Down的数据 - ProcessOn](https://www.processon.com/view/link/5c2110f8e4b056243683909e)
 
 
 ## 项目使用的框架、工具与第三方库
@@ -112,6 +132,7 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 - 代码高亮 - [Prism](https://github.com/PrismJS/prism/)
 - 本地存储 - [PouchDB](https://github.com/pouchdb/pouchdb/)
 - 图片搜索 - [Unsplash](https://github.com/unsplash/unsplash-js)
+- 图片显示(类似 Pinterest) - [react-stack-grid](https://github.com/tsuyoshiwada/react-stack-grid)
 - 文件导出 - [File Saver](https://github.com/eligrey/FileSaver.js/)
 - 日期转换 - [DayJS](https://github.com/iamkun/dayjs)
 
@@ -135,7 +156,7 @@ npm run build
 [MIT](https://github.com/NevenLeung/write-down/blob/master/LICENSE) © Neven Leung
 
 
-## Acknowledgments
+## 感谢
 
 - 文章编辑页中的滚动同步与显示模式切换的功能参考了 [StackEdit](https://stackedit.io/)。
 - 题图搜索功能与文章阅读页的风格参考了 [Medium](https://medium.com/) 。

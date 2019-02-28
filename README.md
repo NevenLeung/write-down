@@ -4,7 +4,23 @@ A simple markdown blog app built with React.
 
 The article in Write Down are using markdown to write. The markdown here is based on GFM, and it supports some additional features, like emoji, subscript, superscript and etc. (You can see those in the full feature example in [Demo](https://nevenleung.github.io/write-down/).)
 
-[README 中文](https://github.com/NevenLeung/write-down/blob/master/README-zh.md)
+[README 中文](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md)
+
+## Table of Contents
+
+- [Motivation](https://github.com/NevenLeung/write-down#motivation)
+- [Demo](https://github.com/NevenLeung/write-down#demo)
+- [Feature List](https://github.com/NevenLeung/write-down#feature-list)
+- [Showcase](https://github.com/NevenLeung/write-down#showcase)
+- [Other resources](https://github.com/NevenLeung/write-down#other-resources)
+- [Built with](https://github.com/NevenLeung/write-down#built-with)
+- [Scripts](https://github.com/NevenLeung/write-down#scripts)
+- [License](https://github.com/NevenLeung/write-down#license)
+- [Acknowledgements](https://github.com/NevenLeung/write-down#acknowledgements)
+
+## Motivation
+
+I want to make something that I have never made it before. Meanwhile, I want to practise what I learn from React by making Write Down.
 
 ## Demo
 
@@ -99,7 +115,10 @@ The article in Write Down are using markdown to write. The markdown here is base
 <p align="center">Article Editing Info Setting Photo Search</p>
 
 
-## [Data in Write Down - ProcessOn](https://www.processon.com/view/link/5c2110f8e4b056243683909e)
+## Other resources
+
+- [Some questions you may want to ask](https://github.com/NevenLeung/write-down/blob/master/docs/FAQ.md)
+- [Data in Write Down - ProcessOn](https://www.processon.com/view/link/5c2110f8e4b056243683909e)
 
 ## Built With
 
@@ -112,6 +131,7 @@ The article in Write Down are using markdown to write. The markdown here is base
 - Code highlighting - [Prism](https://github.com/PrismJS/prism/)
 - Local storage - [PouchDB](https://github.com/pouchdb/pouchdb/)
 - Photo search - [Unsplash](https://github.com/unsplash/unsplash-js)
+- Photo display (like Pinterest) - [react-stack-grid](https://github.com/tsuyoshiwada/react-stack-grid)
 - File export - [File Saver](https://github.com/eligrey/FileSaver.js/)
 - Time transformation - [DayJS](https://github.com/iamkun/dayjs)
 
