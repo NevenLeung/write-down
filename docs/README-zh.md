@@ -4,7 +4,7 @@
 
 Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语法标准为 GFM，且额外支持几种功能，如 Emoji 表情、上下标文字等（具体可到 [Demo](https://nevenleung.github.io/write-down/) 里的 full feature example 中进行查看）
 
-[README in English](https://github.com/NevenLeung/write-down)
+[README in English](https://github.com/NevenLeung/write-down#write-down)
 
 ## 目录
 

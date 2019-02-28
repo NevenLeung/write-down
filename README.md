@@ -157,5 +157,5 @@ npm run build
 
 ## Acknowledgments
 
-- The scroll-sync and toggling display mode features of article editing page is inspired by [StackEdit](https://stackedit.io/).
+- The scroll-sync and toggling display mode features of article editing page are inspired by [StackEdit](https://stackedit.io/).
 - The photo search feature and the style of article reading page are inspired by [Medium](https://medium.com/).
