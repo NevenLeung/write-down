@@ -39,7 +39,7 @@ class ArticleEdit extends Component {
       lineWiseCopyCut: true,
     };
 
-    // 用于保存相应的节点
+    // 初始化相应的节点
     this.$editor = null;
     this.$preview = null;
 
@@ -77,6 +77,12 @@ class ArticleEdit extends Component {
         isLoggedIn: false
       });
     }
+  }
+
+  componentWillUnmount() {
+    // destroy the dom node reference
+    this.$editor = null;
+    this.$preview = null;
   }
 
   handleSourceUpdate = (editor, data, value) => {
