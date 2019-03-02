@@ -16,12 +16,14 @@ class LoginForm extends React.Component {
         // console.log('Received values of form: ', values);
       }
 
-      if (username === 'test' && password === '123456') {
-        // It saves login data depending on 'rememberMe'.
-        if (rememberMe) {
-          saveLoginData({ username, password });
-        }
+      // It saves login data depending on 'rememberMe'.
+      if (rememberMe) {
+        saveLoginData({ username, password });
+      } else {
+        saveLoginData({ username: '', password: '' });
+      }
 
+      if (username === 'test' && password === '123456') {
         userLogin();
         closeModal();
 
