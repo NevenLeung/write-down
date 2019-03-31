@@ -7,7 +7,7 @@ import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import {Row, Col } from 'antd';
 
 import { delay } from "../../utils/index";
-import { MarkdownParser } from '../../utils';
+import { MarkdownParser, ScrollToTop } from '../../utils';
 import Editor from './Editor';
 
 import 'github-markdown-css';
@@ -234,6 +234,7 @@ class ArticleEdit extends Component {
                   when={isMarkdownTouch}
                   message="You haven't saved the markdown yet. Are you sure to abandon the changes?"
                 />
+                <ScrollToTop/>
                 <Header
                   id={this.props.id}
                   markdown={this.state.markdown}

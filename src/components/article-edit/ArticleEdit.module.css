@@ -18,15 +18,15 @@
 /**
   可能要删除的
  */
-.editorWrapper {
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+/*.editorWrapper {*/
+  /*width: 100%;*/
+  /*overflow-x: hidden;*/
+  /*overflow-y: auto;*/
+/*}*/
 
 .editor {
   width: 50%;
-  height: auto;
+  height: 100%;
   opacity: 1;
   position: relative;
   padding: 0;
@@ -54,10 +54,10 @@
 /**
   可能要删除的
  */
-.editorHide .editorWrapper {
-  width: calc(100vw - 460px);
-  /*width: 671px;*/
-}
+/*.editorHide .editorWrapper {*/
+  /*width: calc(100vw - 460px);*/
+  /*!*width: 671px;*!*/
+/*}*/
 
 /* previewer setting */
 :global .emoji {
@@ -81,14 +81,15 @@
 /**
   可能要删除的
  */
-.previewWrapper {
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+/*.previewWrapper {*/
+  /*width: 100%;*/
+  /*overflow-x: hidden;*/
+  /*overflow-y: auto;*/
+/*}*/
 
 .preview {
   width: 50%;
+  height: 100%;
   padding: 0 10px;
   overflow: auto;
   opacity: 1;
@@ -115,7 +116,7 @@
 /**
   可能要删除的
  */
-.previewHide .previewWrapper {
-  width: calc(100vw - 460px);
-  /*width: 671px;*/
-}
+/*.previewHide .previewWrapper {*/
+  /*width: calc(100vw - 460px);*/
+  /*!*width: 671px;*!*/
+/*}*/
