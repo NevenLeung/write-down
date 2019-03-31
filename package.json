@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "keywords": [
+    "blog",
+    "editor",
     "markdown",
-    "writing platform",
-    "editor"
+    "react",
+    "writing platform"
   ],
   "homepage": "https://nevenleung.github.io/write-down/",
   "dependencies": {
@@ -40,11 +42,10 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-router-transition": "^1.2.1",
-    "react-scripts": "^2.1.5",
+    "react-scripts": "^2.1.8",
     "react-scroll-sync": "^0.7.0",
     "react-stack-grid": "^0.7.1",
     "redux": "^4.0.1",
-    "redux-async-initial-state": "^0.3.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "shortid": "^2.2.14",
@@ -56,7 +57,7 @@
     "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "GENERATE_SOURCEMAP=false react-scripts build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
