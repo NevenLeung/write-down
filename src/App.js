@@ -65,6 +65,22 @@ const AppRouter = () => (
   </div>
 );
 
+// const AppRouter = () => (
+//   <div className="App">
+//     <Switch>
+//       <Route exact path={'/'} component={ArticleListPage}/>
+//       <Route path={'/articles'} component={ArticleListPage}/>
+//       <Route path={'/article/:articleID/read/'} component={ArticleReadPage}/>
+//       <Route path={'/article/new/'} component={ArticleEditPage}/>
+//       <Route path={'/article/:articleID/edit/'} component={ArticleEditPage}/>
+//       <Route path={'/drafts'} component={ArticleDraftListPage}/>
+//       <Route path={'/draft/:articleID/edit/'} component={ArticleEditPage}/>
+//       {/*<Route path={'/user'} component={UserPage}/>*/}
+//       <Route component={NoMatchPage}/>
+//     </Switch>
+//   </div>
+// );
+
 // const UserPage = () => (
 //   <div>
 //     <Header/>

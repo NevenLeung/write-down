@@ -51,4 +51,5 @@ p, ul, li, a, table, button {
 
 .switch-wrapper > div {
   position: absolute;
+  width: 100%;
 }
