@@ -52,16 +52,10 @@ const ArticlesPage = ({ articles, error, isFetching, isLoggedIn, isRemovingFinis
       <>
         <Header/>
         <Row>
-          <Col md={4} sm={2} xs={0}>
-
-          </Col>
-          <Col className={styles.list} md={16} sm={20} xs={24}>
+          <Col className={styles.list}>
             <Divider className={styles.pageIndicator}>Article list</Divider>
             {ArticleList? ArticleList: null}
             <BackTop/>
-          </Col>
-          <Col md={4} sm={2} xs={0}>
-
           </Col>
         </Row>
       </>

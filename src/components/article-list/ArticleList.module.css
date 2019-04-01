@@ -26,15 +26,19 @@
 
 .pageIndicator {
   composes: sans-serif-font;
+  width: 96%;
+  min-width: 96%;
+  margin: 16px auto !important;
   padding: 4px 0 0 !important;
   font-size: 24px !important;
   color: #ccc !important;
 }
 
 .list {
+  max-width: 900px;
   /*border: 2px solid #eee;*/
   /*border-radius: 32px;*/
-  margin: 0 0 40px;
+  margin: 0 auto 40px;
   padding: 0 20px;
 }
 
