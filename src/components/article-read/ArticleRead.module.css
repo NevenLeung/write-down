@@ -12,7 +12,7 @@
 
 .readPageContainer {
   width: calc(100vw - 12px);
-  margin: 20px 0 100px 0;
+  margin: 20px auto 100px;
 }
 
 .readPageContent {

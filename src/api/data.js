@@ -45,7 +45,7 @@ let data = [
       authorName: 'Scott Webb',
       authorLink: 'https://unsplash.com/@scottwebb'
     },
-    tags: ['121212121212', '23232323232323', '343434343434343', '4545454545454554', '5656565656565656'],
+    tags: ['121212121212', '23232323232323', '343434343434343', '4545454545454554'],
     markdown: '## This is content No.2',
     isPublished: false,
     postedAt: '2018-10-16T18:16:01.296Z',
