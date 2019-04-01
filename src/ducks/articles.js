@@ -27,6 +27,14 @@ const fetchArticlesFailure = (error) => (
   }
 );
 
+const FETCH_ARTICLE_STATUS_RESET = 'write-down/articles/FETCH_ARTICLE_STATUS_RESET';
+
+const fetchArticleStatusReset = () => (
+  {
+    type: FETCH_ARTICLE_STATUS_RESET
+  }
+);
+
 const fetchArticles = () => async (dispatch) => {
   dispatch(fetchArticlesRequest());
 
@@ -37,6 +45,7 @@ const fetchArticles = () => async (dispatch) => {
 
     if (typeof res === "object" && 'docs' in res && res.docs.length !== 0) {
       dispatch(fetchArticlesSuccess(res.docs));
+      dispatch(fetchArticleStatusReset())
     } else {
       dispatch(fetchArticlesFailure('No articles in database.'));
     }
@@ -87,6 +96,14 @@ const createArticleFailure = (error) => (
   {
     type: CREATE_ARTICLE_FAILURE,
     error
+  }
+);
+
+const CREATE_ARTICLE_STATUS_RESET = 'write-down/articles/CREATE_ARTICLE_STATUS_RESET';
+
+const createArticleStatusReset = () => (
+  {
+    type: CREATE_ARTICLE_STATUS_RESET
   }
 );
 
@@ -141,10 +158,12 @@ const updateArticleRequest = () => (
 
 const UPDATE_ARTICLE_SUCCESS = 'write-down/articles/UPDATE_ARTICLE_SUCCESS';
 
-const updateArticleSuccess = (articles) => (
+// updatedPart is for identifying which data of article has been updated
+const updateArticleSuccess = (articles, updatedPart) => (
   {
     type: UPDATE_ARTICLE_SUCCESS,
-    articles
+    articles,
+    updatedPart
   }
 );
 
@@ -157,7 +176,15 @@ const updateArticleFailure = (error) => (
   }
 );
 
-const updateArticle = (id, updatedData) => async (dispatch) => {
+const UPDATE_ARTICLE_STATUS_RESET = 'write-down/articles/UPDATE_ARTICLE_STATUS_RESET';
+
+const updateArticleStatusReset = () => (
+  {
+    type: UPDATE_ARTICLE_STATUS_RESET
+  }
+);
+
+const updateArticle = (id, updatedData, updatedPart) => async (dispatch) => {
   dispatch(updateArticleRequest());
 
   let res = undefined;
@@ -167,7 +194,7 @@ const updateArticle = (id, updatedData) => async (dispatch) => {
     res = await getDocsByType(db, 'article');
 
     if (typeof res === "object" && 'docs' in res && res.docs.length !== 0) {
-      dispatch(updateArticleSuccess(res.docs));
+      dispatch(updateArticleSuccess(res.docs, updatedPart));
     } else {
       dispatch(updateArticleFailure('It is failed to update article_' + id));
     }
@@ -204,6 +231,14 @@ const removeArticleFailure = (error) => (
   }
 );
 
+const REMOVE_ARTICLE_STATUS_RESET = 'write-down/articles/REMOVE_ARTICLE_STATUS_RESET';
+
+const removeArticleStatusReset = () => (
+  {
+    type: REMOVE_ARTICLE_STATUS_RESET
+  }
+);
+
 const removeArticle = (id) => async (dispatch) => {
   dispatch(removeArticleRequest());
 
@@ -228,11 +263,15 @@ const removeArticle = (id) => async (dispatch) => {
 const articles = (
   state={
     isCreating: false,
+    isCreatingFinished: false,
     isFetching: false,
-    isInserting: false,
+    isFetchingFinished: false,
     isUpdating: false,
+    isUpdatingFinished: false,
     isRemoving: false,
+    isRemovingFinished: false,
     data: [],
+    updatedPart: '',
     error: ''
   },
   action
@@ -241,70 +280,103 @@ const articles = (
     case FETCH_ARTICLES_REQUEST:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        error: ''
       };
     case FETCH_ARTICLES_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        error: '',
+        isFetchingFinished: true,
         data: action.articles
       };
     case FETCH_ARTICLES_FAILURE:
       return {
         ...state,
+        isFetching: false,
+        isFetchingFinished: true,
         error: action.error
+      };
+    case FETCH_ARTICLE_STATUS_RESET:
+      return {
+        ...state,
+        isFetchingFinished: false
       };
     case CREATE_ARTICLE_REQUEST:
       return {
         ...state,
-        isCreating: true
+        isCreating: true,
+        error: ''
       };
     case CREATE_ARTICLE_SUCCESS:
       return {
         ...state,
         isCreating: false,
-        error: '',
+        isCreatingFinished: true,
         data: action.articles
       };
     case CREATE_ARTICLE_FAILURE:
       return {
         ...state,
+        isCreating: false,
+        isCreatingFinished: true,
         error: action.error
+      };
+    case CREATE_ARTICLE_STATUS_RESET:
+      return {
+        ...state,
+        isCreatingFinished: false
       };
     case UPDATE_ARTICLE_REQUEST:
       return {
         ...state,
-        isUpdating: true
+        isUpdating: true,
+        error: ''
       };
     case UPDATE_ARTICLE_SUCCESS:
       return {
         ...state,
         isUpdating: false,
-        error: '',
-        data: action.articles
+        isUpdatingFinished: true,
+        data: action.articles,
+        updatedPart: action.updatedPart
       };
     case UPDATE_ARTICLE_FAILURE:
       return {
         ...state,
+        isUpdating: false,
+        isUpdatingFinished: true,
         error: action.error
+      };
+    case UPDATE_ARTICLE_STATUS_RESET:
+      return {
+        ...state,
+        isUpdatingFinished: false
       };
     case REMOVE_ARTICLE_REQUEST:
       return {
         ...state,
-        isRemoving: true
+        isRemoving: true,
+        error: ''
       };
     case REMOVE_ARTICLE_SUCCESS:
       return {
         ...state,
         isRemoving: false,
-        error: '',
+        isRemovingFinished: true,
         data: action.articles
       };
     case REMOVE_ARTICLE_FAILURE:
       return {
         ...state,
+        isRemoving: false,
+        isRemovingFinished: true,
         error: action.error
+      };
+    case REMOVE_ARTICLE_STATUS_RESET:
+      return {
+        ...state,
+        isRemovingFinished: false
       };
     default:
       return state;
@@ -314,10 +386,14 @@ const articles = (
 export {
   articles,
   createArticle,
+  createArticleStatusReset,
   fetchArticles,
+  fetchArticleStatusReset,
   selectArticle,
   updateArticle,
+  updateArticleStatusReset,
   removeArticle,
+  removeArticleStatusReset,
   CREATE_ARTICLE_SUCCESS,
   SELECT_ARTICLE
 }

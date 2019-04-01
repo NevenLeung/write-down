@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import { Col, Icon, message, Popconfirm, Row, Tag, Tooltip } from "antd";
+import { Col, Icon, Popconfirm, Row, Tag, Tooltip } from "antd";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -38,7 +38,6 @@ class ArticleItem extends Component{
 
   handleDelete = () => {
     this.props.deleteArticle();
-    message.success('The article has been deleted.');
   };
 
   render() {

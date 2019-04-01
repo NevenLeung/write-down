@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { updateArticle} from "../ducks/articles";
+import { updateArticle } from "../ducks/articles";
 
 import { InfoSettingPreview } from '../components/article-edit/ArticleInfoSettingPreview';
 import { WrappedFormInModal as InfoSettingForm } from "../components/article-edit/ArticleInfoSettingForm";

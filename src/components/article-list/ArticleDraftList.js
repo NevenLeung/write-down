@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Divider, BackTop } from "antd";
+import { Col, Row, Divider, BackTop, message } from "antd";
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -11,7 +11,7 @@ import styles from "./ArticleList.module.css";
 
 dayjs.extend(relativeTime);
 
-const ArticleDraftListPage = ({ drafts, isLoggedIn, selectArticle, removeArticle }) => {
+const ArticleDraftListPage = ({ drafts, error, isLoggedIn, isRemovingFinished, selectArticle, removeArticle, removeArticleStatusReset }) => {
   let DraftList = undefined;
 
   if (Array.isArray(drafts)) {
@@ -24,6 +24,15 @@ const ArticleDraftListPage = ({ drafts, isLoggedIn, selectArticle, removeArticle
         deleteArticle={() => removeArticle(data.id)}
       />
     ));
+  }
+
+  if (isRemovingFinished) {
+    message.success('The article has been deleted.');
+    removeArticleStatusReset();
+  }
+
+  if (isRemovingFinished && error) {
+    message.error('Failed to delete article.');
   }
 
   return (

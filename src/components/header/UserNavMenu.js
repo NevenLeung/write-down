@@ -7,7 +7,7 @@ import { LoginModal } from '../login/Login';
 import styles from "./Header.module.css";
 
 const UserNavMenu = (props) => {
-  const { createArticle, userLogout, isLoggedIn, ...rest } = props;
+  const { history, error, createArticle, userLogout, isLoggedIn, isCreatingFinished, createArticleStatusReset, ...rest } = props;
 
   const handleClickOnNewArticle = () => {
     createArticle();
@@ -18,6 +18,18 @@ const UserNavMenu = (props) => {
     message.success('You have logged out.')
   };
 
+  if (isCreatingFinished) {
+    message.success('New article has been created.');
+    createArticleStatusReset();
+
+    // jump to the new article editing page after it has been created successfully
+    history.push('/article/new');
+  }
+
+  if (isCreatingFinished && error) {
+    message.error('Failed to update article.');
+  }
+
   return (
     <>
       {
@@ -25,11 +37,9 @@ const UserNavMenu = (props) => {
           ? (
             <Menu {...rest}>
               <Menu.Item key="1">
-                <Link to={'/article/new'}>
-                  <button className={styles.navMenuOption} onClick={handleClickOnNewArticle}>
-                    New Article
-                  </button>
-                </Link>
+                <button className={styles.navMenuOption} onClick={handleClickOnNewArticle}>
+                  New Article
+                </button>
               </Menu.Item>
               <Menu.Item key="2">
                 <Link to={'/drafts'}>My Draft</Link>

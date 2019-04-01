@@ -12,6 +12,13 @@ class EditPageSaveOption extends Component {
     markdown: PropTypes.string.isRequired,
     saveArticleContent: PropTypes.func.isRequired,
     resetContentEditStatus: PropTypes.func.isRequired,
+    isUpdatingFinished: PropTypes.bool.isRequired,
+    updatedPart: PropTypes.string.isRequired,
+    updateArticleStatusReset: PropTypes.func.isRequired,
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]).isRequired
   };
 
   state = {
@@ -37,11 +44,25 @@ class EditPageSaveOption extends Component {
     message.config({
       duration: 1.3
     });
-
-    message.success('The content of article has been saved successfully.');
   };
 
   render() {
+    const { error, isUpdatingFinished, updatedPart, updateArticleStatusReset } = this.props;
+
+    if (isUpdatingFinished) {
+      if (updatedPart === 'content') {
+        message.success('The content of article has been saved successfully.');
+      } else {
+        message.success('The info setting of article has been saved successfully.');
+      }
+
+      updateArticleStatusReset();
+    }
+
+    if (isUpdatingFinished && error) {
+      message.error('Failed to update article.');
+    }
+
     return (
       <Popover
         content={

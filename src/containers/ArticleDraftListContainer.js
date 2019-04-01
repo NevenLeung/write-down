@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import { selectArticle, removeArticle } from '../ducks/articles';
+import { selectArticle, removeArticle, removeArticleStatusReset } from '../ducks/articles';
 
 import DraftList from '../components/article-list/ArticleDraftList';
 
@@ -12,13 +12,16 @@ const selectTheDraftArticles = (list = []) => {
 const mapState = (state) => (
   {
     drafts: selectTheDraftArticles(state.articles.data),
-    isLoggedIn: state.user.isLoggedIn
+    isLoggedIn: state.user.isLoggedIn,
+    isRemovingFinished: state.articles.isRemovingFinished,
+    error: state.articles.error
   }
 );
 
 const mapDispatch = {
   selectArticle,
-  removeArticle
+  removeArticle,
+  removeArticleStatusReset
 };
 
 

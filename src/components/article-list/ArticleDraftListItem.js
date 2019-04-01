@@ -38,7 +38,6 @@ class ArticleDraftListItem extends Component{
 
   handleDelete = () => {
     this.props.deleteArticle();
-    message.success('The article has been deleted.');
   };
 
   render() {

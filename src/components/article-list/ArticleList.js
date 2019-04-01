@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Divider, BackTop, Spin, Icon } from "antd";
+import { Col, Row, Divider, BackTop, Spin, Icon, message } from "antd";
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -11,7 +11,7 @@ import styles from "./ArticleList.module.css";
 
 dayjs.extend(relativeTime);
 
-const ArticlesPage = ({ articles, isFetching, isLoggedIn, selectArticle, removeArticle }) => {
+const ArticlesPage = ({ articles, error, isFetching, isLoggedIn, isRemovingFinished, selectArticle, removeArticle, removeArticleStatusReset }) => {
   let ArticleList = undefined;
 
   if (Array.isArray(articles)) {
@@ -21,7 +21,7 @@ const ArticlesPage = ({ articles, isFetching, isLoggedIn, selectArticle, removeA
         key={data.id}
         isLoggedIn={isLoggedIn}
         selectArticle={() => selectArticle(data.id)}
-        deteleArticle={() => removeArticle(data.id)}
+        deleteArticle={() => removeArticle(data.id)}
       />
     ));
   }
@@ -29,6 +29,15 @@ const ArticlesPage = ({ articles, isFetching, isLoggedIn, selectArticle, removeA
   const SpinIndicator = (
     <Icon type='loading' className={styles.spinIndicator}/>
   );
+
+  if (isRemovingFinished) {
+    message.success('The article has been deleted.');
+    removeArticleStatusReset();
+  }
+
+  if (isRemovingFinished && error) {
+    message.error('Failed to delete article.');
+  }
 
   return (
     <div className={styles.pageContainer}>

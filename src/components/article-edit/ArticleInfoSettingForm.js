@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Row, Col, Button, Form, Input, Select, Collapse, Tabs, message } from "antd";
+import { Row, Col, Button, Form, Input, Select, Collapse, Tabs } from "antd";
 
 import PhotoSearch from "../photo-search/PhotoSearch";
 
@@ -105,8 +105,11 @@ class ArticleInfoForm extends Component {
       url: coverUrl
     };
 
-    updateArticle(id, { title, excerpt, tags, author, cover, updatedAt: generateTimeString() });
-    message.success('The info setting of article has been saved successfully.');
+    updateArticle(
+      id,
+      { title, excerpt, tags, author, cover, updatedAt: generateTimeString() },
+      'info setting'
+    );
 
     this.props.afterSubmit();
     // console.log(metaData);
@@ -183,7 +186,7 @@ class ArticleInfoForm extends Component {
             })(
               <Select
                 mode='tags'
-                maxTagCount={5}
+                maxTagCount={4}
                 placeholder="Please type some keywords for the article. "
               />
             )}
