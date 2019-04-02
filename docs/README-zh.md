@@ -9,20 +9,20 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 ## 目录
 
 - [项目目的](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#项目目的)
-- [项目演示](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#项目演示)
+- [Demo](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#Demo)
 - [功能列表](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#功能列表)
 - [功能演示](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#功能演示)
 - [其他资料](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#其他资料)
 - [项目使用的框架、工具与第三方库](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#项目使用的框架、工具与第三方库)
 - [Scripts](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#scripts)
 - [License](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#license)
-- [感谢](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#感谢)
+- [Acknowledgments](https://github.com/NevenLeung/write-down/blob/master/docs/README-zh.md#Acknowledgments)
 
 ## 项目目的
 
 我想做一些以前没做过的东西。同时，我想通过开发 Write Down，来实践从 React 中学习的知识。
 
-## 项目演示
+## Demo
 
 [Demo Link](https://nevenleung.github.io/write-down/)
 
@@ -156,7 +156,7 @@ npm run build
 [MIT](https://github.com/NevenLeung/write-down/blob/master/LICENSE) © Neven Leung
 
 
-## 感谢
+## Acknowledgments
 
 - 文章编辑页中的滚动同步与显示模式切换的功能参考了 [StackEdit](https://stackedit.io/)。
 - 题图搜索功能与文章阅读页的风格参考了 [Medium](https://medium.com/) 。
