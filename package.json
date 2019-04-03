@@ -57,7 +57,7 @@
     "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
-    "predeploy": "GENERATE_SOURCEMAP=false react-scripts build",
+    "predeploy": "react-scripts build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
