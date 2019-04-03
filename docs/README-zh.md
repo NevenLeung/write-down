@@ -20,13 +20,13 @@ Write Down 的文章仅支持使用 markdown 进行编写。其中 markdown 语�
 
 ## 项目目的
 
-我想做一些以前没做过的东西。同时，我想通过开发 Write Down，来实践从 React 中学习的知识。
+我想做一些以前没做过的东西，同时，想通过开发 Write Down，来实践从 React 中学到的知识。
 
 ## Demo
 
 [Demo Link](https://nevenleung.github.io/write-down/)
 
-> 需要登录以后才能看到文章的编辑选项和创建新的文章。以下为测试账号：
+> 在登录之后，才能创建新文章和看到文章的编辑选项。以下为测试账号：
 
 | username | password |
 | :------: | :------: |
