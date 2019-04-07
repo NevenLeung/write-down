@@ -5,7 +5,7 @@ import 'codemirror/mode/gfm/gfm.js';
 import "codemirror/addon/selection/active-line"
 
 import 'codemirror/lib/codemirror.css';
-import '../theme/cherry.css';
+import './theme/cherry.css';
 import PropTypes from "prop-types";
 
 // import 'codemirror/theme/material.css';
