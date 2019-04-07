@@ -2,6 +2,12 @@
   composes: button from '../header/Header.module.css';
 }
 
+@media (max-width: 767px) {
+  :global .ant-modal {
+    max-width: inherit;
+  }
+}
+
 /**
   Article Info Setting Form Style
  */
