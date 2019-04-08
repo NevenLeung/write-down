@@ -248,7 +248,7 @@ const removeArticle = (id) => async (dispatch) => {
     await removeDoc(db, 'article_' + id);
     res = await getDocsByType(db, 'article');
 
-    if (typeof res === "object" && 'docs' in res && res.docs.length !== 0) {
+    if (typeof res === "object" && 'docs' in res) {
       dispatch(removeArticleSuccess(res.docs));
     } else {
       dispatch(removeArticleFailure('It is failed to remove article_' + id));

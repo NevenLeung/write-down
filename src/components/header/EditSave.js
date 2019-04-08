@@ -49,7 +49,10 @@ class EditPageSaveOption extends Component {
   render() {
     const { error, isUpdatingFinished, updatedPart, updateArticleStatusReset } = this.props;
 
-    if (isUpdatingFinished) {
+
+    if (isUpdatingFinished && error) {
+      message.error('Failed to update article.');
+    } else if (isUpdatingFinished) {
       if (updatedPart === 'content') {
         message.success('The content of article has been saved successfully.');
       } else {
@@ -57,10 +60,6 @@ class EditPageSaveOption extends Component {
       }
 
       updateArticleStatusReset();
-    }
-
-    if (isUpdatingFinished && error) {
-      message.error('Failed to update article.');
     }
 
     return (

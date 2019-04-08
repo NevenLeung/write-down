@@ -18,16 +18,14 @@ const UserNavMenu = (props) => {
     message.success('You have logged out.')
   };
 
-  if (isCreatingFinished) {
+  if (isCreatingFinished && error) {
+    message.error('Failed to update article.');
+  } else if (isCreatingFinished) {
     message.success('New article has been created.');
     createArticleStatusReset();
 
     // jump to the new article editing page after it has been created successfully
     history.push('/article/new');
-  }
-
-  if (isCreatingFinished && error) {
-    message.error('Failed to update article.');
   }
 
   return (

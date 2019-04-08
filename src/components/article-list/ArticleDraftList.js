@@ -26,13 +26,11 @@ const ArticleDraftListPage = ({ drafts, error, isLoggedIn, isRemovingFinished, s
     ));
   }
 
-  if (isRemovingFinished) {
-    message.success('The article has been deleted.');
-    removeArticleStatusReset();
-  }
-
   if (isRemovingFinished && error) {
     message.error('Failed to delete article.');
+  } else if (isRemovingFinished) {
+    message.success('The article has been deleted.');
+    removeArticleStatusReset();
   }
 
   return (

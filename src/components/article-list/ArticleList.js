@@ -30,13 +30,11 @@ const ArticlesPage = ({ articles, error, isFetching, isLoggedIn, isRemovingFinis
     <Icon type='loading' className={styles.spinIndicator}/>
   );
 
-  if (isRemovingFinished) {
-    message.success('The article has been deleted.');
-    removeArticleStatusReset();
-  }
-
   if (isRemovingFinished && error) {
     message.error('Failed to delete article.');
+  } else if (isRemovingFinished) {
+    message.success('The article has been deleted.');
+    removeArticleStatusReset();
   }
 
   return (
