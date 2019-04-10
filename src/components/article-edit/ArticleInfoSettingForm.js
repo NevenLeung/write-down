@@ -179,9 +179,9 @@ class ArticleInfoForm extends Component {
             {getFieldDecorator('tags', {
               initialValue: tags,
               rules: [{
-                max: 5,
+                max: 4,
                 type: 'array',
-                message: 'The number of tags is up to 5.'
+                message: 'The number of tags is up to 4.'
               }]
             })(
               <Select
