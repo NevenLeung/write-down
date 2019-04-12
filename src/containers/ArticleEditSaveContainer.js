@@ -17,25 +17,33 @@ const mapState = (state, ownProps) => (
 );
 
 const mapDispatch = dispatch => ({
-  resetContentEditStatus: () =>
-    dispatch(resetContentEditStatus()),
+  resetContentEditStatus: () => dispatch(resetContentEditStatus()),
   saveArticleContent: (id, updatedData) =>
-    dispatch(updateArticle(id, {
-      ...updatedData,
-      updatedAt: generateTimeString()
-    }, 'content')),
+    dispatch(updateArticle(
+      id,
+      {
+        ...updatedData,
+        updatedAt: generateTimeString()
+      },
+      'content'
+    )),
   publishArticle: (id) =>
-    dispatch(updateArticle(id, {
-      isPublished: true,
-      postedAt: generateTimeString(),
-      updatedAt: generateTimeString()
-    })),
+    dispatch(updateArticle(
+      id,
+      {
+        isPublished: true,
+        postedAt: generateTimeString(),
+        updatedAt: generateTimeString()
+      }
+    )),
   saveArticleAsDraft: (id) =>
-    dispatch(updateArticle(id, {
-      isPublished: false
-    })),
-  updateArticleStatusReset: () =>
-    dispatch(updateArticleStatusReset())
+    dispatch(updateArticle(
+      id,
+      {
+        isPublished: false
+      }
+    )),
+  updateArticleStatusReset: () => dispatch(updateArticleStatusReset())
 });
 
 const ArticleEditSaveContainer = connect(

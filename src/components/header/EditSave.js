@@ -13,7 +13,7 @@ class EditPageSaveOption extends Component {
     saveArticleContent: PropTypes.func.isRequired,
     resetContentEditStatus: PropTypes.func.isRequired,
     isUpdatingFinished: PropTypes.bool.isRequired,
-    updatedPart: PropTypes.string.isRequired,
+    updatedPart: PropTypes.string,
     updateArticleStatusReset: PropTypes.func.isRequired,
     error: PropTypes.oneOfType([
       PropTypes.string,
@@ -49,13 +49,12 @@ class EditPageSaveOption extends Component {
   render() {
     const { error, isUpdatingFinished, updatedPart, updateArticleStatusReset } = this.props;
 
-
     if (isUpdatingFinished && error) {
       message.error('Failed to update article.');
     } else if (isUpdatingFinished) {
       if (updatedPart === 'content') {
         message.success('The content of article has been saved successfully.');
-      } else {
+      } else if (updatedPart === 'info setting') {
         message.success('The info setting of article has been saved successfully.');
       }
 
