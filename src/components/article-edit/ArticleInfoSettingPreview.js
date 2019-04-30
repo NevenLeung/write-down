@@ -13,30 +13,17 @@ class InfoSettingPreview extends Component {
     };
   }
 
-  async componentDidMount() {
-    try {
-      const coverUrl = await checkImageUrlIsValid(this.props.coverUrl);
-
-      this.setState({
-        coverUrl: coverUrl,
-        isCoverUrlValid: true
-      });
-    } catch (error) {
-
-    }
-  }
-
   render() {
-    const { title, excerpt } = this.props;
+    const { title, excerpt, coverUrl } = this.props;
 
     return (
       <div className={styles.infoPreviewWrapper}>
         {
-          this.state.isCoverUrlValid
+          coverUrl
             ? <div className={styles.infoPreviewImageWrapper}>
               <div
                 className={styles.infoPreviewImage}
-                style={{backgroundImage: `url(${this.state.coverUrl})`}}
+                style={{backgroundImage: `url(${coverUrl})`}}
               />
             </div>
             : null
