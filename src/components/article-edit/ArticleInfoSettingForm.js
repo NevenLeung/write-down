@@ -30,7 +30,7 @@ class ArticleInfoForm extends Component {
 
   componentDidMount() {
     // To load the cover based on saved url.
-    this.checkCoverUrl(undefined, this.props.coverUrl, ()=>{});
+    this.checkCoverUrl(undefined, this.props.coverUrl);
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
   }
@@ -50,10 +50,10 @@ class ArticleInfoForm extends Component {
     const form = this.props.form;
     form.setFieldsValue({ coverUrl });
 
-    this.checkCoverUrl(undefined, coverUrl, () => {});
+    this.checkCoverUrl(undefined, coverUrl);
   };
 
-  checkCoverUrl = async(rule, url, cb) => {
+  checkCoverUrl = async(rule, url, cb=((e) => e? e: '')) => {
     if (url) {
       try {
         const coverUrl = await checkImageUrlIsValid(url);
@@ -69,10 +69,14 @@ class ArticleInfoForm extends Component {
         });
       } catch (error) {
         this.setState({
-          coverPreviewMsg: 'The url of cover is invalid. Please check the url.',
           isUrlChanged: true,
-          isCoverUrlValid: false
+          isCoverUrlValid: false,
+          coverPreviewMsg: 'The url of cover is invalid. Please check the url.'
         });
+
+        // It is failed to pass the validation, the submit button will be disable.
+        // 告知 form 校验失败，不能提交表单
+        cb(error);
       }
     } else {
       // 将cover相关的数据重置
@@ -83,10 +87,14 @@ class ArticleInfoForm extends Component {
           authorLink: ''
         },
         isUrlChanged: false,
-        isCoverUrlValid: false
+        isCoverUrlValid: false,
+        coverPreviewMsg: 'The preview of cover will be here.'
       });
     }
 
+    // If no error, pass the validation, call cb() to finish the validation
+    // 校验通过，总是要调用 cb()，告知 validator 完成校验
+    // https://github.com/ant-design/ant-design/issues/5155
     cb();
   };
 
