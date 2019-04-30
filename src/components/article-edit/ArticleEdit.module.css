@@ -3,7 +3,7 @@
 /* code mirror setting */
 :global .CodeMirror {
   height: auto;
-  min-height: calc(100vh - 10vh - 20px);
+  min-height: calc(100vh - 65px - 20px);
 }
 
 :global .CodeMirror pre {
@@ -11,7 +11,7 @@
 }
 
 .articleEditWrapper {
-  height: 90vh;
+  height: calc(100vh - 65px);
   padding: 10px 0;
 }
 
